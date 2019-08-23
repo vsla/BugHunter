@@ -1,1 +1,1 @@
-# BugBounty
+# Bug x Hunter 
