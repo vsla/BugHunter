@@ -29,15 +29,26 @@ Então, "Bug x Hunter" serve para desenvolvedores que querem começar no mundo d
 
 ## Desenvolvimento
 
-Para desenvolver essa aplicação web usaremos a metodologia SCRUM baseada nas iterações já estabelecidas no calendário.
+Para desenvolver essa aplicação web usaremos a metodologia SCRUM utilizando sprints semanais.
+
 
 ### Metodologia de Desenvolvimento
 
+O scrum utilizado irá funcionar da seguinte maneira:
+
+* *Terças-feiras:* Teremos o Sprint Planning para discutir o que será feito na sprint.
+
+* *Segundas-feiras:* Teremos o fechamento da sprint, com o feedback de possíveis problemas encontrados na sprint.
+
+* Diariamente, os integrantes farão um status report do que farão no dia, ou caso não façam nada, dirão o motivo.
+
+No *Desenvolvimento em si*, após o levantamento das histórias do usuário teremos as funcionalidades principais a serem implantadas no *MVP*.
+
+Essas atividades a serem feitas serão discutidas nas aberturas de sprint semanalmente e jogadas no backlog da sprint.
 
 ### Atribuições e Responsabilidades
-
+> Ainda será decidido quais serão as atribuições de cada um.
 
 ### Controle de código
 
 Usaremos a plataforma do [Git Flow](https://medium.com/trainingcenter/utilizando-o-fluxo-git-flow-e63d5e0d5e04), pois a mesma facilita a gestão das versões do código.
-
