@@ -1,4 +1,4 @@
-# User Stories
+# Histórias de Usuários
 
 ## Cliente: Antonio Lima
 
@@ -23,7 +23,7 @@ Apesar de bastante útil, testes de segurança são relativamente caros, sendo a
 - Para garantir a segurança, o aplicativo deve estar dentro das normas da Lei Geral de Proteção de Dados
 - Qualquer usuário que infringir os Termos de Uso, seja ele uma empresa ou um bug hunter, será suspenso permanentemente da plataforma
 
-## User Story - Company:
+## História de Usuário - Empresa:
 
  <p>&nbsp;&nbsp;&nbsp;&nbsp;Vamos imaginar uma startup de tecnologia iniciante no mercado. Após procurar por empresas especialistas em testes, ela percebe que não têm condições de custear o valor pedido. Então, ela decide procurar por opções e encontra o termo bug bounty, na qual o desenvolvedor só é recompensado se encontrar algum bug na aplicação</p>
  <p>&nbsp;&nbsp;&nbsp;&nbsp;A empresa percebe que o programa de recompensas por bugs seria bastante útil e econômico para a mesma, visto que só há necessidade de pagar o desenvolvedor se ele encontrar alguma falha. O único problema é que à startup não é tão conhecida no mercado e precisa encontrar um meio onde diversos desenvolvedores possam atuar em seus projetos atrás de bugs, sem ter sua privacidade e segurança comprometida</p>
@@ -32,16 +32,16 @@ Apesar de bastante útil, testes de segurança são relativamente caros, sendo a
 
 Sendo assim, podemos extrair diversas funcionalidades que o usuário do tipo empresa necessita, tais como:
 
-| ID  |  User   |      Feature      |                                                              Descrição                                                              |
-| :-: | :-----: | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------: |
-|  1  | Company |       Login       |                         Gostaria de cadastrar minha aplicação web para que ela seja testada de forma segura                         |
-|  2  | Company | Database Security |                                     Gostaria de ter a garantia que meus dados não serão vazados                                     |
-|  3  | Company |   Notifications   |                   Gostaria de receber uma notificação toda vez que um bug hunter relatar algo da minha aplicação                    |
-|  4  | Company |    Bug History    | Gostaria de saber o histórico de relatos dos problemas. Para assim, recompensar apenas o bug hunter que relatou o problema primeiro |
-|  5  | Company | Types of Rewards  |                          Gostaria de recompensar o bug hunter à partir do padrão de ranqueamento de falhas                          |
-|  6  | Company |    Fixed Bugs     |        Gostaria de visualizar todos os bugs resolvidos para cada aplicação e o total do quanto já paguei para os bug hunters        |
+| ID  | Usuário |       Funcionalidades       |                                                                                       Descrição                                                                                       |
+| :-: | :-----: | :-------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|  1  | Empresa |            Login            |                                             Gostaria de cadastrar minha aplicação web. Dessa forma, ela pode ser testada de forma segura                                              |
+|  2  | Empresa | Segurança do Banco de dados |                                                              Gostaria de ter a garantia que meus dados não serão vazados                                                              |
+|  3  | Empresa |        Notificações         | Gostaria de receber uma notificação toda vez que um bug hunter relatar algo da minha aplicação. Para assim, eu checar se de fato é um bug e poder solucioná-lo o mais rápido possível |
+|  4  | Empresa |      Histórico de Bugs      |                          Gostaria de saber o histórico de relatos dos problemas. Para assim, recompensar apenas o bug hunter que relatou o problema primeiro                          |
+|  5  | Empresa |    Padrão de Recompensas    |                          Gostaria de recompensar o bug hunter à partir do padrão de ranqueamento de falhas. Para assim, ter um sistema justo de recompensas                           |
+|  6  | Empresa |       Bugs Corrigidos       |         Gostaria de visualizar todos os bugs resolvidos para cada aplicação e o total do quanto já paguei para os bug hunters. Para assim, eu ter ciência do meu investimento         |
 
-## User Story - Bug Hunter:
+## História de Usuário - Bug Hunter:
 
  <p>&nbsp;&nbsp;&nbsp;&nbsp;Vamos supor um desenvolvedor recém formado que quer se especializar em testes e na arte de encontrar bugs. Para isso, ele procura por sites que tem o programa de recompensas por bugs encontrados, porém, é difícil encontrar tantas aplicações assim e também, ter a certeza que o mesmo será pago pelo trabalho feito</p>
  <p>&nbsp;&nbsp;&nbsp;&nbsp;Além disso, o desenvolvedor está à procura de um meio que possibilite fazer networking e trocar ideias com outros desenvolvedores da mesma área, para assim, ele conseguir melhorar suas habilidades. Junto disso, é importante para ele ter conhecimento seus relatos de bugs para ele entender quais tipos de bugs ele encontra com uma maior facilidade e o quanto ele está lucrando com eles</p>
@@ -49,11 +49,11 @@ Sendo assim, podemos extrair diversas funcionalidades que o usuário do tipo emp
 
 Sendo assim, podemos extrair diversas funcionalidades que o usuário do tipo Bug Hunter necessita, tais como:
 
-| ID  |    User    |      Feature       |                                                                    Descrição                                                                    |
-| :-: | :--------: | :----------------: | :---------------------------------------------------------------------------------------------------------------------------------------------: |
-|  7  | Bug Hunter | Partners Companies | Gostaria de saber quais empresas são parceiras da plataforma, para assim, direcionar melhor meu esforço e consequentemente, maximizar meu lucro |
-|  8  | Bug Hunter |    Social Forum    |                Gostaria de ter como discutir técnicas de bug hunter com outros usuários, para assim, melhorar minhas habilidades                |
-|  9  | Bug Hunter |    Bug Details     |                                   Gostaria de visualizar todos os meus relatos e o quanto lucrei com cada uma                                   |
-| 10  | Bug Hunter | Amount of Reports  |                                  Gostaria de saber a quantidade de relatos que foram feitos em cada aplicação                                   |
-| 11  | Bug Hunter |     Fixed Bugs     |                 Gostaria de saber os bugs que foram corrigidos nas aplicações junto com o valor pago à quem resolveu o problema                 |
-| 12  | Bug Hunter |   Total Rewards    |                                       Gostaria de saber o total de recompensas que cada empresa já pagou                                        |
+| ID  |  Usuário   |    Funcionalidades    |                                                                                  Descrição                                                                                  |
+| :-: | :--------: | :-------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|  7  | Bug Hunter |  Empresas Parceiras   |               Gostaria de saber quais empresas são parceiras da plataforma. Para assim, direcionar melhor meu esforço e consequentemente, maximizar meu lucro               |
+|  8  | Bug Hunter |     Fórum Social      |                              Gostaria de ter como discutir técnicas de bug hunter com outros usuários. Para assim, melhorar minhas habilidades                              |
+|  9  | Bug Hunter |     Lista de Bugs     |                     Gostaria de visualizar todos os meus relatos e o quanto lucrei com cada uma. Para assim, ter noção do meu crescimento na plataforma                     |
+| 10  | Bug Hunter | Quantidade de Relatos |               Gostaria de saber a quantidade de relatos que foram feitos em cada aplicação, para assim, focar em projetos com uma maior probabilidade de bugs               |
+| 11  | Bug Hunter |    Bugs Corrigidos    | Gostaria de saber os bugs que foram corrigidos nas aplicações junto com o valor pago à quem resolveu o problema. Para assim, ter noção das melhorias feitas em cada projeto |
+| 12  | Bug Hunter | Total de Recompensas  |                  Gostaria de saber o total de recompensas que cada empresa já pagou. Para assim, eu conhecer quais empresas são mais ativas na plataforma                   |
