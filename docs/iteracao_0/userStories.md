@@ -32,12 +32,14 @@
 >
 > Sendo assim, podemos extrair diversas funcionalidades que o usuário do tipo empresa necessita, tais como:
 >
-> - Como empresa, quero poder cadastrar minha aplicação web para que ela seja testada de forma segura
-> - Como empresa, quero ter a garantia que meus dados não serão vazados
-> - Como empresa, quero receber uma notificação toda vez que um bug hunter relatar algo da minha aplicação
-> - Como empresa, quero saber o histórico de relatos dos problemas. Para assim, recompensar apenas o bug hunter que relatou o problema primeiro
-> - Como empresa, quero recompensar o bug hunter à partir do padrão de ranqueamento de falhas
-> - Como empresa, quero visualizar todos os bugs resolvidos para cada aplicação e o total do quanto já paguei para os bug hunters
+> | ID  | Usuário |    Feature    |                                                              Descrição                                                              |
+> | :-: | :-----: | :-----------: | :---------------------------------------------------------------------------------------------------------------------------------: |
+> |  1  | Empresa |     Login     |                         Gostaria de cadastrar minha aplicação web para que ela seja testada de forma segura                         |
+> |  2  | Empresa |   Security    |                                     Gostaria de ter a garantia que meus dados não serão vazados                                     |
+> |  3  | Empresa | Notifications |                   Gostaria de receber uma notificação toda vez que um bug hunter relatar algo da minha aplicação                    |
+> |  4  | Empresa |  Bug History  | Gostaria de saber o histórico de relatos dos problemas. Para assim, recompensar apenas o bug hunter que relatou o problema primeiro |
+> |  5  | Empresa |               |                          Gostaria de recompensar o bug hunter à partir do padrão de ranqueamento de falhas                          |
+> |  6  | Empresa |               |        Gostaria de visualizar todos os bugs resolvidos para cada aplicação e o total do quanto já paguei para os bug hunters        |
 >
 > ## User Story - Bug Hunter:
 >
@@ -47,9 +49,11 @@
 >
 > Sendo assim, podemos extrair diversas funcionalidades que o usuário do tipo Bug Hunter necessita, tais como:
 >
-> - Como bug hunter, quero saber quais empresas são parceiras da plataforma, para assim, direcionar melhor meu esforço e consequentemente, maximizar meu lucro
-> - Como bug hunter, quero ter como discutir técnicas de bug hunter com outros usuários, para assim, melhorar minhas habilidades
-> - Como bug hunter, quero visualizar todos os meus relatos e o quanto lucrei com cada uma
-> - Como bug hunter,eu quero saber a quantidade de relatos que foram feitos em cada aplicação
-> - Como bug hunter, eu quero saber os bugs que foram corrigidos nas aplicações junto com o valor pago à quem resolveu o problema
-> - Como bug hunter, eu quero saber o total de recompensas que cada empresa já pagou
+> | ID  |  Usuário   |       Feature       |                                                                    Descrição                                                                    |
+> | :-: | :--------: | :-----------------: | :---------------------------------------------------------------------------------------------------------------------------------------------: |
+> |  7  | Bug Hunter | Partners Companiesl | Gostaria de saber quais empresas são parceiras da plataforma, para assim, direcionar melhor meu esforço e consequentemente, maximizar meu lucro |
+> |  8  | Bug Hunter |    Social Forum     |                Gostaria de ter como discutir técnicas de bug hunter com outros usuários, para assim, melhorar minhas habilidades                |
+> |  9  | Bug Hunter |     Bug Details     |                                   Gostaria de visualizar todos os meus relatos e o quanto lucrei com cada uma                                   |
+> | 10  | Bug Hunter |  Amount of Reports  |                                  Gostaria de saber a quantidade de relatos que foram feitos em cada aplicação                                   |
+> | 11  | Bug Hunter |     Fixed Bugs      |                 Gostaria de saber os bugs que foram corrigidos nas aplicações junto com o valor pago à quem resolveu o problema                 |
+> | 12  | Bug Hunter |    Total Rewards    |                                       Gostaria de saber o total de recompensas que cada empresa já pagou                                        |
