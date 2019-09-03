@@ -1,3 +1,6 @@
+
+![](https://img.shields.io/badge/Status-Under%20Development-green)
+
 # Bug x Hunter
 
 [![](http://files.softicons.com/download/culture-icons/anime-icons-i-ii-by-samir-chajia/png/128x128/Hunter%20x%20Hunter.png)](#)
