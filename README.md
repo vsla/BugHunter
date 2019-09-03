@@ -1,6 +1,7 @@
 
 ![](https://img.shields.io/badge/Status-Under%20Development-green)
 
+
 # Bug x Hunter
 
 [![](http://files.softicons.com/download/culture-icons/anime-icons-i-ii-by-samir-chajia/png/128x128/Hunter%20x%20Hunter.png)](#)
@@ -14,6 +15,7 @@ O Bug X Hunter é Projeto da disciplina de [engenharia de software](https://gith
 * [Desenvolvimento](#Desenvolvimento)
     * [Metodologias de Desenvolvimento](#metodologia-de-desenvolvimento)
     * [Controle de código](#controle-de-código)
+* [Entregas](https://github.com/vsla/BugHunter/blob/master/docs/iteracoes.md)
 
 ## Objetivo
 
