@@ -1,15 +1,16 @@
+# Bug x Hunter
 
 [![](http://files.softicons.com/download/culture-icons/anime-icons-i-ii-by-samir-chajia/png/128x128/Hunter%20x%20Hunter.png)](#)
 
-# Bug x Hunter
-
-O Bug X Hunter é Projeto da disciplina de engenharia de software do Centro de informática da UFPE
+O Bug X Hunter é Projeto da disciplina de [engenharia de software](https://github.com/IF977/if977) do Centro de informática da UFPE
 
 ## Sumário
 
 * [Objetivo](#Objetivo)
 * [Equipe](#Equipe)
 * [Desenvolvimento](#Desenvolvimento)
+    * [Metodologias de Desenvolvimento](#metodologia-de-desenvolvimento)
+    * [Controle de código](#controle-de-código)
 
 ## Objetivo
 
@@ -24,7 +25,7 @@ Então, "Bug x Hunter" serve para desenvolvedores que querem começar no mundo d
 |  Adriana Alves dos Santos  | Engenheiro de teste |
 |  Gabriel Ramos R. Oliveira  | Engenheiro de Back End |
 |  Giovanni veloso  | Engenheiro de DevOps |
-|  Joao Gabriel Silva de Andrade  | Product Owner |
+| Joao Gabriel Silva de Andrade  | Product Owner |
 | Thiago Prazeres Bezerra  | Engenheiro de Front End |
 |  Victor Sena de Lima Attar  | Scrum Master |
 
