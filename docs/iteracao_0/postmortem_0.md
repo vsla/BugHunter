@@ -44,7 +44,7 @@
 ## Em andamento 
  * Nenhuma Atividade
  
-## Planejamento para 0
+## Planejamento para Iteração 1
 * Criar os primeiros passos no controller, view e model
 * Definir as prioridades das features para serem implementadas
 
