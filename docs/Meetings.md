@@ -58,3 +58,32 @@
 >   - Contrato de confidencialidade
 >   - CVS 
 >   - Tipos de bugs
+
+## Reunião 4
+
+> ### Data
+> 14/09/2019
+> ### Presentes
+> - Adriana
+> - Joao Gabriel Silva de Andrade
+> - Victor Sena de Lima Attar
+> ### Ausentes
+> - Gabriel Ramos R. Oliveira
+> - Giovanni
+> - Thiago Bezerra
+>  ### Assuntos acertados
+> #### Foram discutidos alguns assuntos do sistema
+> * Adição de um possível Administrador no sistema
+> * Como seria o sistema de pagamentos dos bugs
+> * O fluxograma de como o bugHunter / Empresa / Administrador usariam o sistema
+> * Call com o Antônio para validar esses pontos
+> * Próximo sábado, reunião com Antônio para 
+> #### O que será feito?
+> * Adri e João → Revisar modelagem e atualizar h.u
+> * Gabriel → Levantar servidor e criar aula de rails
+> * Giovanni → Levantar aplicação em React
+> * Tiago → Mockup de login e cadastro
+> * Victor → Features de cada usuário por back e front
+> #### Próxima reunião
+> * Segunda (16/9) com todos os integrantes
+> * Sábado (21/9), com Antônio
