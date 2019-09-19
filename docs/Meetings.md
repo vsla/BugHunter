@@ -216,15 +216,16 @@
 > - Adriana
 > - Gabriel Ramos R. Oliveira
 > - Victor Sena de Lima Attar
+> - Thiago Bezerra
 >
 > #### Ausentes
 >
 > - Joao Gabriel Silva de Andrade
 > - Giovanni
-> - Thiago Bezerra
 >
 > #### Assuntos acertados
 >
+> - Reunião rápida para acompanhamento do projeto
 > - Discutiu sobre o cronograma e a importância dos testes
 > - Review das atividades da semana
 >
