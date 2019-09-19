@@ -204,3 +204,32 @@
 >
 > - Segunda (16/9) com todos os integrantes
 > - Sábado (21/9), com Antônio
+
+### Reunião 7
+
+> #### Data
+>
+> 19/09/2019
+>
+> #### Presentes
+>
+> - Adriana
+> - Gabriel Ramos R. Oliveira
+> - Victor Sena de Lima Attar
+>
+> #### Ausentes
+>
+> - Joao Gabriel Silva de Andrade
+> - Giovanni
+> - Thiago Bezerra
+>
+> #### Assuntos acertados
+>
+> - Discutiu sobre o cronograma e a importância dos testes
+> - Review das atividades da semana
+>
+> ##### Próxima reunião
+>
+> - Sábado (21/09/2019)
+>   - Discussão sobre os requisitos
+>   - Estudo em grupo sobre testes e início dos testes
