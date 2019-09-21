@@ -234,3 +234,37 @@
 > - Sábado (21/09/2019)
 >   - Discussão sobre os requisitos
 >   - Estudo em grupo sobre testes e início dos testes
+
+
+### Reunião 8
+
+> #### Data
+>
+> 21/09/2019
+>
+> #### Presentes
+>
+> - Adriana
+> - Gabriel Ramos R. Oliveira
+> - Victor Sena de Lima Attar
+>
+> #### Ausentes
+>
+> - Joao Gabriel Silva de Andrade (Problemas médicos/Com atestado)
+> - Giovanni
+> - Thiago Bezerra
+>
+> #### Assuntos acertados
+>
+> - Fizemos esboços das telas de empresa, projeto e Bug Hunter
+> - Discutimos quais histórias do usuário faremos
+>   - Como empresa, quero criar um projeto
+>   - Como empresa, quero visualizar todos os meus projetos
+> - Gabriel e adriana --> Teste e Crud Backend de projeto e empresa
+> - João Gabriel e Victor --> mockup e tela
+>
+> ##### Próxima reunião
+>
+> - Quarta (25/09/2019)
+>   - Acompanhamento das atividades da sprint
+>   - Adicionar novas atividades baseadas na velocidade da equipe
