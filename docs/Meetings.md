@@ -235,7 +235,6 @@
 >   - Discussão sobre os requisitos
 >   - Estudo em grupo sobre testes e início dos testes
 
-
 ### Reunião 8
 
 > #### Data
