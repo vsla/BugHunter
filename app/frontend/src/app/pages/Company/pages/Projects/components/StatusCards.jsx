@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/styles';
 const styles = (theme) => ({
   root: {
     padding: 15,
+    minWidth: 100,
   },
   badgeAtivos: {
     padding: '5px 9px 5px 9px',
