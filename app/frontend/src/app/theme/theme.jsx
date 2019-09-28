@@ -1,6 +1,4 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
 
 const theme = createMuiTheme({
   // https://material.io/resources/color/#!/?view.left=0&view.right=0&secondary.color=AD1457&primary.color=2E7D32&primary.text.color=ffffff
@@ -17,9 +15,13 @@ const theme = createMuiTheme({
       dark: '#78002e',
       contrastText: '#000',
     },
+    text: {
+      primary: '#000000',
+      secondary: '#000000',
+    }
   },
   status: {
     danger: 'orange',
   },
 });
-export default theme
+export default theme;
