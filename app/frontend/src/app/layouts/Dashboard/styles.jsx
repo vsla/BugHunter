@@ -18,12 +18,12 @@ export default (theme) => ({
     zIndex: 1200,
     width: '271px',
   },
-  sidebar: {
-    //width: '270px',
-  },
   content: {
     paddingTop: '64px',
     backgroundColor: 'white',
+    minHeight: '90%',
+    display: 'flex',
+    flexDirection: 'column',
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,

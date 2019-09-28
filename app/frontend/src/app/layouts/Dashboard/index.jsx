@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/no-unused-prop-types */
 import React, { Component, Fragment } from 'react';
 // Externals
 import classNames from 'classnames';
@@ -17,33 +19,39 @@ class Dashboard extends Component {
     super(props);
     const isMobile = ['xs', 'sm', 'md'].includes(props.width);
     this.state = {
-      isOpen: !isMobile
+      isOpen: !isMobile,
     };
   }
+
   handleClose = () => {
     this.setState({ isOpen: false });
   };
+
   handleToggleOpen = () => {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen
+    this.setState((prevState) => ({
+      isOpen: !prevState.isOpen,
     }));
   };
+
   renderSidebar = (profile, classes) => {
     if (profile === 'company') {
       return <Sidebar className={classes.sidebar} />;
     }
   };
+
   render() {
-    const { classes, width, title, children, profile } = this.props;
+    const {
+      classes, width, title, children, profile,
+    } = this.props;
     const { isOpen } = this.state;
     const isMobile = ['xs', 'sm', 'md'].includes(width);
     const shiftTopbar = isOpen && !isMobile;
     const shiftContent = isOpen && !isMobile;
     return (
-      <Fragment>
+      <>
         <Topbar
           className={classNames(classes.topbar, {
-            [classes.topbarShift]: shiftTopbar
+            [classes.topbarShift]: shiftTopbar,
           })}
           isSidebarOpen={isOpen}
           onToggleSidebar={this.handleToggleOpen}
@@ -54,29 +62,30 @@ class Dashboard extends Component {
           classes={{ paper: classes.drawerPaper }}
           onClose={this.handleClose}
           open={isOpen}
-          variant={isMobile ? 'temporary' : 'persistent'}>
+          variant={isMobile ? 'temporary' : 'persistent'}
+        >
           {this.renderSidebar('company', classes)}
         </Drawer>
         <main
           className={classNames(classes.content, {
-            [classes.contentShift]: shiftContent
-          })}>
-            <div>oi</div>
+            [classes.contentShift]: shiftContent,
+          })}
+        >
           {children}
           <Footer />
         </main>
-      </Fragment>
+      </>
     );
   }
 }
 Dashboard.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
-  title: PropTypes.string,
-  width: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
 };
 export default compose(
   withStyles(styles),
-  withWidth()
+  withWidth(),
 )(Dashboard);

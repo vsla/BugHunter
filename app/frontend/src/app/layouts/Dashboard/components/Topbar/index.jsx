@@ -14,14 +14,14 @@ import {
   IconButton,
   Popover,
   Toolbar,
-  Typography
+  Typography,
 } from '@material-ui/core';
 
 // Material icons
 import {
   Menu as MenuIcon,
   Close as CloseIcon,
-  Input as InputIcon
+  Input as InputIcon,
 } from '@material-ui/icons';
 
 // Shared services
@@ -35,19 +35,15 @@ import styles from './styles';
 
 class Topbar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.signal = true;
     this.state = {
       notifications: [],
       notificationsLimit: 4,
       notificationsCount: 0,
-      notificationsEl: null
+      notificationsEl: null,
     };
   }
-
-
-
-
   // async getNotifications() {
   //   try {
   //     const { notificationsLimit } = this.state;
@@ -83,15 +79,15 @@ class Topbar extends Component {
     history.push('/sign-in');
   };
 
-  handleShowNotifications = event => {
+  handleShowNotifications = (event) => {
     this.setState({
-      notificationsEl: event.currentTarget
+      notificationsEl: event.currentTarget,
     });
   };
 
   handleCloseNotifications = () => {
     this.setState({
-      notificationsEl: null
+      notificationsEl: null,
     });
   };
 
@@ -101,7 +97,7 @@ class Topbar extends Component {
       className,
       title,
       isSidebarOpen,
-      onToggleSidebar
+      onToggleSidebar,
     } = this.props;
     // eslint-disable-next-line no-unused-vars
     const { notifications, notificationsCount, notificationsEl } = this.state;
@@ -110,17 +106,17 @@ class Topbar extends Component {
     const showNotifications = Boolean(notificationsEl);
 
 
-
     return (
-      <AppBar className={rootClassName} position='fixed'>
-        <Toolbar >
+      <AppBar className={rootClassName} position="fixed">
+        <Toolbar>
           <IconButton
             className={classes.menuButton}
             onClick={onToggleSidebar}
-            variant="text">
+            variant="text"
+          >
             {isSidebarOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
-          <Typography className={classes.title} variant="h4">
+          <Typography className={classes.title} variant="h5">
             {title}
           </Typography>
           {/* <IconButton
@@ -154,14 +150,14 @@ Topbar.propTypes = {
   history: PropTypes.object.isRequired,
   isSidebarOpen: PropTypes.bool,
   onToggleSidebar: PropTypes.func,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 Topbar.defaultProps = {
-  onToggleSidebar: () => { }
+  onToggleSidebar: () => { },
 };
 
 export default compose(
   withRouter,
-  withStyles(styles)
+  withStyles(styles),
 )(Topbar);

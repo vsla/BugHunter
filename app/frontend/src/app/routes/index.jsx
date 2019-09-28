@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 // import {Home} from '../pages'
-import Dashboard1 from '../layouts/Dashboard1';
+import Dashboard from '../layouts/Dashboard';
 import { SignIn } from '../pages/SharedPages';
+import Projects from '../pages/Company/pages/Projects';
 
 export default class Routes extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ export default class Routes extends Component {
     const { defaultRoute } = this.state;
     return (
       <Switch>
-        <Route component={Dashboard1} exact path="/" />
+        <Route component={Dashboard} exact path="/" />
+        <Route component={Projects} exact path="/empresa/projetos" />
         <Route component={SignIn} exact path="/login" />
         <Redirect to={defaultRoute} />
       </Switch>
