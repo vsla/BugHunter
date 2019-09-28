@@ -1,15 +1,22 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
+
 // Externals
 import PropTypes from 'prop-types';
+
 // Material helpers
 import { withStyles } from '@material-ui/core';
+
 // Material components
 import { Grid, Paper, Typography } from '@material-ui/core';
+
 // Shared layouts
 import Dashboard from '../../../../layouts/Dashboard';
+
 // Custom components
+import StatusCard from './components/StatusCards/StatusCards';
 // Component styles
+
 const styles = (theme) => ({
   StorekeeperDashboard: {
     padding: theme.spacing.unit * 4,
@@ -41,8 +48,9 @@ const Projects = (props) => {
       >
         <Grid
           container
+          spacing={2}
         >
-          
+          <StatusCard />
         </Grid>
       </div>
     </Dashboard>

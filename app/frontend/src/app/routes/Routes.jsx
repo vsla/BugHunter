@@ -3,7 +3,7 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 // import {Home} from '../pages'
 import Dashboard from '../layouts/Dashboard';
 import { SignIn } from '../pages/SharedPages';
-import Projects from '../pages/Company/pages/Projects';
+import Projects from '../pages/Company/pages/Projects/Projects';
 
 export default class Routes extends Component {
   constructor(props) {

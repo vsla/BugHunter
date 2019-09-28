@@ -1,42 +1,42 @@
-export default theme => ({
+export default (theme) => ({
   root: {
     // borderBottom: `1px solid ${theme.palette.border}`,
     // backgroundColor: theme.palette.primary.main,
     height: '64px',
-    zIndex: theme.zIndex.appBar
+    zIndex: theme.zIndex.appBar,
   },
   toolbar: {
     minHeight: 'auto',
-    width: '100%'
+    width: '100%',
   },
   title: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing.unit,
   },
   menuButton: {
-    marginLeft: '-4px'
+    marginLeft: '-4px',
   },
   notificationsButton: {
-    marginLeft: 'auto'
+    marginLeft: 'auto',
   },
   signOutButton: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing.unit,
   },
   selectRegion: {
     position: 'absolute',
-    right: '35px'
+    right: '35px',
   },
   regionTitle: {
     fontSize: '12px',
     color: '#cccccc',
     float: 'left',
     marginTop: '20px',
-    marginRight: '35px'    
+    marginRight: '35px',
   },
   formControl: {
-    width: '130px'
+    width: '130px',
   },
-  inputLabel:{
+  inputLabel: {
     fontSize: '12px',
-    color: '#cccccc',    
-  }
+    color: '#cccccc',
+  },
 });

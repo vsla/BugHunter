@@ -10,7 +10,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme/theme.jsx';
 
 // Routes
-import Routes from './routes';
+import Routes from './routes/Routes';
 
 // Browser history
 const browserHistory = createBrowserHistory();
