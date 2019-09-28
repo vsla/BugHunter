@@ -1,20 +1,22 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { Component } from 'react';
+import React from 'react';
 
 // Externals
 import PropTypes from 'prop-types';
 
 // Material helpers
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core'; 
 
 // Material components
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 // Shared layouts
 import Dashboard from '../../../../layouts/Dashboard';
 
 // Custom components
-import StatusCard from './components/StatusCards/StatusCards';
+import StatusCard from './components/StatusCards';
+import ProjectsList from './components/ProjectsList';
+
 // Component styles
 
 const styles = (theme) => ({
@@ -49,8 +51,14 @@ const Projects = (props) => {
         <Grid
           container
           spacing={2}
+          direction="column"
         >
-          <StatusCard />
+          <Grid item>
+            <StatusCard />
+          </Grid>
+          <Grid item>
+            <ProjectsList />
+          </Grid>
         </Grid>
       </div>
     </Dashboard>

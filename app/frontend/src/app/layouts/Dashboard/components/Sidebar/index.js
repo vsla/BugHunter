@@ -15,13 +15,14 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Collapse
+  Collapse,
 } from '@material-ui/core';
 
 // Material icons
 import {
   Home as DashboardIcon,
   Person as PeopleIcon,
+  Assignment,
 } from '@material-ui/icons';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -32,8 +33,11 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import styles from './styles';
 
 class Sidebar extends Component {
-  state = {
-    open: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
   }
 
   handleClick = () => {
@@ -41,7 +45,6 @@ class Sidebar extends Component {
   }
 
   render() {
-
     const { classes, className } = this.props;
     const rootClassName = classNames(classes.root, className);
 
@@ -53,7 +56,7 @@ class Sidebar extends Component {
 
     return (
       <nav className={rootClassName}>
-         <div className={classes.logoWrapper}>
+        <div className={classes.logoWrapper}>
           <Link className={classes.logoLink} to="/">
             {/* <img
               alt="Obapet logo"
@@ -69,8 +72,8 @@ class Sidebar extends Component {
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
-            to="/"
-            >
+            to="/empresa/home"
+          >
             <ListItemIcon className={classes.listItemIcon}>
               <DashboardIcon />
             </ListItemIcon>
@@ -83,7 +86,8 @@ class Sidebar extends Component {
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
-            to="/perfil">
+            to="/perfil"
+          >
             <ListItemIcon className={classes.listItemIcon}>
               <PeopleIcon />
             </ListItemIcon>
@@ -96,16 +100,17 @@ class Sidebar extends Component {
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
-            to="/projetos">
+            to="/empresa/projetos"
+          >
             <ListItemIcon className={classes.listItemIcon}>
-              <PeopleIcon />
+              <Assignment />
             </ListItemIcon>
             <ListItemText
               classes={{ primary: classes.listItemText }}
               primary="Projetos"
             />
           </ListItem>
-        {/* 
+          {/*
           <ListItem
             onClick={this.handleClick}
             activeClassName={classes.activeListItem}
@@ -159,7 +164,7 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
   className: PropTypes.string,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Sidebar);

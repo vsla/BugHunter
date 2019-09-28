@@ -1,5 +1,5 @@
 import {
- Grid, Paper, Typography, Badge 
+ Grid, Paper, Typography
 } from '@material-ui/core';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';

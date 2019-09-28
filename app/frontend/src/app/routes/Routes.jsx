@@ -17,7 +17,7 @@ export default class Routes extends Component {
     const { defaultRoute } = this.state;
     return (
       <Switch>
-        <Route component={Dashboard} exact path="/" />
+        <Route component={Dashboard} exact path="/empresa/home" />
         <Route component={Projects} exact path="/empresa/projetos" />
         <Route component={SignIn} exact path="/login" />
         <Redirect to={defaultRoute} />
