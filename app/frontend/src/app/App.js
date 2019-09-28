@@ -3,10 +3,10 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 // Material helpers
-// import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 // Theme
-// import theme from './theme';
+import theme from './theme/theme';
 
 // Routes
 import Routes from './routes';
@@ -18,11 +18,11 @@ const browserHistory = createBrowserHistory();
 export default class App extends Component {
   render() {
     return (
-      // <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
           <Routes />
         </Router>
-      // </ThemeProvider>
+      </ThemeProvider>
     );
   }
 }
