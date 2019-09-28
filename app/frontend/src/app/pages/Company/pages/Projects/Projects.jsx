@@ -45,6 +45,7 @@ const Projects = (props) => {
 
   return (
     <Dashboard title="Projetos" profile="company">
+
       <div
         className={classes.StorekeeperDashboard}
       >
