@@ -114,7 +114,7 @@ class Topbar extends Component {
             onClick={onToggleSidebar}
             variant="text"
           >
-            {isSidebarOpen ? <CloseIcon /> : <MenuIcon />}
+            {isSidebarOpen ? <CloseIcon style={{ color: 'white' }} /> : <MenuIcon style={{ color: 'white' }} />}
           </IconButton>
           <Typography className={classes.title} variant="h5">
             {title}

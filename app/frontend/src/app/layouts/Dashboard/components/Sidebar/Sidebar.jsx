@@ -41,7 +41,8 @@ class Sidebar extends Component {
   }
 
   handleClick = () => {
-    this.setState({ open: !this.state.open });
+    const { open } = this.state;
+    this.setState({ open: !open });
   }
 
   render() {
@@ -86,7 +87,7 @@ class Sidebar extends Component {
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
-            to="/perfil"
+            to="/empresa/perfil"
           >
             <ListItemIcon className={classes.listItemIcon}>
               <PeopleIcon />
@@ -163,7 +164,7 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
