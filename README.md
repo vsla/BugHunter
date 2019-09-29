@@ -8,6 +8,10 @@
 
 O Bug X Hunter é Projeto da disciplina de [engenharia de software](https://github.com/IF977/if977) do Centro de informática da UFPE
 
+## Site
+[Site hospedado no heroku](https://bughunter-front.herokuapp.com/empresa/home)<br>
+Caso demore um pouco, espero alguns minutos que o site voltará ao ar!
+
 ## Sumário
 
 * [Objetivo](#Objetivo)
