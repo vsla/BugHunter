@@ -76,6 +76,8 @@ class UserStorekeeperEdit extends Component {
   };
 
   render() {
+    console.log(window.innerWidth < 375)
+    console.log(window.outerWidth < 375)
     return (
       <Grid container>
         {this.renderSnackBar()}
@@ -108,7 +110,7 @@ class UserStorekeeperEdit extends Component {
                     {/* First line */}
                     <Grid item style={{ width: '100%' }}>
                       <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={7}>
                           <TextField
                             fullWidth
                             error={
@@ -129,7 +131,7 @@ class UserStorekeeperEdit extends Component {
                               && errors.coupon_code}
                           </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={5}>
                           <Select
                             fullWidth
 
@@ -151,12 +153,12 @@ class UserStorekeeperEdit extends Component {
                               />
                             )}
                           >
-                            <MenuItem value="">
-                              <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem value={10}>Android</MenuItem>
+                            <MenuItem value={20}>Swift</MenuItem>
+                            <MenuItem value={30}>JsFramework</MenuItem>
+                            <MenuItem value={10}>Windows</MenuItem>
+                            <MenuItem value={20}>Linux</MenuItem>
+                            <MenuItem value={30}>Max</MenuItem>
                           </Select>
                           <Typography variant="subtitle2">
                             {errors.coupon_code
@@ -195,7 +197,7 @@ class UserStorekeeperEdit extends Component {
                             && touched.linkToLive
                             && errors.linkToLive !== '')
                         }
-                        label="Link Live app (opicional)"
+                        label="Link Live app (opcional)"
                         name="linkToLive"
                         onBlur={handleBlur}
                         onChange={handleChange}
@@ -212,7 +214,7 @@ class UserStorekeeperEdit extends Component {
                       <TextField
                         fullWidth
                         multiline
-                        rows={3}
+                        rows={4}
                         error={
                           !!(errors.stepsStoRproduce
                             && touched.stepsStoRproduce
@@ -243,7 +245,7 @@ class UserStorekeeperEdit extends Component {
                     <Grid item>
                       <FormControl component="fieldset">
                         <FormLabel component="legend">Situação</FormLabel>
-                        <RadioGroup row aria-label="Situação" name="status" value={values.status} onChange={handleChange}>
+                        <RadioGroup row={!(window.innerWidth < 375)} aria-label="Situação" name="status" value={values.status} onChange={handleChange}>
                           <FormControlLabel value="active" control={<Radio />} label="Ativo" />
                           <FormControlLabel value="inactive" control={<Radio />} label="Inativo" />
                         </RadioGroup>
