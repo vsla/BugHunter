@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 
 // Shared layouts
-import Dashboard from '../../../../layouts/Dashboard';
+import Dashboard from '../../../../../layouts/Dashboard';
 
 // Custom components
 import StatusCard from './components/StatusCards';

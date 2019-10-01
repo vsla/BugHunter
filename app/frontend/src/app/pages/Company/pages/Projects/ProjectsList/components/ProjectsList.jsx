@@ -2,8 +2,9 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import { Link } from 'react-router-dom'
+
 import {
   Button, Grid, Typography, Badge, IconButton,
 } from '@material-ui/core';
@@ -22,6 +23,9 @@ const useStyles = (theme) => ({
   rightIcon: {
     marginLeft: theme.spacing(1),
   },
+  link:{
+    textDecoration: 'none'
+  }
 });
 
 class ListDividers extends React.Component {
@@ -89,9 +93,11 @@ class ListDividers extends React.Component {
         <ListItem>
           <Grid container justify="flex-end">
             <Grid item>
-              <Button variant="contained" color="primary">
-                Novo Projeto
-              </Button>
+              <Link to='/empresa/projetos/novo' className={classes.link}>
+                <Button variant="contained" color="primary">
+                  Novo Projeto
+                </Button>
+              </Link>
             </Grid>
           </Grid>
         </ListItem>
