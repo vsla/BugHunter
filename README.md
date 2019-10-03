@@ -8,10 +8,6 @@
 
 O Bug X Hunter é Projeto da disciplina de [engenharia de software](https://github.com/IF977/if977) do Centro de informática da UFPE
 
-## Site
-[Site hospedado no heroku](https://bughunter-front.herokuapp.com/empresa/home)<br>
-Caso demore um pouco, espero alguns minutos que o site voltará ao ar!
-
 ## Sumário
 
 * [Objetivo](#Objetivo)
@@ -57,3 +53,87 @@ Essas atividades a serem feitas serão discutidas nas aberturas de sprint semana
 ### Controle de código
 
 Usaremos a plataforma do [Git Flow](https://medium.com/trainingcenter/utilizando-o-fluxo-git-flow-e63d5e0d5e04), pois a mesma facilita a gestão das versões do código.
+
+### GQM
+
+#### O que é?
+
+O paradigma GQM é baseado na teoria de que todas as medições devems ser orientadas em objetivos, tem que ser racionais e necessitam que sejam coletadas métricas. CAda métrica coletada é mapeada para maiores objetivos, perguntas são então derivadas dos objetivos para determinar se os mesmos foram atingidos.
+
+#### Casos
+
+1. caso 1
+    * Objetivo: Diminuir o atraso das entregas
+    * Perguntas
+        * Quais os principais impasses para realizar tarefas?
+        * Quem são as pessoas que não estão realizando?
+    * Métricas
+        * Tarefas executadas por sprint
+        * Tempo de atrado das tarefas
+2. caso 2
+    * Objetivo: Assegurar confiabilidade da aplicação.
+    * Perguntas
+        * O código está sendo testado?
+    * Métricas
+        * Cobertura de código de testes
+
+3. caso 3
+    * Objetivo: Sistema com operacionalidade aceitável
+    * Perguntas
+        * O sistema cai muito do ar?
+        * O sistema apresenta muitos erros durante a navegação?
+    * Métricas
+        * Tempo inativo do sstema
+        * Número de reports de falhas no sistema
+
+4. caso 4
+    * Objetivo: Prover segurança dos dados dos usuário do sistema
+    * Perguntas
+        * Como assgurar a segurança dos dados?
+        * Onde armazenar os dados dos usuários?
+        * Como trafegar os dados na internet?
+    * Métricas
+        * Testes assegurando confiabilidade do sistema
+
+5. caso 5
+    * Objetivo: Assegurar que o bughunter vai receber sua recompensa.
+    * Perguntas
+        * Como o bughunter vai ter confiança no sistema?
+        * Qual o processo de recompensa do bughunter?
+        * Como o bughunter vai receber sua recompensa?
+    * Métricas
+        * Feedback positivo dos bughunters
+
+6. caso 6
+    * Objetivo: Diminuir o atraso das entregas
+    * Perguntas
+        * Quais os principais impasses para realizar tarefas?
+        * Quem são as pessoas que não estão realizando?
+    * Métricas
+        * Tarefas executadas por sprint
+        * Tempo de atrado das tarefas
+
+7. caso 7
+    * Objetivo: Assegurar que a empresa não será cobrada por um erro do administrados.
+    * Perguntas
+        * Quais a principal razão de um erro do admin?
+        * Como será o sistema de contestação?
+    * Métricas
+        * Quantidade de contestações de valores de projeto
+
+8. caso 8
+    * Objetivo: Aumentar o conhecimento dos integrantes nas tecnologias usadas.
+    * Perguntas
+        * Quais os níveis de conhecimento?
+        * Qual a melhor forma de aprender as tecnologias usadas no projeto?
+    * Métricas
+        * Diminuição de tempo feitos em cada atividade.
+        * DIminuição de bugs no sistema.
+
+9. caso 9
+    * Objetivo: Aumento de bugRequests
+    * Perguntas
+        * Houve um aumento de bugRequests, indicando maior utilização do sistema?
+        * Houve um aumento de bugRequests por categoria de aplicação?
+    * Métricas
+        * Quantidade de bugRequests por categoria de aplicação.
