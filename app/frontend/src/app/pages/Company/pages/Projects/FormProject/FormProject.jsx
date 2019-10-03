@@ -1,15 +1,16 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
+import axios from 'axios';
 // Externals
 import PropTypes from 'prop-types';
 // Material helpers
-import { withStyles } from '@material-ui/core';
+import { withStyles, CircularProgress } from '@material-ui/core';
 // Material components
 import { Grid, Paper, Typography } from '@material-ui/core';
 // Shared layouts
 import Dashboard from '../../../../../layouts/Dashboard';
 // Custom components
-import Form from './components/Form'
+import Form from './components/Form';
 // Component styles
 const styles = (theme) => ({
   StorekeeperDashboard: {
@@ -32,23 +33,43 @@ const styles = (theme) => ({
 
 });
 
-const Projects = (props) => {
-  const { classes } = props;
+class Projects extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <Dashboard title="Projetos" profile="Admin">
-      <div
-        className={classes.StorekeeperDashboard}
-      >
-        <Grid
-          container
+    this.state = {
+      loading: false,
+    };
+  }
+
+  render() {
+    const { classes } = this.props;
+    const { loading } = this.state;
+
+    return (
+      <Dashboard title="Projetos" profile="Admin">
+        <div
+          className={classes.StorekeeperDashboard}
         >
-          <Form/>
-        </Grid>
-      </div>
-    </Dashboard>
-  );
-};
+          {
+            !loading ? (
+              <Grid
+                container
+              >
+                <Form />
+              </Grid>
+            ) : (
+              <Grid container justify='center' align='center'>
+                <CircularProgress/>
+              </Grid>
+            )
+          }
+
+        </div>
+      </Dashboard>
+    );
+  }
+}
 
 Projects.propTypes = {
   classes: PropTypes.object.isRequired,
