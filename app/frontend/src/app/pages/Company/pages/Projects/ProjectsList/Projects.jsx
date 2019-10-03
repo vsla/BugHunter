@@ -1,17 +1,25 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import React, { Component } from 'react';
 
 // Externals
 import PropTypes from 'prop-types';
 
 // Material helpers
-import { withStyles } from '@material-ui/core'; 
+import withStyles from '@material-ui/styles/withStyles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Link } from 'react-router-dom';
 
 // Material components
-import { Grid } from '@material-ui/core';
+import { Grid, Button, Typography } from '@material-ui/core';
 
 // Shared layouts
 import Dashboard from '../../../../../layouts/Dashboard';
+import sadface from '../../../../../assets/sadface.png';
+
+// Services
+// import ProjectService from '../../../../../services/ProjectService';
 
 // Custom components
 import StatusCard from './components/StatusCards';
@@ -22,6 +30,7 @@ import ProjectsList from './components/ProjectsList';
 const styles = (theme) => ({
   StorekeeperDashboard: {
     padding: theme.spacing.unit * 4,
+    display: 'flex',
     flexGrow: 1,
   },
   Paperpendency: {
@@ -35,36 +44,85 @@ const styles = (theme) => ({
   subTitle: {
     fontSize: '12px',
   },
-  item: {
+  link: {
+    textDecoration: 'none',
   },
-
 });
 
-const Projects = (props) => {
-  const { classes } = props;
+class Projects extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <Dashboard title="Projetos" profile="company">
+    this.state = {
+      loading: false,
+      hasProjects: true,
+    };
+  }
 
-      <div
-        className={classes.StorekeeperDashboard}
-      >
-        <Grid
-          container
-          spacing={2}
-          direction="column"
-        >
-          <Grid item>
-            <StatusCard />
-          </Grid>
-          <Grid item>
-            <ProjectsList />
-          </Grid>
+  // componentDidMount() {
+  //   const response = ProjectService.getAllProjects('123');
+  //   console.log(response);
+  // }
+
+  render() {
+    const { loading, hasProjects } = this.state;
+    const { classes } = this.props;
+
+    return (
+      <Dashboard title="Projetos" profile="company">
+        <Grid container className={classes.StorekeeperDashboard}>
+          {!loading ? (
+            <Grid container spacing={2} direction="column">
+              {hasProjects ? (
+                <>
+                  <Grid item>
+                    <StatusCard />
+                  </Grid>
+                  <Grid item>
+                    <ProjectsList />
+                  </Grid>
+                </>
+              ) : (
+                <Grid
+                  container
+                  justify="center"
+                  alignItems="center"
+                  direction="column"
+                  spacing={4}
+                  style={{ flexGrow: 1 }}
+                >
+                  <Grid item>
+                    <img
+                      src={sadface}
+                      alt="sad face"
+                      height={100}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Typography> Você não tem projetos, crie um! </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Link to="/empresa/projetos/novo" className={classes.link}>
+                      <Button variant="contained" color="primary">
+                        Novo Projeto
+                      </Button>
+                    </Link>
+                  </Grid>
+                </Grid>
+              )}
+            </Grid>
+          ) : (
+            <Grid container justify="center" alignItems="center">
+              <Grid item>
+                <CircularProgress />
+              </Grid>
+            </Grid>
+          )}
         </Grid>
-      </div>
-    </Dashboard>
-  );
-};
+      </Dashboard>
+    );
+  }
+}
 
 Projects.propTypes = {
   classes: PropTypes.object.isRequired,

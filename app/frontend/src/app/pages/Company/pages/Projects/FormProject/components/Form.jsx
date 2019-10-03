@@ -214,7 +214,7 @@ class UserStorekeeperEdit extends Component {
                       <TextField
                         fullWidth
                         multiline
-                        rows={4}
+                        rows={6}
                         error={
                           !!(errors.stepsStoRproduce
                             && touched.stepsStoRproduce
