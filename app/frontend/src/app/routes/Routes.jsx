@@ -11,7 +11,7 @@ export default class Routes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultRoute: '/',
+      defaultRoute: '/empresa/home',
     };
   }
 
