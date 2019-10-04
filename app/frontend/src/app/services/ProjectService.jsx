@@ -1,12 +1,11 @@
 import { Component } from 'react';
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 import axiosInstance from './BaseRoute'
 
 class ProjectService extends Component{
-  
-  static getAllProjects = async (companyId) => {
+  static async getAllProjects(){
     try {
-      let res = await axiosInstance.get('/project/states/Pernambuco' + companyId)
+      let res = await axiosInstance.get('/projects/' )
       console.log(res);
       return res
     } catch (erro) {
@@ -17,7 +16,7 @@ class ProjectService extends Component{
   
   static getProject = async (projectId) => {
     try {
-      let res = await axiosInstance.get('/project/' + id)
+      let res = await axiosInstance.get('/projects/' + projectId)
       return res
     } catch (erro) {
       console.log(erro);
@@ -29,7 +28,7 @@ class ProjectService extends Component{
   static authProject = async (Project) => {
     try {
       console.log(Project)
-      let res = await axiosInstance.post('/project/auth', Project)
+      let res = await axiosInstance.post('/projects/auth', Project)
       return res
     } catch (erro) {
       return {error: erro};
@@ -40,7 +39,8 @@ class ProjectService extends Component{
 
   static newProject = async (Project) => {
     try {
-      let res = await axiosInstance.post('/project/', Project)
+      let res = await axiosInstance.post('/projects', Project)
+      console.log(res)
       return res
     } catch (erro) {
       return {error: erro};
@@ -48,9 +48,10 @@ class ProjectService extends Component{
 
   }
 
-  static updateProject = (id,Project) =>  {
+
+  static updateProject =  async (id,Project) =>  {
     try {
-      let res = await axiosInstance.patch('/project/' + id, Project)
+      let res = await axiosInstance.patch('/projects/' + id, Project)
       console.log(res)
       return res
     } catch (erro) {
@@ -64,6 +65,6 @@ export default ProjectService;
 //   return {
 //     authState: state,
 //   }
-// }
+// 
 
 // export default connect(mapStateToProps)(ProjectService);

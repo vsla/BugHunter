@@ -19,7 +19,8 @@ import Dashboard from '../../../../../layouts/Dashboard';
 import sadface from '../../../../../assets/sadface.png';
 
 // Services
-// import ProjectService from '../../../../../services/ProjectService';
+import ProjectService from '../../../../../services/ProjectService';
+
 
 // Custom components
 import StatusCard from './components/StatusCards';
@@ -52,20 +53,28 @@ const styles = (theme) => ({
 class Projects extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      loading: false,
+      loading: true,
       hasProjects: true,
     };
   }
 
-  // componentDidMount() {
-  //   const response = ProjectService.getAllProjects('123');
-  //   console.log(response);
-  // }
+  async componentDidMount() {
+    try {
+      const response = await ProjectService.getAllProjects();
+      if (response.data.length === 0) {
+        this.setState({ loading: false, hasProjects: false });
+      } else {
+        this.setState({ data: response.data, loading: false });
+      }
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   render() {
-    const { loading, hasProjects } = this.state;
+    const { loading, hasProjects, data } = this.state;
     const { classes } = this.props;
 
     return (
@@ -79,7 +88,7 @@ class Projects extends Component {
                     <StatusCard />
                   </Grid>
                   <Grid item>
-                    <ProjectsList />
+                    <ProjectsList data={data} />
                   </Grid>
                 </>
               ) : (
@@ -92,11 +101,7 @@ class Projects extends Component {
                   style={{ flexGrow: 1 }}
                 >
                   <Grid item>
-                    <img
-                      src={sadface}
-                      alt="sad face"
-                      height={100}
-                    />
+                    <img src={sadface} alt="sad face" height={100} />
                   </Grid>
                   <Grid item>
                     <Typography> Você não tem projetos, crie um! </Typography>

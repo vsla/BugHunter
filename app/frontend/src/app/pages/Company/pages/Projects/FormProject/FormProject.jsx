@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
 import axios from 'axios';
@@ -59,8 +61,8 @@ class Projects extends Component {
                 <Form />
               </Grid>
             ) : (
-              <Grid container justify='center' align='center'>
-                <CircularProgress/>
+              <Grid container justify="center" align="center">
+                <CircularProgress />
               </Grid>
             )
           }
