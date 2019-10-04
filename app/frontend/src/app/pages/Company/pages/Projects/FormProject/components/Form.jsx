@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // Externals
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import PropTypes from "prop-types";
+import { Formik } from "formik";
+import * as yup from "yup";
 
 // Material helpers
 import {
@@ -18,15 +18,24 @@ import {
   FormControl,
   Select,
   InputLabel,
-  MenuItem,
-} from '@material-ui/core';
+  MenuItem
+} from "@material-ui/core";
 
 // Shared layouts
-import MessageBar from '../../../../../../components/MessageBar';
+import MessageBar from "../../../../../../components/MessageBar";
+import ProjectService from "../../../../../../services/ProjectService";
 
 // Custom components
 
 const schema = yup.object().shape({
+  name: yup.string().required("Digite o nome do projeto"),
+  category: yup.string().required("Escolha uma categoria"),
+  linkToRepository: yup.string().required("Digite o link"),
+  stepsStoRproduce: yup.string().required("Digite o passo a passo"),
+  tableAmount: yup
+    .number()
+    .min(0, "Digite um valor acima de 0")
+    .required("Digite o valor de pagamento")
 });
 class UserStorekeeperEdit extends Component {
   constructor(props) {
@@ -34,40 +43,55 @@ class UserStorekeeperEdit extends Component {
     this.state = {
       // data: this.props.data,
       // edit: this.props.edit,
-      openSnackBar: false,
+      openSnackBar: false
     };
   }
 
   getInitalValues = () => ({
-    name: '',
-    category: '',
-    shortDescription: '',
-    linkToRepository: '',
-    linkToLive: '',
-    stepsStoRproduce: '',
-    status: '',
+    name: "",
+    category: "",
+    shortDescription: "",
+    linkToRepository: "",
+    linkToLive: "",
+    stepsStoReproduce: "",
+    tableAmount: "1",
+    status: "active"
   });
 
-  // sendform = async (admin) => {
-  //   const { edit, data } = this.state;
-  //   if (edit === true) {
-  //     console.log(data._id, admin);
-  //     const response = await StoreKeeperService.storekeeperUpdate(
-  //       data._id,
-  //       admin,
-  //     );
-  //     return response;
-  //   }
-  //   const response = await StoreKeeperService.adminNew(admin);
-  //   return response;
-  // };
+  sendform = async project => {
+    // const { edit, data } = this.state;
+    const edit = false;
+    const id = 1;
+    // const { data } = this.state;
+    // if (edit === true) {
+    //   const response = await ProjectService.newProject(
+    //     id,
+    //     project,
+    //   );
+    //   return response;
+    // }
+    const newProject = {
+      name: project.name,
+      description: project.shortDescription,
+      company_id: id
+    };
+    console.log(newProject);
+    const response = await ProjectService.newProject(newProject);
+    if (response.status === 201){
+      this.setState({ openSnackBar: "Projeto adicionado com com sucesso!" });
+    } else {
+      this.setState({ openSnackBar: "Erro ao criar o projeto!" });
+    }
+    console.log(response);
+    return response;
+  };
 
   renderSnackBar = () => {
     const { openSnackBar } = this.state;
     if (openSnackBar) {
       return (
         <MessageBar
-          message="Projeto adicionado com com sucesso!"
+          message={openSnackBar}
           variant="sucess"
         />
       );
@@ -76,17 +100,16 @@ class UserStorekeeperEdit extends Component {
   };
 
   render() {
-    console.log(window.innerWidth < 375)
-    console.log(window.outerWidth < 375)
     return (
       <Grid container>
         {this.renderSnackBar()}
         <Formik
           initialValues={this.getInitalValues()}
-          onSubmit={(values) => {
-            this.setState({ openSnackBar: false });
+          onSubmit={values => {
+            this.setState({ openSnackBar: "" });
             console.log(values);
-            this.setState({ openSnackBar: true });
+            this.sendform(values);
+            
           }}
           validationSchema={schema}
         >
@@ -96,85 +119,123 @@ class UserStorekeeperEdit extends Component {
             touched,
             handleChange,
             handleBlur,
-            handleSubmit,
+            handleSubmit
           }) => (
-            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-              <Grid container direction="column" spacing={2} style={{ maxWidth: 750 }}>
-                <Grid item style={{ borderBottom: '1px solid black' }}>
-                  <Typography variant="h5">
-                    Novo projeto
-                  </Typography>
+            <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+              <Grid
+                container
+                direction="column"
+                spacing={2}
+                style={{ maxWidth: 750 }}
+              >
+                <Grid item style={{ borderBottom: "1px solid black" }}>
+                  <Typography variant="h5">Novo projeto</Typography>
                 </Grid>
-                <Grid item style={{ paddingTop: '25px', paddingBottom: '25px', width: '100%' }}>
+                <Grid
+                  item
+                  style={{
+                    paddingTop: "25px",
+                    paddingBottom: "25px",
+                    width: "100%"
+                  }}
+                >
                   <Grid container direction="column" spacing={2}>
                     {/* First line */}
-                    <Grid item style={{ width: '100%' }}>
+                    <Grid item style={{ width: "100%" }}>
                       <Grid container spacing={2}>
-                        <Grid item xs={12} sm={7}>
+                        <Grid item xs={12} sm={7} style={{ width: "100%" }}>
                           <TextField
                             fullWidth
                             error={
-                              !!(errors.coupon_code
-                                && touched.coupon_code
-                                && errors.coupon_code !== '')
+                              !!(
+                                errors.name &&
+                                touched.name &&
+                                errors.name !== ""
+                              )
                             }
-                            label="Nome"
-                            name="coupon_code"
+                            label="Nome do projeto"
+                            name="name"
                             onBlur={handleBlur}
                             onChange={handleChange}
-                            value={values.coupon_code}
+                            value={values.name}
                             variant="outlined"
                           />
                           <Typography variant="subtitle2">
-                            {errors.coupon_code
-                              && touched.coupon_code
-                              && errors.coupon_code}
+                            {errors.name && touched.name && errors.name}
                           </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={5}>
+                        <Grid item xs={12} sm={5} style={{ width: "100%" }}>
                           <Select
                             fullWidth
-
                             onBlur={handleBlur}
                             onChange={handleChange}
                             value={values.category}
                             variant="outlined"
                             error={
-                              !!(errors.category
-                                && touched.category
-                                && errors.category !== '')
+                              !!(
+                                errors.category &&
+                                touched.category &&
+                                errors.category !== ""
+                              )
                             }
-                            input={(
+                            input={
                               <TextField
                                 id="outlined-age-simple"
                                 name="category"
                                 label="Categoria"
                                 variant="outlined"
                               />
-                            )}
+                            }
                           >
-                            <MenuItem value={10}>Android</MenuItem>
-                            <MenuItem value={20}>Swift</MenuItem>
-                            <MenuItem value={30}>JsFramework</MenuItem>
-                            <MenuItem value={10}>Windows</MenuItem>
-                            <MenuItem value={20}>Linux</MenuItem>
-                            <MenuItem value={30}>Max</MenuItem>
+                            <MenuItem value={"Android"}>Android</MenuItem>
+                            <MenuItem value={"Swift"}>Swift</MenuItem>
+                            <MenuItem value={"JsFramework"}>
+                              JsFramework
+                            </MenuItem>
+                            <MenuItem value={"Windows"}>Windows</MenuItem>
+                            <MenuItem value={"Linux"}>Linux</MenuItem>
+                            <MenuItem value={"Mac"}>Mac</MenuItem>
                           </Select>
                           <Typography variant="subtitle2">
-                            {errors.coupon_code
-                              && touched.coupon_code
-                              && errors.coupon_code}
+                            {errors.category &&
+                              touched.category &&
+                              errors.category}
                           </Typography>
                         </Grid>
                       </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={12} style={{ width: "100%" }}>
                       <TextField
                         fullWidth
                         error={
-                          !!(errors.linkToRepository
-                            && touched.linkToRepository
-                            && errors.linkToRepository !== '')
+                          !!(
+                            errors.shortDescription &&
+                            touched.shortDescription &&
+                            errors.shortDescription !== ""
+                          )
+                        }
+                        label="Pequena descrição do projeto"
+                        name="shortDescription"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.shortDescription}
+                        variant="outlined"
+                      />
+                      <Typography variant="subtitle2">
+                        {errors.shortDescription &&
+                          touched.shortDescription &&
+                          errors.shortDescription}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} style={{ width: "100%" }}>
+                      <TextField
+                        fullWidth
+                        error={
+                          !!(
+                            errors.linkToRepository &&
+                            touched.linkToRepository &&
+                            errors.linkToRepository !== ""
+                          )
                         }
                         label="Link para o respostório"
                         name="linkToRepository"
@@ -184,18 +245,20 @@ class UserStorekeeperEdit extends Component {
                         variant="outlined"
                       />
                       <Typography variant="subtitle2">
-                        {errors.linkToRepository
-                          && touched.linkToRepository
-                          && errors.linkToRepository}
+                        {errors.linkToRepository &&
+                          touched.linkToRepository &&
+                          errors.linkToRepository}
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={12} style={{ width: "100%" }}>
                       <TextField
                         fullWidth
                         error={
-                          !!(errors.linkToLive
-                            && touched.linkToLive
-                            && errors.linkToLive !== '')
+                          !!(
+                            errors.linkToLive &&
+                            touched.linkToLive &&
+                            errors.linkToLive !== ""
+                          )
                         }
                         label="Link Live app (opcional)"
                         name="linkToLive"
@@ -205,20 +268,22 @@ class UserStorekeeperEdit extends Component {
                         variant="outlined"
                       />
                       <Typography variant="subtitle2">
-                        {errors.linkToLive
-                          && touched.linkToLive
-                          && errors.linkToLive}
+                        {errors.linkToLive &&
+                          touched.linkToLive &&
+                          errors.linkToLive}
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={12} style={{ width: "100%" }}>
                       <TextField
                         fullWidth
                         multiline
                         rows={6}
                         error={
-                          !!(errors.stepsStoRproduce
-                            && touched.stepsStoRproduce
-                            && errors.stepsStoRproduce !== '')
+                          !!(
+                            errors.stepsStoRproduce &&
+                            touched.stepsStoRproduce &&
+                            errors.stepsStoRproduce !== ""
+                          )
                         }
                         label="Passo a Passo"
                         name="stepsStoRproduce"
@@ -228,14 +293,42 @@ class UserStorekeeperEdit extends Component {
                         variant="outlined"
                       />
                       <Typography variant="subtitle2">
-                        {errors.stepsStoRproduce
-                          && touched.stepsStoRproduce
-                          && errors.stepsStoRproduce}
+                        {errors.stepsStoRproduce &&
+                          touched.stepsStoRproduce &&
+                          errors.stepsStoRproduce}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} style={{ width: "100%" }}>
+                      <TextField
+                        fullWidth
+                        type="number"
+                        inputProps={{ min: "0", max: "10" }}
+                        error={
+                          !!(
+                            errors.tableAmount &&
+                            touched.tableAmount &&
+                            errors.tableAmount !== ""
+                          )
+                        }
+                        label="Valor da tabela a ser pago"
+                        name="tableAmount"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.tableAmount}
+                        variant="outlined"
+                      />
+                      <Typography variant="subtitle2">
+                        {errors.tableAmount &&
+                          touched.tableAmount &&
+                          errors.tableAmount}
                       </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item style={{ borderTop: '1px solid black' }}>
+                <Grid
+                  item
+                  style={{ borderTop: "1px solid black", width: "100%" }}
+                >
                   <Grid
                     container
                     className="radio_container"
@@ -245,15 +338,34 @@ class UserStorekeeperEdit extends Component {
                     <Grid item>
                       <FormControl component="fieldset">
                         <FormLabel component="legend">Situação</FormLabel>
-                        <RadioGroup row={!(window.innerWidth < 375)} aria-label="Situação" name="status" value={values.status} onChange={handleChange}>
-                          <FormControlLabel value="active" control={<Radio />} label="Ativo" />
-                          <FormControlLabel value="inactive" control={<Radio />} label="Inativo" />
+                        <RadioGroup
+                          row={!(window.innerWidth < 375)}
+                          aria-label="Situação"
+                          name="status"
+                          value={values.status}
+                          onChange={handleChange}
+                        >
+                          <FormControlLabel
+                            value="active"
+                            control={<Radio />}
+                            label="Ativo"
+                          />
+                          <FormControlLabel
+                            value="inactive"
+                            control={<Radio />}
+                            label="Inativo"
+                          />
                         </RadioGroup>
                       </FormControl>
                     </Grid>
                     <Grid item>
-                      <Button variant="contained" color="primary" type="submit" size="large">
-                        {'Criar'}
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        size="large"
+                      >
+                        {"Criar"}
                       </Button>
                     </Grid>
                   </Grid>
@@ -268,7 +380,7 @@ class UserStorekeeperEdit extends Component {
 }
 
 UserStorekeeperEdit.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default UserStorekeeperEdit;

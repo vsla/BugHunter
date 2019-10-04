@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import {
   Button, Grid, Typography, Badge, IconButton,
 } from '@material-ui/core';
-import { BugReport, DeleteIcon, Edit } from '@material-ui/icons';
+import { BugReport, DeleteIcon, Edit, CodeSharp } from '@material-ui/icons';
 
 const useStyles = (theme) => ({
   root: {
@@ -28,19 +28,19 @@ const useStyles = (theme) => ({
   }
 });
 
-class ListDividers extends React.Component {
+class ProjectList extends React.Component {
   constructor(props) {
     super(props);
-
+    const { data } = this.props
     this.state = {
-      projects: [1, 2, 3],
+      projects: data,
     };
   }
 
   renderProjects = () => {
     const { projects } = this.state;
     const { classes } = this.props;
-    return projects.map(() => (
+    return projects.map((project) => (
       <ListItem divider className={classes.projectsContainer}>
         <Grid container direction="row">
           <Grid item xs={8}>
@@ -49,13 +49,12 @@ class ListDividers extends React.Component {
                 <Grid container direction="column" spacing={1}>
                   <Grid item>
                     <Typography variant="h5" color="primary">
-                      BugHunter
+                      {project.name}
                     </Typography>
                   </Grid>
                   <Grid item>
                     <Typography variant="body2">
-                      Plataforma para encontrar falhas na sua aplicação a partir do oferecimento
-                      de recompensas ou contratando serviços especializados.
+                     {project.description}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -108,4 +107,4 @@ class ListDividers extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(ListDividers);
+export default withStyles(useStyles)(ProjectList);

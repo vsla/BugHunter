@@ -1,12 +1,11 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
-import axios from 'axios';
 // Externals
 import PropTypes from 'prop-types';
 // Material helpers
-import { withStyles, CircularProgress } from '@material-ui/core';
-// Material components
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { withStyles, CircularProgress, Grid } from '@material-ui/core';
 // Shared layouts
 import Dashboard from '../../../../../layouts/Dashboard';
 // Custom components
@@ -59,8 +58,8 @@ class Projects extends Component {
                 <Form />
               </Grid>
             ) : (
-              <Grid container justify='center' align='center'>
-                <CircularProgress/>
+              <Grid container justify="center" align="center">
+                <CircularProgress />
               </Grid>
             )
           }
