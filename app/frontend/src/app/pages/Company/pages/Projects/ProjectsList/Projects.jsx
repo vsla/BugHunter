@@ -14,14 +14,13 @@ import { Link } from 'react-router-dom';
 // Material components
 import { Grid, Button, Typography } from '@material-ui/core';
 
-import axios from 'axios';
-
 // Shared layouts
 import Dashboard from '../../../../../layouts/Dashboard';
 import sadface from '../../../../../assets/sadface.png';
 
 // Services
 import ProjectService from '../../../../../services/ProjectService';
+
 
 // Custom components
 import StatusCard from './components/StatusCards';

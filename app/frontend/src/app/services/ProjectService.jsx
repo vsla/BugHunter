@@ -3,7 +3,6 @@ import { Component } from 'react';
 import axiosInstance from './BaseRoute'
 
 class ProjectService extends Component{
-  
   static async getAllProjects(){
     try {
       let res = await axiosInstance.get('/projects/' )
@@ -49,6 +48,7 @@ class ProjectService extends Component{
 
   }
 
+
   static updateProject =  async (id,Project) =>  {
     try {
       let res = await axiosInstance.patch('/projects/' + id, Project)
@@ -65,6 +65,6 @@ export default ProjectService;
 //   return {
 //     authState: state,
 //   }
-// }
+// 
 
 // export default connect(mapStateToProps)(ProjectService);
