@@ -6,6 +6,7 @@ import { SignIn } from '../pages/SharedPages';
 import Profile from '../pages/Company/pages/Profile/Profile';
 import Projects from '../pages/Company/pages/Projects/ProjectsList/Projects';
 import FormProject from '../pages/Company/pages/Projects/FormProject/FormProject';
+import SignUp from '../pages/SharedPages/sign-up/SignUp';
 
 export default class Routes extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ export default class Routes extends Component {
         <Route component={Profile} exact path="/empresa/perfil" />
         <Route component={Projects} exact path="/empresa/projetos" />
         <Route component={FormProject} exact path="/empresa/projetos/novo" />
+        <Route component={SignUp} exact path="/empresa/cadastro" />
         <Route component={SignIn} exact path="/login" />
         <Redirect to={defaultRoute} />
       </Switch>
