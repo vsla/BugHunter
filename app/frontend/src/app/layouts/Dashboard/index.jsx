@@ -1,6 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-unused-prop-types */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 // Externals
 import classNames from 'classnames';
 import compose from 'recompose/compose';

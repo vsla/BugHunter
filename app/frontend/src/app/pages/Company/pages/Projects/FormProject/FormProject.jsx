@@ -2,13 +2,12 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
-import axios from 'axios';
 // Externals
 import PropTypes from 'prop-types';
 // Material helpers
-import { withStyles, CircularProgress } from '@material-ui/core';
+
 // Material components
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { withStyles, CircularProgress, Grid } from '@material-ui/core';
 // Shared layouts
 import Dashboard from '../../../../../layouts/Dashboard';
 // Custom components

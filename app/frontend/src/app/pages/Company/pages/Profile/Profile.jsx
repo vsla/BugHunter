@@ -1,11 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { Component } from 'react';
+import React from 'react';
 // Externals
 import PropTypes from 'prop-types';
 // Material helpers
-import { withStyles } from '@material-ui/core';
+import { withStyles, Grid } from '@material-ui/core';
 // Material components
-import { Grid, Paper, Typography } from '@material-ui/core';
 // Shared layouts
 import Dashboard from '../../../../layouts/Dashboard';
 // Custom components

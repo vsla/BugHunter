@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import {
   Button, Grid, Typography, Badge, IconButton,
 } from '@material-ui/core';
-import { BugReport, DeleteIcon, Edit, CodeSharp } from '@material-ui/icons';
+import { BugReport, Edit } from '@material-ui/icons';
 
 const useStyles = (theme) => ({
   root: {
