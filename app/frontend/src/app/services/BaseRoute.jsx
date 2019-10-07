@@ -7,5 +7,11 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+const axiosDevelop = axios.create({
+  baseURL: 'http://172.22.65.13/',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-export default axiosInstance;
+export default axiosDevelop;
