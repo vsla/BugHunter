@@ -108,7 +108,7 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <Grid container>
+      <Grid container justify='center'>
         {this.renderSnackBar()}
         <Formik
           initialValues={this.getInitalValues()}
