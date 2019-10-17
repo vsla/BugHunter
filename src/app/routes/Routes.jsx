@@ -6,10 +6,12 @@ import { SignIn } from '../pages/SharedPages';
 import Profile from '../pages/Company/pages/Profile/Profile';
 import Projects from '../pages/Company/pages/Projects/ProjectsList/Projects';
 import FormProject from '../pages/Company/pages/Projects/FormProject/FormProject';
-import SignUp from '../pages/SharedPages/sign-up/SignUp';
+import SignUp from '../pages/Company/pages/CompanySignUp';
+import ChooseSignUp from '../pages/SharedPages/ChooseSignUp';
+import AfterLogged from '../pages/Company/pages/CompanySignUp/AfterLogged';
 
 // BugHunter
-import NotLoggedHome from '../pages/BugHunter/pages/NotLoggedHome'
+import NotLoggedHome from '../pages/BugHunter/pages/NotLoggedHome';
 
 export default class Routes extends Component {
   constructor(props) {
@@ -27,7 +29,10 @@ export default class Routes extends Component {
         <Route component={Profile} exact path="/empresa/perfil" />
         <Route component={Projects} exact path="/empresa/projetos" />
         <Route component={FormProject} exact path="/empresa/projetos/novo" />
-        <Route component={SignUp} exact path="/empresa/cadastro" />
+        
+        <Route component={SignUp} exact path="/cadastro/empresa" />
+        <Route component={ChooseSignUp} exact path="/cadastro/escolher" />
+        <Route component={AfterLogged} exact path="/cadastro/cadastrado" />
         <Route component={SignIn} exact path="/login" />
 
         {/* BugHunter */}
