@@ -49,7 +49,7 @@ export default function ButtonAppBar() {
                 <Link to="/login">
                   <Button className={classes.loginButon} variant="contained" size="medium">Login</Button>
                 </Link>
-                <Link to="/cadastro">
+                <Link to="/cadastro/escolher">
                   <Button color="default" variant="contained" size="medium">Cadastre-se</Button>
                 </Link>
               </Grid>
