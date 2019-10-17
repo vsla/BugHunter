@@ -10,6 +10,8 @@ import { BugReport } from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
+import logo from '../../../assets/HunterLogo.png'
+
 const useStyles = () => ({
   loginRoot: {
     display: 'flex',
@@ -48,7 +50,7 @@ class SignIn extends React.Component {
               >
                 <Grid item>
                   <Avatar>
-                    <BugReport />
+                    <img src={logo}/>
                   </Avatar>
                 </Grid>
                 <Grid item>

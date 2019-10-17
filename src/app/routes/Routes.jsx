@@ -8,11 +8,14 @@ import Projects from '../pages/Company/pages/Projects/ProjectsList/Projects';
 import FormProject from '../pages/Company/pages/Projects/FormProject/FormProject';
 import SignUp from '../pages/SharedPages/sign-up/SignUp';
 
+// BugHunter
+import NotLoggedHome from '../pages/BugHunter/pages/NotLoggedHome'
+
 export default class Routes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultRoute: '/empresa/home',
+      defaultRoute: '/',
     };
   }
 
@@ -26,6 +29,11 @@ export default class Routes extends Component {
         <Route component={FormProject} exact path="/empresa/projetos/novo" />
         <Route component={SignUp} exact path="/empresa/cadastro" />
         <Route component={SignIn} exact path="/login" />
+
+        {/* BugHunter */}
+
+        <Route component={NotLoggedHome} exact path="/" />
+
         <Redirect to={defaultRoute} />
       </Switch>
     );
