@@ -22,6 +22,7 @@
 | Problemas no atributos de empresa e projeto iteração 1  | Adriana e Gabriel |    não    |
 |                Github só para o backend                 |      Gabriel      |    sim    |
 |                 Backend listar projetos                 | Adriana e Gabriel |    não    |
+|                  Crud de de bughunter                   | Adriana e Gabriel |    não    |
 |                 Testes listar projetos                  | Adriana e Gabriel |    não    |
 |            Backend criar projetos da empresa            | Adriana e Gabriel |    não    |
 |            Testes criar projetos da empresa             | Adriana e Gabriel |    não    |
@@ -30,6 +31,7 @@
 |              Tela de cadastro do bughunter              |   João Gabriel    |    não    |
 |           Integração autenticação do sistema            |      Victor       |    não    |
 |               Tela ver projeto da empresa               |      Victor       |    sim    |
+|      mockup da tela de ver projeto pelo bughunter       |      Victor       |    sim    |
 |            Mockup telas de cadastro empresa             |      Victor       |    sim    |
 |           Mockup telas de cadastro bughunter            |      Victor       |    sim    |
 |            FRONT - telas de cadastro empresa            |      Victor       |    sim    |
