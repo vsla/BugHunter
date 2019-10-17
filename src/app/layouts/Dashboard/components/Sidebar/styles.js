@@ -11,6 +11,7 @@ export default (theme) => ({
   },
   logoWrapper: {
     display: 'flex',
+    backgroundColor: theme.palette.primary.main,
     justifyContent: 'center',
     alignItems: 'center',
     height: '55px',

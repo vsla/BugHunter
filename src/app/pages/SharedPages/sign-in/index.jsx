@@ -4,11 +4,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import { BugReport } from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+
+import { Link } from 'react-router-dom';
 
 import logo from '../../../assets/HunterLogo.png'
 
@@ -95,15 +95,16 @@ class SignIn extends React.Component {
                     />
                   </Grid>
                   <Grid item style={{ width: '100%' }}>
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className={classes.submit}
-                    >
-                      Entrar
-                    </Button>
+                    <Link to="/empresa/projetos">
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                      >
+                        Entrar
+                      </Button>
+                    </Link>
                   </Grid>
                   <Grid item style={{ width: '100%' }}>
                     <Grid container>

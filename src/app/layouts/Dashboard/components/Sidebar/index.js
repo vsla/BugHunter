@@ -59,7 +59,6 @@ class Sidebar extends Component {
         <div className={classes.logoWrapper}>
           <Link className={classes.logoLink} to="/">
             {/* <img
-              alt="Obapet logo"
               className={classes.logoImage}
               src="/images/logos/logo.svg"
             /> */}

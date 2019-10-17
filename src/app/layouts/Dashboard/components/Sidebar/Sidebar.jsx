@@ -28,6 +28,8 @@ import {
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
+// Logo
+import logo from '../../../../assets/bughunter.png'
 
 // Component styles
 import styles from './styles';
@@ -59,11 +61,11 @@ class Sidebar extends Component {
       <nav className={rootClassName}>
         <div className={classes.logoWrapper}>
           <Link className={classes.logoLink} to="/">
-            {/* <img
-              alt="Obapet logo"
+            <img
+              alt="BugHunter logo"
               className={classes.logoImage}
-              src="/images/logos/logo.svg"
-            /> */}
+              src={logo}
+            />
           </Link>
         </div>
         <Divider className={classes.logoDivider} />
@@ -83,7 +85,7 @@ class Sidebar extends Component {
               primary="Inicial"
             />
           </ListItem>
-          <ListItem
+          {/* <ListItem
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
@@ -96,7 +98,7 @@ class Sidebar extends Component {
               classes={{ primary: classes.listItemText }}
               primary="Perfil"
             />
-          </ListItem>
+          </ListItem> */}
           <ListItem
             activeClassName={classes.activeListItem}
             className={classes.listItem}
