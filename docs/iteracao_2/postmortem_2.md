@@ -83,7 +83,7 @@
 |        Mockup telas de editar um bug pelo admin        |      Victor       |      não       |
 |           telas de ver projeto pela empresa            |   João Gabriel    |      não       |
 |       tela dashboard bughunter -> vendo Empresas       |   João Gabriel    |      não       |
-|    tela dashboard bughunter -> ver projeto empresa     |   João Gabriel    |      não       |
+| tela dashboard bughunter -> ver projeto de uma empresa |   João Gabriel    |      não       |
 
 ## Lições Aprendidas
 
