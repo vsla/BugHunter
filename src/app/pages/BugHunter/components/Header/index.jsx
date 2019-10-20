@@ -6,12 +6,14 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
+import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
+import BugReport from '@material-ui/icons/BugReport';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { SwipeableDrawer } from '@material-ui/core';
+import { SwipeableDrawer, List, ListItemIcon } from '@material-ui/core';
 import DefaultContainer from '../DefaultContainer';
 
 import Logo from '../../../../assets/bughunter.png';
@@ -32,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   search: {
     position: 'relative',
+    flexGrow: 1,
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
@@ -87,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [logged, logg] = React.useState(false);
+  const [logged, logg] = React.useState(true);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
 
@@ -122,14 +125,22 @@ export default function PrimarySearchAppBar() {
           </>
         )
           : (
-            <MenuItem>
-              <IconButton
-                edge="end"
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </MenuItem>
+            <List>
+              <ListItem>
+                <ListItemIcon
+                  color="inherit"
+                >
+                  <BugReport />
+                </ListItemIcon>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </ListItemIcon>
+              </ListItem>
+            </List>
           )
       }
     </SwipeableDrawer>
@@ -139,7 +150,7 @@ export default function PrimarySearchAppBar() {
     <div>
       <AppBar position="fixed">
         <DefaultContainer>
-          <Toolbar>
+          <Toolbar style={{ padding: 0}}>
 
             <img
               src={Logo}
@@ -148,20 +159,26 @@ export default function PrimarySearchAppBar() {
               alt="logo bughunter"
               height={40}
             />
-            {/* <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div> */}
-            <div className={classes.grow} />
+            {
+              logged ? (
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder="Projeto ou empresa..."
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    inputProps={{ 'aria-label': 'search' }}
+                  />
+                </div>
+              )
+                : (
+                  <div className={classes.grow} />
+                )
+            }
             <div className={classes.sectionDesktop}>
               {
                 !logged ? (
@@ -175,12 +192,18 @@ export default function PrimarySearchAppBar() {
                   </>
                 )
                   : (
-                    <IconButton
-                      edge="end"
-                      color="inherit"
-                    >
-                      <AccountCircle />
-                    </IconButton>
+                    <>
+                      <IconButton
+                        color="inherit"
+                      >
+                        <BugReport />
+                      </IconButton>
+                      <IconButton
+                        color="inherit"
+                      >
+                        <AccountCircle />
+                      </IconButton>
+                    </>
                   )
               }
             </div>
