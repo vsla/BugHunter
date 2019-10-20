@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { Grid, withStyles, Select, TextField, Button } from '@material-ui/core';
+import {
+  Grid, withStyles, Select, TextField,
+} from '@material-ui/core';
 
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-
-import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 
 import Header from '../../components/Header';
 import DefaultContainer from '../../components/DefaultContainer';
@@ -31,7 +26,7 @@ const styles = (theme) => ({
     padding: '40px 20px',
   },
   tabs: {
-    borderBottom: '1px solid gray'
+    borderBottom: '1px solid gray',
   },
 });
 
@@ -61,10 +56,10 @@ class Dashboard extends Component {
               <Grid container className={classes.tabs}>
                 <Grid item xs={9}>
                   <Tabs
-                    indicatorColor="secondary"
+                    indicatorColor="primary"
                     value={value}
-
-                    onChange={(e, newValue) => { this.setState({ value: newValue }) }}>
+                    onChange={(e, newValue) => { this.setState({ value: newValue }); }}
+                  >
                     <Tab label="Projetos" />
                     <Tab label="Empresas" />
                   </Tabs>
@@ -73,12 +68,12 @@ class Dashboard extends Component {
                   <Select
                     fullWidth
                     onChange={() => { }}
-                    value={''}
+                    value=""
                     input={(
                       <TextField
                         id="outlined-age-simple"
                         name="category"
-                        label="Categoria"
+                        label="Ordenar por"
                         variant="outlined"
                       />
                     )}
