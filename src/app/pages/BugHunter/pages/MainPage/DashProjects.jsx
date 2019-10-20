@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const styles = createStyles({
   paper: {
@@ -17,8 +17,9 @@ const styles = createStyles({
     borderRadius: 8,
   },
   link: {
+    display: 'inline',
     '&:hover': {
-      textDecoration: 'underline'
+      textDecoration: 'underline',
     }
   }
 });

@@ -39,7 +39,7 @@ export default class Routes extends Component {
         {/* BugHunter */}
 
         <Route component={NotLoggedHome} exact path="/" />
-        <Route component={Dashboard} exact path="/dashboard/projetos" />
+        <Route component={Dashboard} exact path="/dashboard" />
 
         <Redirect to={defaultRoute} />
       </Switch>
