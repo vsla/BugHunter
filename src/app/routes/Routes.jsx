@@ -12,6 +12,7 @@ import AfterLogged from '../pages/Company/pages/CompanySignUp/AfterLogged';
 
 // BugHunter
 import NotLoggedHome from '../pages/BugHunter/pages/NotLoggedHome';
+import Dashboard from 'app/pages/BugHunter/pages/MainPage';
 
 export default class Routes extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ export default class Routes extends Component {
         {/* BugHunter */}
 
         <Route component={NotLoggedHome} exact path="/" />
+        <Route component={Dashboard} exact path="/dashboard/projetos" />
 
         <Redirect to={defaultRoute} />
       </Switch>
