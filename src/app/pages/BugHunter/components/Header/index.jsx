@@ -150,15 +150,17 @@ export default function PrimarySearchAppBar() {
     <div>
       <AppBar position="fixed">
         <DefaultContainer>
-          <Toolbar style={{ padding: 0}}>
+          <Toolbar style={{ padding: 0 }}>
+            <Link to="/" style={{display: 'flex', alignItems: 'center'}}>
+              <img
+                src={Logo}
+                edge="start"
+                className={classes.menuButton}
+                alt="logo bughunter"
+                height={40}
+              />
+            </Link>
 
-            <img
-              src={Logo}
-              edge="start"
-              className={classes.menuButton}
-              alt="logo bughunter"
-              height={40}
-            />
             {
               logged ? (
                 <div className={classes.search}>

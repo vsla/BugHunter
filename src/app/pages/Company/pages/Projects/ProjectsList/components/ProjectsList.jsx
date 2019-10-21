@@ -24,7 +24,7 @@ const useStyles = (theme) => ({
     marginLeft: theme.spacing(1),
   },
   link: {
-    textDecoration: 'none'
+    "&:hover": { textDecoration: 'underline' }
   }
 });
 
@@ -46,10 +46,11 @@ class ProjectList extends React.Component {
           <Grid item xs={8} style={{ width: '100%' }}>
             <Grid container direction="column" spacing={3}>
               <Grid item style={{ width: '100%' }}>
+
                 <Grid container direction="column" spacing={1}>
                   <Grid item style={{ width: '100%' }}>
-                    <Link to={'/empresa/projetos/' + '123'} style={{display: 'inline'}}>
-                      <Typography variant="h5" color="primary">
+                    <Link to={'/empresa/projetos/' + '123'} style={{ display: 'inline' }}>
+                      <Typography variant="h5" color="primary" className={classes.link}>
                         {project.name}
                       </Typography>
                     </Link>
@@ -61,6 +62,7 @@ class ProjectList extends React.Component {
                   </Grid>
                 </Grid>
               </Grid>
+
 
               <Grid item >
                 <IconButton >
