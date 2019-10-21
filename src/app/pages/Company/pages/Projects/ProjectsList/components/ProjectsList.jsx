@@ -23,7 +23,7 @@ const useStyles = (theme) => ({
   rightIcon: {
     marginLeft: theme.spacing(1),
   },
-  link:{
+  link: {
     textDecoration: 'none'
   }
 });
@@ -42,26 +42,28 @@ class ProjectList extends React.Component {
     const { classes } = this.props;
     return projects.map((project) => (
       <ListItem divider className={classes.projectsContainer}>
-        <Grid container direction="row">
-          <Grid item xs={8}>
+        <Grid container direction="row" style={{ width: '100%' }}>
+          <Grid item xs={8} style={{ width: '100%' }}>
             <Grid container direction="column" spacing={3}>
-              <Grid item>
+              <Grid item style={{ width: '100%' }}>
                 <Grid container direction="column" spacing={1}>
-                  <Grid item>
-                    <Typography variant="h5" color="primary">
-                      {project.name}
-                    </Typography>
+                  <Grid item style={{ width: '100%' }}>
+                    <Link to={'/empresa/projetos/' + '123'} style={{display: 'inline'}}>
+                      <Typography variant="h5" color="primary">
+                        {project.name}
+                      </Typography>
+                    </Link>
                   </Grid>
-                  <Grid item>
+                  <Grid item style={{ width: '100%' }}>
                     <Typography variant="body2">
-                     {project.description}
+                      {project.description}
                     </Typography>
                   </Grid>
                 </Grid>
               </Grid>
 
-              <Grid item>
-                <IconButton>
+              <Grid item >
+                <IconButton >
                   <Badge badgeContent={4} color="primary">
                     <BugReport height={22} />
                   </Badge>
@@ -70,11 +72,11 @@ class ProjectList extends React.Component {
 
             </Grid>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={4} style={{ width: '100%' }}>
             <Grid container justify="flex-end" alignItems="center">
               <Grid item>
                 <Button variant="contained" color="secondary" className={classes.button}>
-                  Edit
+                  Editar
                   <Edit className={classes.rightIcon} />
                 </Button>
               </Grid>
@@ -88,8 +90,8 @@ class ProjectList extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <List component="nav" className={classes.root} aria-label="mailbox folders">
-        <ListItem>
+      <List component="nav" className={classes.root} aria-label="mailbox folders" style={{ width: '100%' }}>
+        <ListItem style={{ width: '100%' }}>
           <Grid container justify="flex-end">
             <Grid item>
               <Link to='/empresa/projetos/novo' className={classes.link}>

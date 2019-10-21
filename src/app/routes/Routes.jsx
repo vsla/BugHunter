@@ -29,8 +29,7 @@ export default class Routes extends Component {
         <Route component={Home} exact path="/empresa/home" />
         <Route component={Profile} exact path="/empresa/perfil" />
         <Route component={Projects} exact path="/empresa/projetos" />
-        <Route component={FormProject} exact path="/empresa/projetos/novo" />
-        
+        <Route component={FormProject} exact path="/empresa/projetos/novo" />     
         <Route component={SignUp} exact path="/cadastro/empresa" />
         <Route component={ChooseSignUp} exact path="/cadastro/escolher" />
         <Route component={AfterLogged} exact path="/cadastro/cadastrado" />
