@@ -42,7 +42,7 @@ const color2 = {
     contrastText: '#fff',
   },
   text: {
-    primary: '#000000',
+    primary: '#47525E',
     secondary: '#000000',
   },
   darkButton: {

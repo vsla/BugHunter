@@ -11,6 +11,7 @@ export default (theme) => ({
   },
   title: {
     marginLeft: theme.spacing.unit,
+    color: '#fff'
   },
   menuButton: {
     marginLeft: '-4px',

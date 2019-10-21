@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 // Material helpers
-import { withStyles } from '@material-ui/core';
+import { withStyles, Button } from '@material-ui/core';
 
 // Material components
 import {
@@ -68,9 +68,9 @@ class Sidebar extends Component {
             />
           </Link>
         </div>
-        <Divider className={classes.logoDivider} />
+        
 
-        <List component="div" disablePadding>
+        <List component="div" className={classes.list}>
           <ListItem
             activeClassName={classes.activeListItem}
             className={classes.listItem}
@@ -159,6 +159,16 @@ class Sidebar extends Component {
             </List>
           </Collapse>
          */}
+          <div className={classes.grow} />
+          <Divider className={classes.logoDivider} />
+          <div className={classes.button}>
+            <Button fullWidth variant='outlined' color='primary'>
+              Sair
+            </Button>
+          </div>
+
+
+
         </List>
       </nav>
     );

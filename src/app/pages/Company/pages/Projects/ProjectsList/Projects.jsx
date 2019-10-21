@@ -54,7 +54,7 @@ class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [{name: 'teste', description:'asdsad'}],
+      data: [{ name: 'teste', description: 'asdsad' }],
       loading: false,
       hasProjects: true,
     };
@@ -85,45 +85,47 @@ class Projects extends Component {
             <Grid container spacing={2} direction="column">
               {hasProjects ? (
                 <>
-                  <Grid item>
+                  <Grid item style={{ width: '100%' }}>
                     <StatusCard />
                   </Grid>
-                  <Grid item>
+                  <Grid item style={{ width: '100%' }}>
                     <ProjectsList data={data} />
                   </Grid>
                 </>
-              ) : (
-                <Grid
-                  container
-                  justify="center"
-                  alignItems="center"
-                  direction="column"
-                  spacing={4}
-                  style={{ flexGrow: 1 }}
-                >
-                  <Grid item>
-                    <img src={sadface} alt="sad face" height={100} />
-                  </Grid>
-                  <Grid item>
-                    <Typography> Você não tem projetos, crie um! </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Link to="/empresa/projetos/novo" className={classes.link}>
-                      <Button variant="contained" color="primary">
-                        Novo Projeto
+              )
+                : (
+                  <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    direction="column"
+                    spacing={4}
+                    style={{ flexGrow: 1 }}
+                  >
+                    <Grid item>
+                      <img src={sadface} alt="sad face" height={100} />
+                    </Grid>
+                    <Grid item>
+                      <Typography> Você não tem projetos, crie um! </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Link to="/empresa/projetos/novo" className={classes.link}>
+                        <Button variant="contained" color="primary">
+                          Novo Projeto
                       </Button>
-                    </Link>
+                      </Link>
+                    </Grid>
                   </Grid>
+                )}
+            </Grid>
+          )
+            : (
+              <Grid container justify="center" alignItems="center">
+                <Grid item>
+                  <CircularProgress />
                 </Grid>
-              )}
-            </Grid>
-          ) : (
-            <Grid container justify="center" alignItems="center">
-              <Grid item>
-                <CircularProgress />
               </Grid>
-            </Grid>
-          )}
+            )}
         </Grid>
       </Dashboard>
     );
