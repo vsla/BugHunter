@@ -15,12 +15,12 @@ import AfterLogged from 'app/pages/Company/pages/CompanySignUp/AfterLogged';
 import NotLoggedHome from 'app/pages/BugHunter/pages/NotLoggedHome';
 import Dashboard from 'app/pages/BugHunter/pages/MainPage';
 import SeeProject from 'app/pages/Company/pages/Projects/SeeProject';
-
+import DashboardDetails from 'app/pages/BugHunter/pages/ProjectDetails';
 export default class Routes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultRoute: '/',
+      defaultRoute: '/'
     };
   }
 
@@ -31,9 +31,8 @@ export default class Routes extends Component {
         <Route component={Home} exact path="/empresa/home" />
         <Route component={Profile} exact path="/empresa/perfil" />
         <Route component={Projects} exact path="/empresa/projetos" />
-        <Route component={FormProject} exact path="/empresa/projetos/novo" /> 
+        <Route component={FormProject} exact path="/empresa/projetos/novo" />
         <Route component={SeeProject} exact path="/empresa/projetos/:id" />
-          
 
         <Route component={SignUp} exact path="/cadastro/empresa" />
         <Route component={ChooseSignUp} exact path="/cadastro/escolher" />
@@ -44,6 +43,11 @@ export default class Routes extends Component {
 
         <Route component={NotLoggedHome} exact path="/" />
         <Route component={Dashboard} exact path="/dashboard" />
+        <Route
+          component={DashboardDetails}
+          exact
+          path="/bughunter/projetos/:id"
+        />
 
         <Redirect to={defaultRoute} />
       </Switch>
