@@ -6,7 +6,7 @@ import SignUpForm from './Form';
 
 const useStyles = theme => ({
   root: {
-    height: '100vh',
+    height: '100vh'
   },
   image: {
     // backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -14,21 +14,21 @@ const useStyles = theme => ({
       'url(https://images.unsplash.com/photo-1549692520-acc6669e2f0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=633&q=80)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: 'center'
   },
   paper: {
     padding: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 });
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      logged: false,
+      logged: false
     };
   }
 
