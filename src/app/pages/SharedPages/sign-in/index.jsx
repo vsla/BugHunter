@@ -49,9 +49,7 @@ class SignIn extends React.Component {
                 spacing={2}
               >
                 <Grid item>
-                  <Avatar>
-                    <img src={logo}/>
-                  </Avatar>
+                  <img src={logo} alt="logo bughunter"/>
                 </Grid>
                 <Grid item>
                   <Typography component="h1" variant="h5" color="primary">
@@ -125,10 +123,10 @@ class SignIn extends React.Component {
             </Grid>
             <Grid item style={{ width: '100%' }}>
               <Typography variant="body2" color="textSecondary" align="center">
-                Copyright © 
+                Copyright ©
                 <Link color="inherit" href="/">
                   BugHuntera
-                </Link> 
+                </Link>
                 {new Date().getFullYear()}
                 .
               </Typography>
