@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import { connect } from 'react-redux'
-import axiosInstance from '../helpers/httpClient'
+import axiosInstance from '../services/BaseRoute'
 
 class CompanyService extends Component{
   
   static getAllCompanies = async () => {
     try {
-      let res = await axiosInstance.get('/company/states/Pernambuco')
+      let res = await axiosInstance.get('/companies')
       console.log(res);
       return res
     } catch (erro) {
@@ -17,7 +17,7 @@ class CompanyService extends Component{
   
   static getCompany = async (id) => {
     try {
-      let res = await axiosInstance.get('/company/' + id)
+      let res = await axiosInstance.get('/companies/' + id)
       return res
     } catch (erro) {
       console.log(erro);
@@ -29,7 +29,7 @@ class CompanyService extends Component{
   static authCompany = async (company) => {
     try {
       console.log(company)
-      let res = await axiosInstance.post('/company/auth', company)
+      let res = await axiosInstance.post('/companies/auth', company)
       return res
     } catch (erro) {
       return {error: erro};
@@ -40,7 +40,7 @@ class CompanyService extends Component{
 
   static newCompany = async (company) => {
     try {
-      let res = await axiosInstance.post('/company/', company)
+      let res = await axiosInstance.post('/companies', company)
       return res
     } catch (erro) {
       return {error: erro};
@@ -48,9 +48,9 @@ class CompanyService extends Component{
 
   }
 
-  static updateCompany = (id,company) =>  {
+  static updateCompany = async (id,company) =>  {
     try {
-      let res = await axiosInstance.patch('/company/' + id, company)
+      let res = await axiosInstance.patch('/companies/' + id, company)
       console.log(res)
       return res
     } catch (erro) {

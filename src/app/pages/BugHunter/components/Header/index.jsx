@@ -151,7 +151,7 @@ export default function PrimarySearchAppBar() {
       <AppBar position="fixed">
         <DefaultContainer>
           <Toolbar style={{ padding: 0 }}>
-            <Link to="/" style={{display: 'flex', alignItems: 'center'}}>
+            <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
               <img
                 src={Logo}
                 edge="start"
@@ -200,11 +200,15 @@ export default function PrimarySearchAppBar() {
                       >
                         <BugReport />
                       </IconButton>
-                      <IconButton
-                        color="inherit"
-                      >
-                        <AccountCircle />
-                      </IconButton>
+                      <Link to="/dashboard">
+                        <IconButton
+                          style={{ color: 'white' }}
+
+                        >
+                          <AccountCircle />
+                        </IconButton>
+                      </Link>
+
                     </>
                   )
               }
