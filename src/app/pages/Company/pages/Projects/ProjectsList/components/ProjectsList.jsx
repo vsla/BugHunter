@@ -31,7 +31,9 @@ const useStyles = (theme) => ({
 class ProjectList extends React.Component {
   constructor(props) {
     super(props);
+    
     const { data } = this.props
+    console.log(data)
     this.state = {
       projects: data,
     };

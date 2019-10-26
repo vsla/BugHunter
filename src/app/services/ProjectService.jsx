@@ -9,7 +9,7 @@ class ProjectService extends Component{
       console.log(res);
       return res
     } catch (erro) {
-      console.log(erro);
+      console.log({error: erro});
       return {error: erro};
     }
   }
