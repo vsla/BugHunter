@@ -3,6 +3,8 @@ import { Grid, withStyles, Typography, Paper, Button } from '@material-ui/core';
 import Header from '../../components/Header';
 import DefaultContainer from '../../components/DefaultContainer';
 
+import { Link } from 'react-router-dom';
+
 const styles = {
   mainContainer: {
     backgroundImage: 'url(https://source.unsplash.com/wh-RPfR_3_M/1600x900)',
@@ -63,10 +65,14 @@ class index extends Component {
                     <Grid item>
                       <Grid container direction="row" justify="space-around" alignItems="center">
                         <Grid item>
-                          <Button color="secondary" variant="contained" size="large">Login</Button>
+                          <Link to="/login">
+                            <Button color="secondary" variant="contained" size="large">Login</Button>
+                          </Link>
                         </Grid>
                         <Grid item>
-                          <Button color="primary" variant="contained" size="large">Cadastre-se</Button>
+                          <Link to="/cadastro/escolher">
+                            <Button color="primary" variant="contained" size="large">Cadastre-se</Button>
+                          </Link>
                         </Grid>
                       </Grid>
 

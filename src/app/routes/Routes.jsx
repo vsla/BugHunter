@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 // import {Home} from '../pages'
-import Home from '../pages/Company/pages/Home/Home';
-import { SignIn } from '../pages/SharedPages';
-import Profile from '../pages/Company/pages/Profile/Profile';
-import Projects from '../pages/Company/pages/Projects/ProjectsList/Projects';
-import FormProject from '../pages/Company/pages/Projects/FormProject/FormProject';
-import SignUp from '../pages/Company/pages/CompanySignUp';
-import ChooseSignUp from '../pages/SharedPages/ChooseSignUp';
-import AfterLogged from '../pages/Company/pages/CompanySignUp/AfterLogged';
 
-// BugHunter
-import NotLoggedHome from '../pages/BugHunter/pages/NotLoggedHome';
+import Home from 'app/pages/Company/pages/Home/Home';
+import { SignIn } from 'app/pages/SharedPages';
+import Profile from 'app/pages/Company/pages/Profile/Profile';
+import Projects from 'app/pages/Company/pages/Projects/ProjectsList/Projects';
+import FormProject from 'app/pages/Company/pages/Projects/FormProject/FormProject';
+import SignUp from 'app/pages/Company/pages/CompanySignUp';
+import ChooseSignUp from 'app/pages/SharedPages/ChooseSignUp';
+import AfterLogged from 'app/pages/Company/pages/CompanySignUp/AfterLogged';
+
 import BugHunterSignUp from '../pages/BugHunter/pages/BughunterSIgnUp';
+import NotLoggedHome from 'app/pages/BugHunter/pages/NotLoggedHome';
+import Dashboard from 'app/pages/BugHunter/pages/MainPage';
+import SeeProject from 'app/pages/Company/pages/Projects/SeeProject';
 
 export default class Routes extends Component {
   constructor(props) {
@@ -29,8 +31,10 @@ export default class Routes extends Component {
         <Route component={Home} exact path="/empresa/home" />
         <Route component={Profile} exact path="/empresa/perfil" />
         <Route component={Projects} exact path="/empresa/projetos" />
-        <Route component={FormProject} exact path="/empresa/projetos/novo" />
-        
+        <Route component={FormProject} exact path="/empresa/projetos/novo" /> 
+        <Route component={SeeProject} exact path="/empresa/projetos/:id" />
+          
+
         <Route component={SignUp} exact path="/cadastro/empresa" />
         <Route component={ChooseSignUp} exact path="/cadastro/escolher" />
         <Route component={AfterLogged} exact path="/cadastro/cadastrado" />
@@ -40,6 +44,8 @@ export default class Routes extends Component {
 
         <Route component={NotLoggedHome} exact path="/" />
         <Route component={BugHunterSignUp} exact path="/cadastro/bughunter" />
+        <Route component={Dashboard} exact path="/dashboard" />
+
 
         <Redirect to={defaultRoute} />
       </Switch>

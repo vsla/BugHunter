@@ -54,9 +54,8 @@ class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [{name: 'teste', description:'asdsad'}],
-      loading: false,
-      hasProjects: true,
+      data: [],
+      status: 'loading',
     };
   }
 
@@ -64,66 +63,80 @@ class Projects extends Component {
     try {
       const response = await ProjectService.getAllProjects();
       if (response.data.length === 0) {
-        this.setState({ loading: false, hasProjects: false });
+        this.setState({ status: 'noProjects' });
       } else {
-        this.setState({ data: response.data, loading: false });
+        this.setState({ data: response.data, status: 'hasProjects' });
       }
-      console.log(response);
+      console.log(response, response.data, this.state.status);
     } catch (error) {
       console.log(error);
     }
   }
 
+  renderContent = () => {
+    const { status, hasProjects, data } = this.state;
+    const { classes } = this.props;
+    if (status == 'hasProjects') {
+        return (
+          <>
+            <Grid item style={{ width: '100%' }}>
+              <StatusCard />
+            </Grid>
+            <Grid item style={{ width: '100%' }}>
+              <ProjectsList data={data} />
+            </Grid>
+          </>
+        )
+
+      } else if (status == 'noProjects') {
+        return (
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            direction="column"
+            spacing={4}
+            style={{ flexGrow: 1 }}
+          >
+            <Grid item>
+              <img src={sadface} alt="sad face" height={100} />
+            </Grid>
+            <Grid item>
+              <Typography> Você não tem projetos, crie um! </Typography>
+            </Grid>
+            <Grid item>
+              <Link to="/empresa/projetos/novo" className={classes.link}>
+                <Button variant="contained" color="primary">
+                  Novo Projeto
+              </Button>
+              </Link>
+            </Grid>
+          </Grid>
+        )
+
+      } else {
+      return (
+
+        <Grid container justify="center" alignItems="center" style={{height: '100%'}}>
+          <Grid item>
+            <CircularProgress />
+          </Grid>
+        </Grid>
+      )
+    }
+  }
+
   render() {
-    const { loading, hasProjects, data } = this.state;
+    const { status, hasProjects, data } = this.state;
     const { classes } = this.props;
 
     return (
       <Dashboard title="Projetos" profile="company">
         <Grid container className={classes.StorekeeperDashboard}>
-          {!loading ? (
-            <Grid container spacing={2} direction="column">
-              {hasProjects ? (
-                <>
-                  <Grid item>
-                    <StatusCard />
-                  </Grid>
-                  <Grid item>
-                    <ProjectsList data={data} />
-                  </Grid>
-                </>
-              ) : (
-                <Grid
-                  container
-                  justify="center"
-                  alignItems="center"
-                  direction="column"
-                  spacing={4}
-                  style={{ flexGrow: 1 }}
-                >
-                  <Grid item>
-                    <img src={sadface} alt="sad face" height={100} />
-                  </Grid>
-                  <Grid item>
-                    <Typography> Você não tem projetos, crie um! </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Link to="/empresa/projetos/novo" className={classes.link}>
-                      <Button variant="contained" color="primary">
-                        Novo Projeto
-                      </Button>
-                    </Link>
-                  </Grid>
-                </Grid>
-              )}
-            </Grid>
-          ) : (
-            <Grid container justify="center" alignItems="center">
-              <Grid item>
-                <CircularProgress />
-              </Grid>
-            </Grid>
-          )}
+
+          <Grid container spacing={2} direction="column">
+            {this.renderContent()}
+          </Grid>
         </Grid>
       </Dashboard>
     );

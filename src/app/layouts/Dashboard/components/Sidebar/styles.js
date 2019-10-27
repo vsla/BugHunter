@@ -1,19 +1,21 @@
-export default (theme) => ({
+export default theme => ({
   root: {
     backgroundColor: theme.palette.common.white,
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    paddingTop: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
+    padding: 0,
+    // paddingTop: theme.spacing.unit,
+    // paddingBottom: theme.spacing.unit,
+    // paddingLeft: theme.spacing.unit,
+    // paddingRight: theme.spacing.unit,
   },
   logoWrapper: {
     display: 'flex',
+    backgroundColor: theme.palette.primary.main,
     justifyContent: 'center',
     alignItems: 'center',
-    height: '55px',
+    height: '64px',
     flexShrink: 0,
   },
   logoLink: {
@@ -26,6 +28,7 @@ export default (theme) => ({
   },
   logoDivider: {
     marginBottom: theme.spacing.unit * 2,
+    marginTop: 5,
   },
   profile: {
     display: 'flex',
@@ -91,4 +94,16 @@ export default (theme) => ({
   nested: {
     paddingLeft: 50,
   },
+  grow: {
+    flexGrow: 1,
+  },
+  list: {
+    display: 'flex',
+    flexGrow: 1,
+    flexDirection: 'column',
+    padding: '10px 10px'
+  },
+  button:{
+
+  }
 });

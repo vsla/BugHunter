@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 // Material helpers
-import { withStyles } from '@material-ui/core';
+import { withStyles, Button } from '@material-ui/core';
 
 // Material components
 import {
@@ -28,6 +28,8 @@ import {
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
+// Logo
+import logo from '../../../../assets/bughunter.png'
 
 // Component styles
 import styles from './styles';
@@ -59,16 +61,16 @@ class Sidebar extends Component {
       <nav className={rootClassName}>
         <div className={classes.logoWrapper}>
           <Link className={classes.logoLink} to="/">
-            {/* <img
-              alt="Obapet logo"
+            <img
+              alt="BugHunter logo"
               className={classes.logoImage}
-              src="/images/logos/logo.svg"
-            /> */}
+              src={logo}
+            />
           </Link>
         </div>
-        <Divider className={classes.logoDivider} />
+        
 
-        <List component="div" disablePadding>
+        <List component="div" className={classes.list}>
           <ListItem
             activeClassName={classes.activeListItem}
             className={classes.listItem}
@@ -83,7 +85,7 @@ class Sidebar extends Component {
               primary="Inicial"
             />
           </ListItem>
-          <ListItem
+          {/* <ListItem
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
@@ -96,7 +98,7 @@ class Sidebar extends Component {
               classes={{ primary: classes.listItemText }}
               primary="Perfil"
             />
-          </ListItem>
+          </ListItem> */}
           <ListItem
             activeClassName={classes.activeListItem}
             className={classes.listItem}
@@ -157,6 +159,16 @@ class Sidebar extends Component {
             </List>
           </Collapse>
          */}
+          <div className={classes.grow} />
+          <Divider className={classes.logoDivider} />
+          <div className={classes.button}>
+            <Button fullWidth variant='outlined' color='primary'>
+              Sair
+            </Button>
+          </div>
+
+
+
         </List>
       </nav>
     );

@@ -4,11 +4,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import { BugReport } from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+
+import { Link } from 'react-router-dom';
 
 import logo from '../../../assets/HunterLogo.png'
 
@@ -49,9 +49,7 @@ class SignIn extends React.Component {
                 spacing={2}
               >
                 <Grid item>
-                  <Avatar>
-                    <img src={logo}/>
-                  </Avatar>
+                  <img src={logo} alt="logo bughunter"/>
                 </Grid>
                 <Grid item>
                   <Typography component="h1" variant="h5" color="primary">
@@ -95,15 +93,16 @@ class SignIn extends React.Component {
                     />
                   </Grid>
                   <Grid item style={{ width: '100%' }}>
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className={classes.submit}
-                    >
-                      Entrar
-                    </Button>
+                    <Link to="/empresa/projetos">
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                      >
+                        Entrar
+                      </Button>
+                    </Link>
                   </Grid>
                   <Grid item style={{ width: '100%' }}>
                     <Grid container>
@@ -124,10 +123,10 @@ class SignIn extends React.Component {
             </Grid>
             <Grid item style={{ width: '100%' }}>
               <Typography variant="body2" color="textSecondary" align="center">
-                Copyright © 
+                Copyright ©
                 <Link color="inherit" href="/">
                   BugHuntera
-                </Link> 
+                </Link>
                 {new Date().getFullYear()}
                 .
               </Typography>
