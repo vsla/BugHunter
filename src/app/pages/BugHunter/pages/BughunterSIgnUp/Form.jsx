@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // Externals
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import PropTypes from "prop-types";
+import { Formik } from "formik";
+import * as yup from "yup";
 
 // Material helpers
 import {
@@ -16,92 +16,69 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio
-} from '@material-ui/core';
-import HunterImage from '../../../../assets/HunterLogo.png';
+} from "@material-ui/core";
+import HunterImage from "../../../../assets/HunterLogo.png";
 
 // Shared layouts
-import MessageBar from '../../../../components/MessageBar';
-import ProjectService from '../../../../services/ProjectService';
+import MessageBar from "../../../../components/MessageBar";
+import BughunterService from "../../../../services/BughunterService";
 
 // Regex
-import {
-  cpfRegex,
-  phonRegex,
-  passwordRegex
-} from '../../../../components/FormattedInput/Regex';
+import { cpfRegex } from "../../../../components/FormattedInput/Regex";
 
 // Router
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 //Formatted inputs
-import { CpfFormatted } from '../../../../components/FormattedInput';
+import { CpfFormatted } from "../../../../components/FormattedInput";
 
 const schema = yup.object().shape({
-  name: yup.string().required('Digite o seu nome'),
+  name: yup.string().required("Digite o seu nome"),
   email: yup
     .string()
-    .email('Digite um email válido')
-    .required('Digite um email'),
-  id: yup.string().required('Digite o cpf'),
+    .email("Digite um email válido")
+    .required("Digite um email"),
+  id: yup
+    .string()
+    .matches(cpfRegex, "Cpf incorreto")
+    .required("Digite o cpf"),
   password: yup
     .string()
     //.matches(passwordRegex, 'Senha deve conter pelo menos uma letra maiúscula, uma minúscula e um numero')
-    .min(8, 'A senha precisa ter no mínimo 8 caracteres')
-    .required('Senha é obrigatória'),
+    .min(6, "A senha precisa ter no mínimo 6 caracteres")
+    .required("Senha é obrigatória"),
   confirmPassword: yup
     .string()
-    .required('A confirmação de senha é obrigatória')
-    .oneOf([yup.ref('password'), null], 'As senhas precisam ser idênticas')
+    .required("A confirmação de senha é obrigatória")
+    .oneOf([yup.ref("password"), null], "As senhas precisam ser idênticas")
 });
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // data: this.props.data,
-      // edit: this.props.edit,
       openSnackBar: false,
       isSignUp: false
     };
   }
 
   getInitalValues = () => ({
-    name: '',
-    email: '',
-    cnpj_cpf: 'cpf',
-    id: '',
-    phone: '',
-    password: '',
-    confirmPassword: ''
+    name: "",
+    email: "",
+    cnpj_cpf: "cpf",
+    id: "",
+    password: "",
+    confirmPassword: ""
   });
 
-  sendform = async project => {
-    // const { edit, data } = this.state;
-    const edit = false;
-    const id = 1;
-    // const { data } = this.state;
-    // if (edit === true) {
-    //   const response = await ProjectService.newProject(
-    //     id,
-    //     project,
-    //   );
-    //   return response;
-    // }
-    const newProject = {
-      name: project.name,
-      description: project.shortDescription,
-      company_id: id
-    };
-    console.log(newProject);
-    const response = await ProjectService.newProject(newProject);
+  sendform = async Bughunter => {
+    const response = await BughunterService.newBughunter(Bughunter);
+
     if (response.status === 201) {
-      this.setState({
-        openSnackBar: 'Adicionado com sucesso!',
-        type: 'sucess'
-      });
+      this.setState({ isSignUp: true });
     } else {
       this.setState({
-        openSnackBar: 'Erro ao criar o projeto!',
-        type: 'error'
+        openSnackBar: "Email já existente",
+        type: "error"
       });
     }
     console.log(response);
@@ -109,9 +86,9 @@ class SignUpForm extends Component {
   };
 
   renderSnackBar = () => {
-    const { openSnackBar } = this.state;
+    const { openSnackBar, type } = this.state;
     if (openSnackBar) {
-      return <MessageBar message={openSnackBar} variant="sucess" />;
+      return <MessageBar message={openSnackBar} variant={type} />;
     }
     return <div />;
   };
@@ -125,10 +102,15 @@ class SignUpForm extends Component {
           <Formik
             initialValues={this.getInitalValues()}
             onSubmit={values => {
-              // this.setState({ openSnackBar: "" });
-              // console.log(values);
-              // this.sendform(values);
-              this.setState({ isSignUp: true });
+              const bughunter = {
+                name: values.name,
+                cnpj: values.id,
+                password: values.password,
+                email: values.email
+              };
+              this.setState({ openSnackBar: "" });
+              console.log(values, bughunter);
+              this.sendform(bughunter);
             }}
             validationSchema={schema}
           >
@@ -142,7 +124,7 @@ class SignUpForm extends Component {
             }) => (
               <form
                 onSubmit={handleSubmit}
-                style={{ width: '100%', maxWidth: '550px' }}
+                style={{ width: "100%", maxWidth: "550px" }}
               >
                 <Grid
                   container
@@ -171,21 +153,21 @@ class SignUpForm extends Component {
                   <Grid
                     item
                     style={{
-                      paddingTop: '25px',
-                      paddingBottom: '25px',
-                      width: '100%'
+                      paddingTop: "25px",
+                      paddingBottom: "25px",
+                      width: "100%"
                     }}
                   >
                     <Grid container direction="column" spacing={1}>
                       {/* First line */}
-                      <Grid item xs={12} style={{ width: '100%' }}>
+                      <Grid item xs={12} style={{ width: "100%" }}>
                         <TextField
                           fullWidth
                           error={
                             !!(
                               errors.name &&
                               touched.name &&
-                              errors.name !== ''
+                              errors.name !== ""
                             )
                           }
                           label="Nome"
@@ -200,14 +182,14 @@ class SignUpForm extends Component {
                           {errors.name && touched.name && errors.name}
                         </Typography>
                       </Grid>
-                      <Grid item xs={12} style={{ width: '100%' }}>
+                      <Grid item xs={12} style={{ width: "100%" }}>
                         <TextField
                           fullWidth
                           error={
                             !!(
                               errors.email &&
                               touched.email &&
-                              errors.email !== ''
+                              errors.email !== ""
                             )
                           }
                           label="E-mail"
@@ -221,11 +203,11 @@ class SignUpForm extends Component {
                           {errors.email && touched.email && errors.email}
                         </Typography>
                       </Grid>
-                      <Grid item xs={12} style={{ width: '100%' }}>
+                      <Grid item xs={12} style={{ width: "100%" }}>
                         <TextField
                           fullWidth
                           error={
-                            !!(errors.id && touched.id && errors.id !== '')
+                            !!(errors.id && touched.id && errors.id !== "")
                           }
                           InputProps={{ inputComponent: CpfFormatted }}
                           label="CPF"
@@ -240,14 +222,14 @@ class SignUpForm extends Component {
                         </Typography>
                       </Grid>
                     </Grid>
-                    <Grid item xs={12} style={{ width: '100%' }}>
+                    <Grid item xs={12} style={{ width: "100%" }}>
                       <TextField
                         fullWidth
                         error={
                           !!(
                             errors.password &&
                             touched.password &&
-                            errors.password !== ''
+                            errors.password !== ""
                           )
                         }
                         label="Senha"
@@ -262,14 +244,14 @@ class SignUpForm extends Component {
                         {errors.password && touched.password && errors.password}
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} style={{ width: '100%' }}>
+                    <Grid item xs={12} style={{ width: "100%" }}>
                       <TextField
                         fullWidth
                         error={
                           !!(
                             errors.confirmPassword &&
                             touched.confirmPassword &&
-                            errors.confirmPassword !== ''
+                            errors.confirmPassword !== ""
                           )
                         }
                         label="Confirme a senha"
@@ -288,18 +270,15 @@ class SignUpForm extends Component {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item style={{ width: '100%' }}>
+                <Grid item style={{ width: "100%" }}>
                   <Button
                     variant="contained"
-                    // onClick={() => {
-                    //   this.setState({ isSignUp: true });
-                    // }}
                     fullWidth
                     color="primary"
                     type="submit"
                     size="medium"
                   >
-                    {'Criar'}
+                    {"Criar"}
                   </Button>
                 </Grid>
               </form>
