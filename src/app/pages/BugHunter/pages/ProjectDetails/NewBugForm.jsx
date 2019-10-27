@@ -22,8 +22,8 @@ import {
 } from '@material-ui/core';
 
 // Shared layouts
-import MessageBar from '../../../../../../components/MessageBar';
-import ProjectService from '../../../../../../services/ProjectService';
+import MessageBar from '../../../../components/MessageBar';
+import ProjectService from '../../../../services/ProjectService';
 
 // Custom components
 
