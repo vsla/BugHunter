@@ -65,7 +65,7 @@ export default {
     lineHeight: '10px',
     textTransform: 'initial',
     paddingTop: 5,
-    // paddingBottom: 10,
+    paddingBottom: 5,
   },
   body1: {
     color: '#47525E',
