@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 
 // Externals
 import PropTypes from 'prop-types';
+import BugRequestForm from './NewBugForm';
 
 // Material helpers
 import { Link } from 'react-router-dom';
@@ -64,14 +65,16 @@ const styles = theme => ({
     padding: 5,
     borderRadius: 5,
     marginLeft: 10,
-    color: palette.primary.light
+    color: palette.primary.light,
+    textAlign: 'center'
   },
   inactive: {
     border: `1px solid ${palette.secondary.dark}`,
     padding: 5,
     borderRadius: 5,
     marginLeft: 10,
-    color: palette.secondary.dark
+    color: palette.secondary.dark,
+    textAlign: 'center'
   },
   money: {
     border: '1px solid gray',
@@ -105,7 +108,12 @@ const styles = theme => ({
     overflowX: 'auto'
   },
   table: {
-    minWidth: 650
+    minWidth: 650,
+    border: 1
+  },
+  button: {
+    backgroundColor: palette.secondary.dark,
+    color: '#fff'
   }
 });
 
@@ -142,7 +150,7 @@ class BugsList extends Component {
 
     this.state = {
       loading: false,
-      active: true
+      active: false
     };
   }
 
@@ -163,9 +171,8 @@ class BugsList extends Component {
                 className={classes.title}
               >
                 <Grid item>
-                  <Button variant="outlined">
+                  <Button variant="outlined" className={classes.button}>
                     NOVO
-                    <BugReport />
                   </Button>
                 </Grid>
               </Grid>
@@ -194,10 +201,10 @@ class BugsList extends Component {
                             {row.status}
                           </Typography>
                         </TableCell>
-                        <TableCell align="right">{row.bugs}</TableCell>
-                        <TableCell align="right">{row.category}</TableCell>
-                        <TableCell align="right">{row.author}</TableCell>
-                        <TableCell align="right">{row.value}</TableCell>
+                        <TableCell align="center">{row.bugs}</TableCell>
+                        <TableCell align="center">{row.category}</TableCell>
+                        <TableCell align="center">{row.author}</TableCell>
+                        <TableCell align="center">{row.value}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
