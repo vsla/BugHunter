@@ -11,7 +11,7 @@ import SignUp from 'app/pages/Company/pages/CompanySignUp';
 import ChooseSignUp from 'app/pages/SharedPages/ChooseSignUp';
 import AfterLogged from 'app/pages/Company/pages/CompanySignUp/AfterLogged';
 
-// BugHunter
+import BugHunterSignUp from '../pages/BugHunter/pages/BughunterSIgnUp';
 import NotLoggedHome from 'app/pages/BugHunter/pages/NotLoggedHome';
 import Dashboard from 'app/pages/BugHunter/pages/MainPage';
 import SeeProject from 'app/pages/Company/pages/Projects/SeeProject';
@@ -43,7 +43,9 @@ export default class Routes extends Component {
         {/* BugHunter */}
 
         <Route component={NotLoggedHome} exact path="/" />
+        <Route component={BugHunterSignUp} exact path="/cadastro/bughunter" />
         <Route component={Dashboard} exact path="/dashboard" />
+
 
         <Redirect to={defaultRoute} />
       </Switch>
