@@ -8,6 +8,12 @@ import PropTypes from 'prop-types';
 
 // Material helpers
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 // Material components
 import {
@@ -45,7 +51,7 @@ const styles = theme => ({
   content: {
     paddingTop: 26,
     padding: theme.spacing(4),
-    maxWidth: '900px'
+    maxWidth: '965px'
   },
   title: {
     maxWidth: '900px'
@@ -93,9 +99,43 @@ const styles = theme => ({
   divider: {
     borderBottom: '1px solid gray',
     paddingBottom: 10
+  },
+  root: {
+    width: '100%',
+    overflowX: 'auto'
+  },
+  table: {
+    minWidth: 650
   }
 });
 
+function createData(status, bugs, category, author, value) {
+  return { status, bugs, category, author, value };
+}
+
+const rows = [
+  createData(
+    'Pendente',
+    'Problemas na integração do serviço de entrega',
+    'Android',
+    'Hudson',
+    'R$ 400'
+  ),
+  createData(
+    'Resolvido',
+    'Problemas na integração do serviço de entrega',
+    'Integração',
+    'Hudson',
+    'R$ 400'
+  ),
+  createData(
+    'Resolvido',
+    'Problemas na integração do serviço de entrega',
+    'Integração',
+    'Hudson',
+    'R$ 400'
+  )
+];
 class BugsList extends Component {
   constructor(props) {
     super(props);
@@ -131,106 +171,38 @@ class BugsList extends Component {
               </Grid>
             </Grid>
             <Grid item className={classes.content}>
-              <Grid container direction="row" alignItems="center" spacing={2}>
-                <Grid
-                  item
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Typography variant="h5">Status</Typography>
-                  <Typography
-                    className={active ? classes.active : classes.inactive}
-                  >
-                    Inativo
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Typography variant="h5">Valor</Typography>
-                  <Typography className={classes.money}>R$ 2.0X</Typography>
-                </Grid>
-                <Grid
-                  item
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Typography variant="h5">Categoria</Typography>
-                  <Typography className={classes.category}>Desktop</Typography>
-                </Grid>
-              </Grid>
-              <Grid container direction="column" spacing={2}>
-                <Grid item>
-                  <Typography variant="body1" className={classes.divider}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry
-                    standard dummy text ever since the 1500s,
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Typography variant="h5">Link para o git: </Typography>
-                  <a href="https://github.com/vsla/bughunter">
-                    <Typography
-                      color="secondary"
-                      className={classes.growContent}
-                    >
-                      www.github.com/vsla/bughunter
-                    </Typography>
-                  </a>
-                </Grid>
-                <Grid
-                  item
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Typography variant="h5">Live App: </Typography>
-                  <a href="https://bughunter-front.herokuapp.com">
-                    <Typography
-                      color="secondary"
-                      className={classes.growContent}
-                    >
-                      https://bughunter-front.herokuapp.com
-                    </Typography>
-                  </a>
-                </Grid>
-                <Grid item>
-                  <Typography variant="h5">Descrição: </Typography>
-                  <Paper elevation={2} style={{ padding: 15, marginTop: 8 }}>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry
-                      standard dummy text ever since the 1500s, Lorem Ipsum is
-                      simply dummy text of the printing and typesetting
-                      industry. Lorem Ipsum has been the industry standard dummy
-                      text ever since the 1500s, Lorem Ipsum is simply dummy
-                      text of the printing and typesetting industry. Lorem Ipsum
-                      has been the industry standard dummy text ever since the
-                      1500s,
-                    </Typography>
-                  </Paper>
-                </Grid>
-              </Grid>
+              <Paper className={classes.root}>
+                <Table className={classes.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">Status</TableCell>
+                      <TableCell align="center">Bugs</TableCell>
+                      <TableCell align="center">Categoria</TableCell>
+                      <TableCell align="center">Autor</TableCell>
+                      <TableCell align="center">Valor</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map(row => (
+                      <TableRow key={row.status}>
+                        <TableCell component="th" scope="row">
+                          <Typography
+                            className={
+                              active ? classes.active : classes.inactive
+                            }
+                          >
+                            {row.status}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right">{row.bugs}</TableCell>
+                        <TableCell align="right">{row.category}</TableCell>
+                        <TableCell align="right">{row.author}</TableCell>
+                        <TableCell align="right">{row.value}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Paper>
             </Grid>
           </Grid>
         ) : (

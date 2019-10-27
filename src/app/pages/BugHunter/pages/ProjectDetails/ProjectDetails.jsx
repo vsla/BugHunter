@@ -122,9 +122,6 @@ class ProjectDetails extends Component {
                 <Grid item>
                   <Typography variant="h3">Nome do Projeto</Typography>
                 </Grid>
-                <Grid item>
-                  <Button variant="outlined">Editar</Button>
-                </Grid>
               </Grid>
             </Grid>
             <Grid item className={classes.content}>

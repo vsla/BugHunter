@@ -60,21 +60,6 @@ class DashboardDetails extends Component {
                     <Tab label="Bugs" />
                   </Tabs>
                 </Grid>
-                <Grid item xs={3}>
-                  <Select
-                    fullWidth
-                    onChange={() => {}}
-                    value=""
-                    input={
-                      <TextField
-                        id="outlined-age-simple"
-                        name="category"
-                        label="Ordenar por"
-                        variant="outlined"
-                      />
-                    }
-                  />
-                </Grid>
               </Grid>
 
               {value === 0 ? <ProjectDetails /> : <BugsList />}
