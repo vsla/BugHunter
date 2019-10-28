@@ -17,7 +17,7 @@ import {
   Radio,
   FormControl,
   Select,
-  InputLabel,
+  CircularProgress,
   MenuItem
 } from "@material-ui/core";
 
@@ -30,99 +30,119 @@ import ProjectService from "../../../../../../services/ProjectService";
 const schema = yup.object().shape({
   name: yup.string().required("Digite o nome do projeto"),
   category: yup.string().required("Escolha uma categoria"),
-  linkToRepository: yup
-    .string()
-    .required("Digite o link"),
-  stepsStoRproduce: yup
-    .string()
-    .required("Digite o passo a passo"),
-  tableAmount: yup
-    .number()
-    .min(0, "Digite um valor acima de 0")
+  linkToRepository: yup.string().required("Digite o link"),
+  stepsStoRproduce: yup.string().required("Digite o passo a passo"),
+  tableAmount: yup.number().min(0, "Digite um valor acima de 0")
   // .required("Digite o valor de pagamento")
 });
 class UserStorekeeperEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // data: this.props.data,
-      // edit: this.props.edit,
-      openSnackBar: false
+      loading: true,
+      edit: this.props.edit,
+      openSnackBar: false,
+      params: this.props.params,
+      data: {
+        name: "",
+        category: "",
+        shortDescription: "",
+        linkToRepository: "",
+        linkToLive: "",
+        stepsStoReproduce: "",
+        tableAmount: "0",
+        status: "active"
+      }
     };
   }
 
-  getInitalValues = () => ({
-    name: "",
-    category: "",
-    shortDescription: "",
-    linkToRepository: "",
-    linkToLive: "",
-    stepsStoReproduce: "",
-    tableAmount: "0",
-    status: "active"
-  });
+  async componentDidMount() {
+    const { edit, params } = this.state;
+    if (edit) {
+      const response = await ProjectService.getProject(params.id);
+      const { name, category, link1, link2, description } = response.data;
+      const responseData = {
+        name: name,
+        category: category ? category : "",
+        shortDescription: "",
+        linkToRepository: link1 ? link1 : "",
+        linkToLive: link2 ? link2 : "",
+        stepsStoReproduce: description,
+        tableAmount: "0",
+        status: "active"
+      };
+      console.log(responseData);
+      this.setState({ data: responseData, loading: false });
+    } else {
+      this.setState({ loading: false });
+    }
+  }
+
+  getInitalValues = () => this.state.data;
 
   sendform = async project => {
     const { edit, data } = this.state;
-    const id = 1;
-    if (edit === true) {
-      const response = await ProjectService.newProject(
-        id,
-        project,
-      );
-      return response;
-    }
+    console.log(edit)
     const newProject = {
       name: project.name,
-      description: project.shortDescription,
-      company_id: id
+      shortDescription: project.shortDescription,
+      company_id: 1,
+      category: project.category,
+      link1: project.linkToRepository,
+      link2: project.linkToLive,
+      description: project.stepsStoReproduce,
+      tableAmount: "0",
+      status: "active"
     };
-    console.log(newProject);
-    const response = await ProjectService.newProject(newProject);
-    if (response.status === 201) {
-      this.setState({ openSnackBar: "Projeto adicionado com com sucesso!" });
+    if (edit === true) {
+      const response = await ProjectService.updateProject(1, newProject);
+      console.log(response)
+      if (response.status === 201) {
+        this.setState({ openSnackBar: "Projeto editado com com sucesso!" });
+      } else {
+        this.setState({ openSnackBar: "Erro ao editar o projeto!" });
+      }
     } else {
-      this.setState({ openSnackBar: "Erro ao criar o projeto!" });
+      const response = await ProjectService.newProject(newProject);
+      if (response.status === 201) {
+        this.setState({ openSnackBar: "Projeto adicionado com com sucesso!" });
+      } else {
+        this.setState({ openSnackBar: "Erro ao criar o projeto!" });
+      }
     }
-    console.log(response);
-    return response;
   };
 
   renderSnackBar = () => {
     const { openSnackBar } = this.state;
     if (openSnackBar) {
-      return (
-        <MessageBar
-          message={openSnackBar}
-          variant="sucess"
-        />
-      );
+      return <MessageBar message={openSnackBar} variant="sucess" />;
     }
     return <div />;
   };
 
   render() {
+    const { loading } = this.state;
     return (
       <Grid container>
         {this.renderSnackBar()}
-        <Formik
-          initialValues={this.getInitalValues()}
-          onSubmit={values => {
-            this.setState({ openSnackBar: "" });
-            console.log(values);
-            this.sendform(values);
-
-          }}
-          validationSchema={schema}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit
-          }) => (
+        {!loading ? (
+          <Formik
+            initialValues={this.getInitalValues()}
+            onSubmit={values => {
+              this.setState({ openSnackBar: "" });
+              console.log(values);
+              this.sendform(values);
+            }}
+            validationSchema={schema}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit
+            }) => (
               <form onSubmit={handleSubmit} style={{ width: "100%" }}>
                 <Grid
                   container
@@ -193,7 +213,7 @@ class UserStorekeeperEdit extends Component {
                               <MenuItem value={"Swift"}>Swift</MenuItem>
                               <MenuItem value={"JsFramework"}>
                                 JsFramework
-                            </MenuItem>
+                              </MenuItem>
                               <MenuItem value={"Windows"}>Windows</MenuItem>
                               <MenuItem value={"Linux"}>Linux</MenuItem>
                               <MenuItem value={"Mac"}>Mac</MenuItem>
@@ -375,7 +395,10 @@ class UserStorekeeperEdit extends Component {
                 </Grid>
               </form>
             )}
-        </Formik>
+          </Formik>
+        ) : (
+          <CircularProgress />
+        )}
       </Grid>
     );
   }
