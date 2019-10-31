@@ -53,8 +53,7 @@ class ProjectService extends Component{
   static updateProject =  async (id,Project) =>  {
     console.log(Project)
     try {
-      let res = await axiosInstance.put(`/projects/${id}`, Project)
-      
+      let res = await axiosInstance.put(`/projects/${id}`, Project)     
       console.log(res)
       return res
     } catch (erro) {

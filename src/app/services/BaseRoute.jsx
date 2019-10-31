@@ -6,6 +6,7 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   }
+
 });
 const axiosDevelop = axios.create({
   baseURL: 'http://localhost:2000/',

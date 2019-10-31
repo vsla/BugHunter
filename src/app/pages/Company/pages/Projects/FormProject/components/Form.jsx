@@ -98,6 +98,7 @@ class UserStorekeeperEdit extends Component {
       const response = await ProjectService.updateProject(1, newProject);
       console.log(response)
       if (response.status === 200) {
+
         this.setState({ openSnackBar: "Projeto editado com com sucesso!" });
       } else {
         this.setState({ openSnackBar: "Erro ao editar o projeto!" });
