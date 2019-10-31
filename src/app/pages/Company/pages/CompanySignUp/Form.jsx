@@ -21,13 +21,13 @@ import HunterImage from '../../../../assets/HunterLogo.png'
 
 // Shared layouts
 import MessageBar from "../../../../components/MessageBar";
-import ProjectService from "../../../../services/ProjectService";
+import CompanyService from "../../../../services/CompanyService";
 
 // Regex
 import { cpfRegex, phonRegex, passwordRegex } from '../../../../components/FormattedInput/Regex'
 
 // Router
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 //Formatted inputs
 import { CpfFormatted, PhoneFormatted, CnpjFormatted } from '../../../../components/FormattedInput'
@@ -40,7 +40,7 @@ const schema = yup.object().shape({
   password: yup
     .string()
     //.matches(passwordRegex, 'Senha deve conter pelo menos uma letra maiúscula, uma minúscula e um numero')
-    .min(8, 'A senha precisa ter no mínimo 8 caracteres')
+    .min(6, 'A senha precisa ter no mínimo 6 caracteres')
     .required('Senha é obrigatória'),
   confirmPassword: yup
     .string()
@@ -69,41 +69,25 @@ class SignUpForm extends Component {
   });
 
 
-  sendform = async project => {
-    // const { edit, data } = this.state;
-    const edit = false;
-    const id = 1;
-    // const { data } = this.state;
-    // if (edit === true) {
-    //   const response = await ProjectService.newProject(
-    //     id,
-    //     project,
-    //   );
-    //   return response;
-    // }
-    const newProject = {
-      name: project.name,
-      description: project.shortDescription,
-      company_id: id
-    };
-    console.log(newProject);
-    const response = await ProjectService.newProject(newProject);
-    if (response.status === 201) {
-      this.setState({ openSnackBar: "Projeto adicionado com com sucesso!", type: 'sucess' });
+  sendform = async (company) => {
+
+    const response = await CompanyService.newCompany(company);
+    console.log(response)
+
+    if (response.status !== 201) {
+      this.setState({ openSnackBar: "Erro no cadastro!", type: 'error' });
     } else {
-      this.setState({ openSnackBar: "Erro ao criar o projeto!", type: 'error' });
+      this.setState({ isSignUp: true })
     }
-    console.log(response);
-    return response;
   };
 
   renderSnackBar = () => {
-    const { openSnackBar } = this.state;
+    const { openSnackBar, type} = this.state;
     if (openSnackBar) {
       return (
         <MessageBar
           message={openSnackBar}
-          variant="sucess"
+          variant={type}
         />
       );
     }
@@ -112,17 +96,28 @@ class SignUpForm extends Component {
 
   render() {
     const { isSignUp } = this.state
-    if (!isSignUp){
+    if (!isSignUp) {
       return (
         <Grid container justify='center'>
           {this.renderSnackBar()}
           <Formik
             initialValues={this.getInitalValues()}
             onSubmit={values => {
-              // this.setState({ openSnackBar: "" });
-              // console.log(values);
-              // this.sendform(values);
-              this.setState({ isSignUp: true })
+              const newCompany = {
+                name: values.name,
+                description: values.description,
+                // phone: parseInt(values.phone.replace(/\D/g, "")),
+                // id: parseInt(values.id.replace(/\D/g, "")),
+                phone: values.phone,
+                cnpj: values.id,
+                password: values.password,
+                cnpj_cpf: values.cnpj_cpf,
+                email: values.email
+              }
+              this.setState({ openSnackBar: "" });
+              console.log(newCompany);
+              this.sendform(newCompany);
+              // 
             }}
             validationSchema={schema}
           >
@@ -150,7 +145,7 @@ class SignUpForm extends Component {
                           <Typography variant="h2" color='primary'>Olá empresa, Faça seu cadastro</Typography>
                         </Grid>
                       </Grid>
-  
+
                     </Grid>
                     <Grid
                       item
@@ -209,11 +204,11 @@ class SignUpForm extends Component {
                           <Grid container direction='column'>
                             <Grid item>
                               <FormControl component="fieldset">
-                                <RadioGroup 
-                                  aria-label="CPJ OR CNPJ" 
-                                  name="cnpj_cpf" 
-                                  value={values.cnpj_cpf} 
-                                  onChange={handleChange} 
+                                <RadioGroup
+                                  aria-label="CPJ OR CNPJ"
+                                  name="cnpj_cpf"
+                                  value={values.cnpj_cpf}
+                                  onChange={handleChange}
                                   row
                                 >
                                   <FormControlLabel
@@ -242,7 +237,7 @@ class SignUpForm extends Component {
                                   )
                                 }
                                 InputProps={
-                                  values.cnpj_cpf === 'cnpj' ? {inputComponent: CnpjFormatted } : {inputComponent: CpfFormatted}
+                                  values.cnpj_cpf === 'cnpj' ? { inputComponent: CnpjFormatted } : { inputComponent: CpfFormatted }
                                 }
                                 label={values.cnpj_cpf === 'cnpj' ? 'CNPJ' : 'CPF'}
                                 name="id"
@@ -268,6 +263,7 @@ class SignUpForm extends Component {
                               )
                             }
                             label="Telefone"
+                            InputProps={{ inputComponent: PhoneFormatted }}
                             name="phone"
                             onBlur={handleBlur}
                             onChange={handleChange}
@@ -331,7 +327,7 @@ class SignUpForm extends Component {
                   >
                     <Button
                       variant="contained"
-                      onClick={() => {this.setState({ isSignUp: true })}}
+                      // onClick={() => {this.setState({ isSignUp: true })}}
                       fullWidth
                       color="primary"
                       type="submit"
@@ -348,7 +344,7 @@ class SignUpForm extends Component {
       );
     }
     return (
-      <Redirect to='/cadastro/cadastrado'/>
+      <Redirect to='/cadastro/cadastrado' />
     )
   }
 }
