@@ -5,8 +5,13 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+// Shared layouts
+import MessageBar from '../../../../components/MessageBar';
+import ProjectService from '../../../../services/ProjectService';
+
 // Material helpers
 import {
+  withStyles,
   Typography,
   Button,
   Grid,
@@ -20,10 +25,6 @@ import {
   InputLabel,
   MenuItem
 } from '@material-ui/core';
-
-// Shared layouts
-import MessageBar from '../../../../components/MessageBar';
-import ProjectService from '../../../../services/ProjectService';
 
 // Custom components
 
@@ -91,6 +92,7 @@ class BugRequestForm extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <Grid container>
         {this.renderSnackBar()}
@@ -118,8 +120,26 @@ class BugRequestForm extends Component {
                 spacing={2}
                 style={{ maxWidth: 750 }}
               >
-                <Grid item style={{ borderBottom: '1px solid black' }}>
-                  <Typography variant="h5">Bug Request</Typography>
+                <Grid
+                  item
+                  style={{
+                    paddingTop: '20px',
+                    paddingBottom: '20px',
+                    backgroundColor: 'rgba(227, 227, 227, 0.32)'
+                  }}
+                >
+                  <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    className={{
+                      maxWidth: '900px'
+                    }}
+                  >
+                    <Grid item>
+                      <Typography variant="h3">Nome do Projeto</Typography>
+                    </Grid>
+                  </Grid>
                 </Grid>
                 <Grid
                   item
@@ -133,7 +153,7 @@ class BugRequestForm extends Component {
                     {/* First line */}
                     <Grid item style={{ width: '100%' }}>
                       <Grid container spacing={2}>
-                        <Grid item xs={12} sm={7} style={{ width: '100%' }}>
+                        <Grid item xs={12} sm={6} style={{ width: '100%' }}>
                           <TextField
                             fullWidth
                             error={
@@ -154,7 +174,7 @@ class BugRequestForm extends Component {
                             {errors.name && touched.name && errors.name}
                           </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={5} style={{ width: '100%' }}>
+                        <Grid item xs={12} sm={6} style={{ width: '100%' }}>
                           <Select
                             fullWidth
                             onBlur={handleBlur}
