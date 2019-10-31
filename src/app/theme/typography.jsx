@@ -1,7 +1,13 @@
 import palette from './palette';
 
 export default {
-  fontFamily: '"Poppins", "Helvetica", "Arial", sans-serif',
+  fontFamily: [
+    'Roboto',
+    'Helvetica',
+    'Arial',
+    'Poppins',
+    'sans-serif',
+  ].join(','),
 
   h1: {
     color: palette.text.primary,
@@ -32,7 +38,7 @@ export default {
     lineHeight: '24px',
   },
   h5: {
-    color: '#000',
+    color: '#47525E',
     fontWeight: '500',
     fontSize: '1.5rem',
     letterSpacing: '-0.05px',
@@ -59,10 +65,10 @@ export default {
     lineHeight: '10px',
     textTransform: 'initial',
     paddingTop: 5,
-    // paddingBottom: 10,
+    paddingBottom: 5,
   },
   body1: {
-    color: '#000',
+    color: '#47525E',
     fontSize: '14px',
     letterSpacing: '-0.05px',
     lineHeight: '21px',
@@ -73,7 +79,7 @@ export default {
     fontSize: '12px',
     letterSpacing: '-0.04px',
     lineHeight: '14px',
-    fontFamily: 'Poppins, sans-serif',
+    
   },
   button: {
     color: palette.text.primary,

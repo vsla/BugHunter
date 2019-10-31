@@ -37,15 +37,17 @@ const styles = (theme) => ({
 class Projects extends Component {
   constructor(props) {
     super(props);
-
+    const { params } = this.props.match;
     this.state = {
       loading: false,
+      params,
+      edit: Object.keys(params).length > 0,
     };
   }
 
   render() {
     const { classes } = this.props;
-    const { loading } = this.state;
+    const { loading, params, edit } = this.state;
 
     return (
       <Dashboard title="Projetos" profile="Admin">
@@ -57,7 +59,7 @@ class Projects extends Component {
               <Grid
                 container
               >
-                <Form />
+                <Form params={params} edit={edit} />
               </Grid>
             ) : (
               <Grid container justify="center" align="center">

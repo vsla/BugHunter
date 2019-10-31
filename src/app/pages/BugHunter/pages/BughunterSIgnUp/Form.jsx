@@ -21,36 +21,27 @@ import HunterImage from "../../../../assets/HunterLogo.png";
 
 // Shared layouts
 import MessageBar from "../../../../components/MessageBar";
-import CompanyService from "../../../../services/CompanyService";
+import BughunterService from "../../../../services/BughunterService";
 
 // Regex
-import {
-  cpfRegex,
-  phonRegex,
-  passwordRegex
-} from "../../../../components/FormattedInput/Regex";
+import { cpfRegex } from "../../../../components/FormattedInput/Regex";
 
 // Router
 import { Redirect } from "react-router-dom";
 
 //Formatted inputs
-import {
-  CpfFormatted,
-  PhoneFormatted,
-  CnpjFormatted
-} from "../../../../components/FormattedInput";
+import { CpfFormatted } from "../../../../components/FormattedInput";
 
 const schema = yup.object().shape({
-  name: yup.string().required("Digite o nome do projeto"),
+  name: yup.string().required("Digite o seu nome"),
   email: yup
     .string()
     .email("Digite um email válido")
     .required("Digite um email"),
-  id: yup.string().required("Digite cpf ou cnpj"),
-  phone: yup
+  id: yup
     .string()
-    .matches(phonRegex, "Digite o telefone")
-    .required("Digite o telefone"),
+    .matches(cpfRegex, "Cpf incorreto")
+    .required("Digite o cpf"),
   password: yup
     .string()
     //.matches(passwordRegex, 'Senha deve conter pelo menos uma letra maiúscula, uma minúscula e um numero')
@@ -65,8 +56,6 @@ class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // data: this.props.data,
-      // edit: this.props.edit,
       openSnackBar: false,
       isSignUp: false
     };
@@ -75,22 +64,25 @@ class SignUpForm extends Component {
   getInitalValues = () => ({
     name: "",
     email: "",
-    cnpj_cpf: "cnpj",
+    cnpj_cpf: "cpf",
     id: "",
-    phone: "",
     password: "",
     confirmPassword: ""
   });
 
-  sendform = async company => {
-    const response = await CompanyService.newCompany(company);
-    console.log(response);
+  sendform = async Bughunter => {
+    const response = await BughunterService.newBughunter(Bughunter);
 
-    if (response.status !== 201) {
-      this.setState({ openSnackBar: "Erro no cadastro!", type: "error" });
-    } else {
+    if (response.status === 201) {
       this.setState({ isSignUp: true });
+    } else {
+      this.setState({
+        openSnackBar: "Email já existente",
+        type: "error"
+      });
     }
+    console.log(response);
+    return response;
   };
 
   renderSnackBar = () => {
@@ -110,21 +102,15 @@ class SignUpForm extends Component {
           <Formik
             initialValues={this.getInitalValues()}
             onSubmit={values => {
-              const newCompany = {
+              const bughunter = {
                 name: values.name,
-                description: values.description,
-                // phone: parseInt(values.phone.replace(/\D/g, "")),
-                // id: parseInt(values.id.replace(/\D/g, "")),
-                phone: values.phone,
                 cnpj: values.id,
                 password: values.password,
-                cnpj_cpf: values.cnpj_cpf,
                 email: values.email
               };
               this.setState({ openSnackBar: "" });
-              console.log(newCompany);
-              this.sendform(newCompany);
-              //
+              console.log(values, bughunter);
+              this.sendform(bughunter);
             }}
             validationSchema={schema}
           >
@@ -159,7 +145,7 @@ class SignUpForm extends Component {
                       </Grid>
                       <Grid item>
                         <Typography variant="h2" color="primary">
-                          Olá empresa, Faça seu cadastro
+                          Olá BugHunter, Faça seu cadastro
                         </Typography>
                       </Grid>
                     </Grid>
@@ -184,7 +170,7 @@ class SignUpForm extends Component {
                               errors.name !== ""
                             )
                           }
-                          label="Nome da empresa"
+                          label="Nome"
                           Inpu
                           name="name"
                           onBlur={handleBlur}
@@ -218,134 +204,75 @@ class SignUpForm extends Component {
                         </Typography>
                       </Grid>
                       <Grid item xs={12} style={{ width: "100%" }}>
-                        <Grid container direction="column">
-                          <Grid item>
-                            <FormControl component="fieldset">
-                              <RadioGroup
-                                aria-label="CPJ OR CNPJ"
-                                name="cnpj_cpf"
-                                value={values.cnpj_cpf}
-                                onChange={handleChange}
-                                row
-                              >
-                                <FormControlLabel
-                                  value="cnpj"
-                                  control={<Radio color="primary" />}
-                                  label="CNPJ"
-                                  labelPlacement="end"
-                                />
-                                <FormControlLabel
-                                  value="cpf"
-                                  control={<Radio color="secondary" />}
-                                  label="CPF"
-                                  labelPlacement="end"
-                                />
-                              </RadioGroup>
-                            </FormControl>
-                          </Grid>
-                          <Grid item style={{ width: "100%" }}>
-                            <TextField
-                              fullWidth
-                              error={
-                                !!(errors.id && touched.id && errors.id !== "")
-                              }
-                              InputProps={
-                                values.cnpj_cpf === "cnpj"
-                                  ? { inputComponent: CnpjFormatted }
-                                  : { inputComponent: CpfFormatted }
-                              }
-                              label={
-                                values.cnpj_cpf === "cnpj" ? "CNPJ" : "CPF"
-                              }
-                              name="id"
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.id}
-                              variant="outlined"
-                            />
-                            <Typography variant="subtitle2">
-                              {errors.id && touched.id && errors.id}
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid item xs={12} style={{ width: "100%" }}>
                         <TextField
                           fullWidth
                           error={
-                            !!(
-                              errors.phone &&
-                              touched.phone &&
-                              errors.phone !== ""
-                            )
+                            !!(errors.id && touched.id && errors.id !== "")
                           }
-                          label="Telefone"
-                          InputProps={{ inputComponent: PhoneFormatted }}
-                          name="phone"
+                          InputProps={{ inputComponent: CpfFormatted }}
+                          label="CPF"
+                          name="id"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          value={values.phone}
+                          value={values.id}
                           variant="outlined"
                         />
                         <Typography variant="subtitle2">
-                          {errors.phone && touched.phone && errors.phone}
+                          {errors.id && touched.id && errors.id}
                         </Typography>
                       </Grid>
-                      <Grid item xs={12} style={{ width: "100%" }}>
-                        <TextField
-                          fullWidth
-                          error={
-                            !!(
-                              errors.password &&
-                              touched.password &&
-                              errors.password !== ""
-                            )
-                          }
-                          label="Senha"
-                          name="password"
-                          type="password"
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          value={values.password}
-                          variant="outlined"
-                        />
-                        <Typography variant="subtitle2">
-                          {errors.password &&
+                    </Grid>
+                    <Grid item xs={12} style={{ width: "100%" }}>
+                      <TextField
+                        fullWidth
+                        error={
+                          !!(
+                            errors.password &&
                             touched.password &&
-                            errors.password}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={12} style={{ width: "100%" }}>
-                        <TextField
-                          fullWidth
-                          error={
-                            !!(
-                              errors.confirmPassword &&
-                              touched.confirmPassword &&
-                              errors.confirmPassword !== ""
-                            )
-                          }
-                          label="Confirme a senha"
-                          name="confirmPassword"
-                          type="password"
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          value={values.confirmPassword}
-                          variant="outlined"
-                        />
-                        <Typography variant="subtitle2">
-                          {errors.confirmPassword &&
+                            errors.password !== ""
+                          )
+                        }
+                        label="Senha"
+                        name="password"
+                        type="password"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.password}
+                        variant="outlined"
+                      />
+                      <Typography variant="subtitle2">
+                        {errors.password && touched.password && errors.password}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} style={{ width: "100%" }}>
+                      <TextField
+                        fullWidth
+                        error={
+                          !!(
+                            errors.confirmPassword &&
                             touched.confirmPassword &&
-                            errors.confirmPassword}
-                        </Typography>
-                      </Grid>
+                            errors.confirmPassword !== ""
+                          )
+                        }
+                        label="Confirme a senha"
+                        name="confirmPassword"
+                        type="password"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.confirmPassword}
+                        variant="outlined"
+                      />
+                      <Typography variant="subtitle2">
+                        {errors.confirmPassword &&
+                          touched.confirmPassword &&
+                          errors.confirmPassword}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
                 <Grid item style={{ width: "100%" }}>
                   <Button
                     variant="contained"
-                    // onClick={() => {this.setState({ isSignUp: true })}}
                     fullWidth
                     color="primary"
                     type="submit"
