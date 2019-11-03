@@ -4,7 +4,7 @@
 
 [![](http://files.softicons.com/download/culture-icons/anime-icons-i-ii-by-samir-chajia/png/128x128/Hunter%20x%20Hunter.png)](#)
 
-- Link para o site --> https://bughunter-front.herokuapp.com/
+- Link para o site --> https://vsla.github.io/
 - Link para o repositorio backend do projeto --> https://github.com/brailog/backend-bxh
 - O Bug X Hunter é Projeto da disciplina de [engenharia de software](https://github.com/IF977/if977) do Centro de informática da UFPE
 
