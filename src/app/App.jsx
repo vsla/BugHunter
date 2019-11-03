@@ -6,9 +6,6 @@ import { createBrowserHistory } from 'history';
 // Material helpers
 import { ThemeProvider } from '@material-ui/styles';
 
-// axios to not let heroku sleep
-import axios from 'axios';
-
 // Redux
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -23,12 +20,7 @@ import Routes from './routes/Routes';
 // Browser history
 const browserHistory = createBrowserHistory();
 
-const doNotLetHerokuSleep = () => {
-  setInterval(() => axios.get('https://bughunter-front.herokuapp.com/'), 1500000);
-};
-
 const App = () => {
-  doNotLetHerokuSleep();
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
