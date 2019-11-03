@@ -31,7 +31,7 @@ const schema = yup.object().shape({
   name: yup.string().required("Digite o nome do projeto"),
   category: yup.string().required("Escolha uma categoria"),
   linkToRepository: yup.string().required("Digite o link"),
-  stepsStoRproduce: yup.string().required("Digite o passo a passo"),
+  longDescription: yup.string().required("Digite o passo a passo"),
   tableAmount: yup.number().min(0, "Digite um valor acima de 0")
   // .required("Digite o valor de pagamento")
 });
@@ -49,7 +49,7 @@ class UserStorekeeperEdit extends Component {
         shortDescription: "",
         linkToRepository: "",
         linkToLive: "",
-        stepsStoReproduce: "",
+        longDescription: "",
         tableAmount: "0",
         status: "active"
       }
@@ -67,7 +67,7 @@ class UserStorekeeperEdit extends Component {
         shortDescription: "",
         linkToRepository: link1 ? link1 : "",
         linkToLive: link2 ? link2 : "",
-        stepsStoReproduce: description,
+        longDescription: description,
         tableAmount: "0",
         status: "active"
       };
@@ -81,24 +81,23 @@ class UserStorekeeperEdit extends Component {
   getInitalValues = () => this.state.data;
 
   sendform = async project => {
-    const { edit, data } = this.state;
-    console.log(edit)
+    const { edit, data, params } = this.state;
+    console.log(edit);
     const newProject = {
       name: project.name,
-      shortDescription: project.shortDescription,
       company_id: 1,
       category: project.category,
       link1: project.linkToRepository,
       link2: project.linkToLive,
-      description: project.stepsStoReproduce,
+      description: project.longDescription,
+      status: project.status,
       tableAmount: "0",
       status: "active"
     };
     if (edit === true) {
-      const response = await ProjectService.updateProject(1, newProject);
-      console.log(response)
+      const response = await ProjectService.updateProject(params.id, newProject);
+      console.log(response);
       if (response.status === 200) {
-
         this.setState({ openSnackBar: "Projeto editado com com sucesso!" });
       } else {
         this.setState({ openSnackBar: "Erro ao editar o projeto!" });
@@ -122,7 +121,7 @@ class UserStorekeeperEdit extends Component {
   };
 
   render() {
-    const { loading } = this.state;
+    const { loading, edit } = this.state;
     return (
       <Grid container>
         {this.renderSnackBar()}
@@ -152,7 +151,9 @@ class UserStorekeeperEdit extends Component {
                   style={{ maxWidth: 750 }}
                 >
                   <Grid item style={{ borderBottom: "1px solid black" }}>
-                    <Typography variant="h5">Novo projeto</Typography>
+                    <Typography variant="h5">
+                      {!edit ? "Novo projeto" : "Editar projeto"}
+                    </Typography>
                   </Grid>
                   <Grid
                     item
@@ -303,22 +304,22 @@ class UserStorekeeperEdit extends Component {
                           rows={6}
                           error={
                             !!(
-                              errors.stepsStoRproduce &&
-                              touched.stepsStoRproduce &&
-                              errors.stepsStoRproduce !== ""
+                              errors.longDescription &&
+                              touched.longDescription &&
+                              errors.longDescription !== ""
                             )
                           }
                           label="Passo a Passo"
-                          name="stepsStoRproduce"
+                          name="longDescription"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          value={values.stepsStoRproduce}
+                          value={values.longDescription}
                           variant="outlined"
                         />
                         <Typography variant="subtitle2">
-                          {errors.stepsStoRproduce &&
-                            touched.stepsStoRproduce &&
-                            errors.stepsStoRproduce}
+                          {errors.longDescription &&
+                            touched.longDescription &&
+                            errors.longDescription}
                         </Typography>
                       </Grid>
                       <Grid item xs={12} sm={12} style={{ width: "100%" }}>
@@ -386,9 +387,9 @@ class UserStorekeeperEdit extends Component {
                           variant="contained"
                           color="primary"
                           type="submit"
-                          size="large"
+                          size="medium"
                         >
-                          {"Criar"}
+                          {!edit ? "Criar projeto" : "Editar projeto"}
                         </Button>
                       </Grid>
                     </Grid>

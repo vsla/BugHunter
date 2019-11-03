@@ -11,7 +11,12 @@ import { Link } from 'react-router-dom';
 
 // Material components
 import {
-  withStyles, CircularProgress, Grid, Typography, Button, Paper,
+  withStyles,
+  CircularProgress,
+  Grid,
+  Typography,
+  Button,
+  Paper,
 } from '@material-ui/core';
 
 // Shared layouts
@@ -20,12 +25,13 @@ import Dashboard from '../../../../../layouts/Dashboard';
 // Custom components
 import palette from '../../../../../theme/palette';
 
+import ProjectService from '../../../../../services/ProjectService';
+
 // Component styles
-const styles = (theme) => ({
+const styles = theme => ({
   StorekeeperDashboard: {
     // padding: theme.spacing(4),
     flexGrow: 1,
-
   },
   titleSection: {
     paddingTop: '20px',
@@ -92,108 +98,163 @@ const styles = (theme) => ({
 class SeeProject extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      loading: false,
+      loading: true,
+      id: this.props.match.params.id,
       active: true,
     };
   }
 
+  async componentDidMount() {
+    const { id } = this.state;
+    const response = await ProjectService.getProject(id);
+    const {
+      name, category, link1, link2, description,
+    } = response.data;
+    const responseData = {
+      name,
+      category: category || '',
+      shortDescription: '',
+      linkToRepository: link1 || '',
+      linkToLive: link2 || '',
+      longDescription: description,
+      tableAmount: '0',
+      status: 'active',
+      id,
+    };
+    this.setState({ data: responseData, loading: false });
+  }
+
   render() {
     const { classes } = this.props;
-    const { loading, active } = this.state;
+    const { loading, data } = this.state;
 
     return (
       <Dashboard title="Ver Projeto" profile="company">
-        <div
-          className={classes.StorekeeperDashboard}
-        >
-          {
-            !loading ? (
-              <Grid
-                container
-                direction="column"
-              >
-                <Grid item className={classes.titleSection}>
-                  <Grid container direction="row" justify="space-between" className={classes.title}>
-                    <Grid item>
-                      <Typography variant="h3">Nome do Projeto</Typography>
-                    </Grid>
-                    <Grid item>
+        <div className={classes.StorekeeperDashboard}>
+          {!loading ? (
+            <Grid container direction="column">
+              <Grid item className={classes.titleSection}>
+                <Grid
+                  container
+                  direction="row"
+                  justify="space-between"
+                  className={classes.title}
+                >
+                  <Grid item>
+                    <Typography variant="h3">{data.name}</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Link
+                      to={{
+                        pathname: `/empresa/projetos/editar/${data.id}`,
+                      }}
+                    >
                       <Button variant="outlined">Editar</Button>
-                    </Grid>
+                    </Link>
                   </Grid>
                 </Grid>
-                <Grid item className={classes.content}>
-                  <Grid container direction="row" alignItems="center" spacing={2}>
-                    <Grid item style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                      <Typography variant="h5">Status</Typography>
-                      <Typography
-                        className={active ? classes.active : classes.inactive}
-                      >
-                        Inativo
-                      </Typography>
-                    </Grid>
-                    <Grid item style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                      <Typography variant="h5">Valor</Typography>
-                      <Typography className={classes.money}>R$ 2.0X</Typography>
-                    </Grid>
-                    <Grid item style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                      <Typography variant="h5">Categoria</Typography>
-                      <Typography className={classes.category}>Desktop</Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid container direction="column" spacing={2}>
-                    <Grid item>
-                      <Typography variant="body1" className={classes.divider}>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry standard
-                        dummy text ever since the 1500s,
-                      </Typography>
-                    </Grid>
-                    <Grid item style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                      <Typography variant="h5">Link para o git: </Typography>
-                      <a href="https://github.com/vsla/bughunter">
-                        <Typography color="secondary" className={classes.growContent}>www.github.com/vsla/bughunter</Typography>
-                      </a>
-
-                    </Grid>
-                    <Grid item style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                      <Typography variant="h5">Live App: </Typography>
-                      <a href="https://bughunter-front.herokuapp.com">
-                        <Typography color="secondary" className={classes.growContent}>https://bughunter-front.herokuapp.com</Typography>
-                      </a>
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="h5">Descrição: </Typography>
-                      <Paper elevation={2} style={{padding: 15, marginTop: 8}}>
-                        <Typography >
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry standard
-                        dummy text ever since the 1500s,
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry standard
-                        dummy text ever since the 1500s,
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry standard
-                        dummy text ever since the 1500s,
-                        </Typography>
-                      </Paper>
-
-
-                    </Grid>
-                  </Grid>
-                </Grid>
-
               </Grid>
-            )
-              : (
-                <Grid container justify="center" align="center">
-                  <CircularProgress />
+              <Grid item className={classes.content}>
+                <Grid container direction="row" alignItems="center" spacing={2}>
+                  <Grid
+                    item
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography variant="h5">Status</Typography>
+                    <Typography
+                      className={data.status ? classes.active : classes.inactive}
+                    >
+                      {data.status === 'active' ? 'Ativo' : 'Inativo'}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography variant="h5">Valor</Typography>
+                    <Typography className={classes.money}>R$ 2.0X</Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography variant="h5">Categoria</Typography>
+                    <Typography className={classes.category}>
+                      {data.category}
+                    </Typography>
+                  </Grid>
                 </Grid>
-              )
-          }
-
+                <Grid container direction="column" spacing={2}>
+                  <Grid item>
+                    <Typography variant="body1" className={classes.divider}>
+                      {data.shortDescription}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography variant="h5">Link para o git: </Typography>
+                    <a href={data.linkToRepository}>
+                      <Typography
+                        color="secondary"
+                        className={classes.growContent}
+                      >
+                        {data.linkToRepository}
+                      </Typography>
+                    </a>
+                  </Grid>
+                  <Grid
+                    item
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography variant="h5">Live App: </Typography>
+                    <a href={data.linkToLive}>
+                      <Typography
+                        color="secondary"
+                        className={classes.growContent}
+                      >
+                        {data.linkToLive}
+                      </Typography>
+                    </a>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="h5">Descrição: </Typography>
+                    <Paper elevation={2} style={{ padding: 15, marginTop: 8 }}>
+                      <Typography>
+                        {data.longDescription}
+                      </Typography>
+                    </Paper>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid container justify="center" align="center">
+              <CircularProgress />
+            </Grid>
+          )}
         </div>
       </Dashboard>
     );
