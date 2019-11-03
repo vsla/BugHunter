@@ -81,7 +81,7 @@ class UserStorekeeperEdit extends Component {
   getInitalValues = () => this.state.data;
 
   sendform = async project => {
-    const { edit, data } = this.state;
+    const { edit, data, params } = this.state;
     console.log(edit);
     const newProject = {
       name: project.name,
@@ -90,11 +90,12 @@ class UserStorekeeperEdit extends Component {
       link1: project.linkToRepository,
       link2: project.linkToLive,
       description: project.longDescription,
+      status: project.status,
       tableAmount: "0",
       status: "active"
     };
     if (edit === true) {
-      const response = await ProjectService.updateProject(1, newProject);
+      const response = await ProjectService.updateProject(params.id, newProject);
       console.log(response);
       if (response.status === 200) {
         this.setState({ openSnackBar: "Projeto editado com com sucesso!" });

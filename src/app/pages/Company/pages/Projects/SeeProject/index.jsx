@@ -108,8 +108,9 @@ class SeeProject extends Component {
   async componentDidMount() {
     const { id } = this.state;
     const response = await ProjectService.getProject(id);
-    console.log(response);
-    const { name, category, link1, link2, description } = response.data;
+    const {
+      name, category, link1, link2, description,
+    } = response.data;
     const responseData = {
       name,
       category: category || '',
@@ -121,13 +122,12 @@ class SeeProject extends Component {
       status: 'active',
       id,
     };
-    console.log(responseData);
     this.setState({ data: responseData, loading: false });
   }
 
   render() {
     const { classes } = this.props;
-    const { loading, active, data } = this.state;
+    const { loading, data } = this.state;
 
     return (
       <Dashboard title="Ver Projeto" profile="company">
