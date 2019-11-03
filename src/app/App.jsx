@@ -18,19 +18,19 @@ import theme from './theme/theme.jsx';
 import Routes from './routes/Routes';
 
 // Browser history
-const browserHistory = createBrowserHistory();
+const browserHistory = createBrowserHistory({
+  basename: process.env.PUBLIC_URL,
+});
 
-const App = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Router history={browserHistory}>
-            <Routes />
-          </Router>
-        </PersistGate>
-      </Provider>
-    </ThemeProvider>
-  );
-};
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router history={browserHistory}>
+          <Routes />
+        </Router>
+      </PersistGate>
+    </Provider>
+  </ThemeProvider>
+);
 export default App;
