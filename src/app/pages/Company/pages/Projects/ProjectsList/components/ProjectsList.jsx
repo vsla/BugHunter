@@ -48,7 +48,7 @@ class ProjectList extends React.Component {
                 <Grid container direction="column" spacing={1}>
                   <Grid item style={{ width: "100%" }}>
                     <Link
-                      to={"/empresa/projetos/" + "123"}
+                      to={"/empresa/projetos/" + project.id}
                       style={{ display: "inline" }}
                     >
                       <Typography
