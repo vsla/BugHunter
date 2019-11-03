@@ -31,7 +31,6 @@ Então, "Bug x Hunter" serve para desenvolvedores que querem começar no mundo d
 |   Gabriel Ramos R. Oliveira   | Engenheiro de Back End  |
 |        Giovanni veloso        |  Engenheiro de DevOps   |
 | Joao Gabriel Silva de Andrade |      Product Owner      |
-|    Thiago Prazeres Bezerra    | Engenheiro de Front End |
 |   Victor Sena de Lima Attar   |      Scrum Master       |
 
 ## Desenvolvimento
