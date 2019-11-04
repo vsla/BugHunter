@@ -46,7 +46,6 @@ export default class Routes extends Component {
         <Route component={NotLoggedHome} exact path="/" />
         <Route component={BugHunterSignUp} exact path="/cadastro/bughunter" />
         <Route component={Dashboard} exact path="/dashboard" />
-
         <Route
           component={DashboardDetails}
           exact

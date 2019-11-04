@@ -47,14 +47,15 @@ class DashProjects extends Component {
 
   renderProjects = () => {
     const { projects } = this.state;
+    console.log(projects)
     const { classes } = this.props;
     if (projects.length > 0) {
-      return projects.map(({ name, description }) => (
+      return projects.map(({ name, description, category, id }) => (
         <>
           <ListItem>
             <Grid container spacing={1} style={{ paddingTop: 5 }}>
               <Grid item xs={12}>
-                <Link to="#">
+                <Link to={"/bughunter/projetos/" + id}>
                   <Typography
                     className={classes.link}
                     variant="h3"
@@ -74,7 +75,7 @@ class DashProjects extends Component {
                   </Grid>
                   <Grid item>
                     <Typography className={classes.category}>
-                      Desktop
+                      {category}
                     </Typography>
                   </Grid>
                 </Grid>
