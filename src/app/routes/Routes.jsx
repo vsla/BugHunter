@@ -52,12 +52,6 @@ export default class Routes extends Component {
           path="/bughunter/projetos/:id"
         />
 
-        <Route
-          component={DashboardDetails}
-          exact
-          path="/bughunter/projetos/:id"
-        />
-
         <Redirect to={defaultRoute} />
       </Switch>
     );

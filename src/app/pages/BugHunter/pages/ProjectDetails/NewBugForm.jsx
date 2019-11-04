@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // Externals
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import PropTypes from "prop-types";
+import { Formik } from "formik";
+import * as yup from "yup";
 
 // Shared layouts
-import MessageBar from '../../../../components/MessageBar';
-import ProjectService from '../../../../services/ProjectService';
+import MessageBar from "../../../../components/MessageBar";
+import ProjectService from "../../../../services/ProjectService";
 
 // Material helpers
 import {
@@ -24,15 +24,15 @@ import {
   Select,
   InputLabel,
   MenuItem
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 // Custom components
 
 const schema = yup.object().shape({
-  name: yup.string().required('Digite o título do bug request'),
-  category: yup.string().required('Escolha uma categoria'),
-  linkToRepository: yup.string().required('Digite o link'),
-  stepsStoRproduce: yup.string().required('Digite a descrição')
+  name: yup.string().required("Digite o título do bug request"),
+  category: yup.string().required("Escolha uma categoria"),
+  linkToRepository: yup.string().required("Digite o link"),
+  stepsStoRproduce: yup.string().required("Digite a descrição")
 });
 class BugRequestForm extends Component {
   constructor(props) {
@@ -45,14 +45,14 @@ class BugRequestForm extends Component {
   }
 
   getInitalValues = () => ({
-    name: '',
-    category: '',
-    shortDescription: '',
-    linkToRepository: '',
-    linkToLive: '',
-    stepsStoReproduce: '',
-    tableAmount: '1',
-    status: 'active'
+    name: "",
+    category: "",
+    shortDescription: "",
+    linkToRepository: "",
+    linkToLive: "",
+    stepsStoReproduce: "",
+    tableAmount: "1",
+    status: "active"
   });
 
   sendform = async project => {
@@ -75,9 +75,9 @@ class BugRequestForm extends Component {
     console.log(newProject);
     const response = await ProjectService.newProject(newProject);
     if (response.status === 201) {
-      this.setState({ openSnackBar: 'BugRequest adicionado com com sucesso!' });
+      this.setState({ openSnackBar: "BugRequest adicionado com com sucesso!" });
     } else {
-      this.setState({ openSnackBar: 'Erro ao criar o BugRequest!' });
+      this.setState({ openSnackBar: "Erro ao criar o BugRequest!" });
     }
     console.log(response);
     return response;
@@ -99,7 +99,7 @@ class BugRequestForm extends Component {
         <Formik
           initialValues={this.getInitalValues()}
           onSubmit={values => {
-            this.setState({ openSnackBar: '' });
+            this.setState({ openSnackBar: "" });
             console.log(values);
             this.sendform(values);
           }}
@@ -113,19 +113,14 @@ class BugRequestForm extends Component {
             handleBlur,
             handleSubmit
           }) => (
-            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-              <Grid
-                container
-                direction="column"
-                spacing={2}
-                style={{ maxWidth: 750 }}
-              >
+            <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+              <Grid container direction="column" style={{ maxWidth: 750 }}>
                 <Grid
                   item
                   style={{
-                    paddingTop: '20px',
-                    paddingBottom: '20px',
-                    backgroundColor: 'rgba(227, 227, 227, 0.32)'
+                    paddingTop: "20px",
+                    paddingBottom: "20px",
+                    backgroundColor: "rgba(227, 227, 227, 0.32)"
                   }}
                 >
                   <Grid
@@ -133,34 +128,36 @@ class BugRequestForm extends Component {
                     direction="row"
                     justify="space-between"
                     className={{
-                      maxWidth: '900px'
+                      maxWidth: "900px"
                     }}
                   >
                     <Grid item>
-                      <Typography variant="h3">Nome do Projeto</Typography>
+                      <Typography variant="h3" style={{ paddingLeft: 20 }}>
+                        Nome do Projeto
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
                 <Grid
                   item
                   style={{
-                    paddingTop: '25px',
-                    paddingBottom: '25px',
-                    width: '100%'
+                    paddingTop: "25px",
+                    paddingBottom: "25px",
+                    width: "100%"
                   }}
                 >
                   <Grid container direction="column" spacing={2}>
                     {/* First line */}
-                    <Grid item style={{ width: '100%' }}>
+                    <Grid item style={{ width: "100%" }}>
                       <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} style={{ width: '100%' }}>
+                        <Grid item xs={12} sm={6} style={{ width: "100%" }}>
                           <TextField
                             fullWidth
                             error={
                               !!(
                                 errors.name &&
                                 touched.name &&
-                                errors.name !== ''
+                                errors.name !== ""
                               )
                             }
                             label="Título"
@@ -174,7 +171,7 @@ class BugRequestForm extends Component {
                             {errors.name && touched.name && errors.name}
                           </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} style={{ width: '100%' }}>
+                        <Grid item xs={12} sm={6} style={{ width: "100%" }}>
                           <Select
                             fullWidth
                             onBlur={handleBlur}
@@ -185,7 +182,7 @@ class BugRequestForm extends Component {
                               !!(
                                 errors.category &&
                                 touched.category &&
-                                errors.category !== ''
+                                errors.category !== ""
                               )
                             }
                             input={
@@ -197,14 +194,14 @@ class BugRequestForm extends Component {
                               />
                             }
                           >
-                            <MenuItem value={'Android'}>Android</MenuItem>
-                            <MenuItem value={'Swift'}>Swift</MenuItem>
-                            <MenuItem value={'JsFramework'}>
+                            <MenuItem value={"Android"}>Android</MenuItem>
+                            <MenuItem value={"Swift"}>Swift</MenuItem>
+                            <MenuItem value={"JsFramework"}>
                               JsFramework
                             </MenuItem>
-                            <MenuItem value={'Windows'}>Windows</MenuItem>
-                            <MenuItem value={'Linux'}>Linux</MenuItem>
-                            <MenuItem value={'Mac'}>Mac</MenuItem>
+                            <MenuItem value={"Windows"}>Windows</MenuItem>
+                            <MenuItem value={"Linux"}>Linux</MenuItem>
+                            <MenuItem value={"Mac"}>Mac</MenuItem>
                           </Select>
                           <Typography variant="subtitle2">
                             {errors.category &&
@@ -212,84 +209,84 @@ class BugRequestForm extends Component {
                               errors.category}
                           </Typography>
                         </Grid>
+                        <Grid item xs={12} sm={6} style={{ width: "100%" }}>
+                          <TextField
+                            fullWidth
+                            error={
+                              !!(
+                                errors.linkToRepository &&
+                                touched.linkToRepository &&
+                                errors.linkToRepository !== ""
+                              )
+                            }
+                            label="Link Repositório demo do bug"
+                            name="linkToRepository"
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            value={values.linkToRepository}
+                            variant="outlined"
+                          />
+                          <Typography variant="subtitle2">
+                            {errors.linkToRepository &&
+                              touched.linkToRepository &&
+                              errors.linkToRepository}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6} style={{ width: "100%" }}>
+                          <TextField
+                            fullWidth
+                            error={
+                              !!(
+                                errors.linkToLive &&
+                                touched.linkToLive &&
+                                errors.linkToLive !== ""
+                              )
+                            }
+                            label="Link Live demo do bug (opcional)"
+                            name="linkToLive"
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            value={values.linkToLive}
+                            variant="outlined"
+                          />
+                          <Typography variant="subtitle2">
+                            {errors.linkToLive &&
+                              touched.linkToLive &&
+                              errors.linkToLive}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={12} style={{ width: "100%" }}>
+                          <TextField
+                            fullWidth
+                            multiline
+                            rows={6}
+                            error={
+                              !!(
+                                errors.stepsStoRproduce &&
+                                touched.stepsStoRproduce &&
+                                errors.stepsStoRproduce !== ""
+                              )
+                            }
+                            label="Descrição"
+                            name="stepsStoRproduce"
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            value={values.stepsStoRproduce}
+                            variant="outlined"
+                          />
+                          <Typography variant="subtitle2">
+                            {errors.stepsStoRproduce &&
+                              touched.stepsStoRproduce &&
+                              errors.stepsStoRproduce}
+                          </Typography>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item xs={12} sm={6} style={{ width: '100%' }}>
-                      <TextField
-                        fullWidth
-                        error={
-                          !!(
-                            errors.linkToRepository &&
-                            touched.linkToRepository &&
-                            errors.linkToRepository !== ''
-                          )
-                        }
-                        label="Link Repositório demo do bug"
-                        name="linkToRepository"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.linkToRepository}
-                        variant="outlined"
-                      />
-                      <Typography variant="subtitle2">
-                        {errors.linkToRepository &&
-                          touched.linkToRepository &&
-                          errors.linkToRepository}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6} style={{ width: '100%' }}>
-                      <TextField
-                        fullWidth
-                        error={
-                          !!(
-                            errors.linkToLive &&
-                            touched.linkToLive &&
-                            errors.linkToLive !== ''
-                          )
-                        }
-                        label="Link Live demo do bug (opcional)"
-                        name="linkToLive"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.linkToLive}
-                        variant="outlined"
-                      />
-                      <Typography variant="subtitle2">
-                        {errors.linkToLive &&
-                          touched.linkToLive &&
-                          errors.linkToLive}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={12} style={{ width: '100%' }}>
-                      <TextField
-                        fullWidth
-                        multiline
-                        rows={6}
-                        error={
-                          !!(
-                            errors.stepsStoRproduce &&
-                            touched.stepsStoRproduce &&
-                            errors.stepsStoRproduce !== ''
-                          )
-                        }
-                        label="Descrição"
-                        name="stepsStoRproduce"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.stepsStoRproduce}
-                        variant="outlined"
-                      />
-                      <Typography variant="subtitle2">
-                        {errors.stepsStoRproduce &&
-                          touched.stepsStoRproduce &&
-                          errors.stepsStoRproduce}
-                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
                 <Grid
                   item
-                  style={{ borderTop: '1px solid black', width: '100%' }}
+                  style={{ borderTop: "1px solid black", width: "100%" }}
                 >
                   <Grid
                     container
@@ -304,7 +301,7 @@ class BugRequestForm extends Component {
                         type="submit"
                         size="large"
                       >
-                        {'ENVIAR'}
+                        {"ENVIAR"}
                       </Button>
                     </Grid>
                   </Grid>
