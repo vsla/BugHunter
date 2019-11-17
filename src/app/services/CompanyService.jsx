@@ -29,7 +29,7 @@ class CompanyService extends Component{
   static authCompany = async (company) => {
     try {
       console.log(company)
-      let res = await axiosInstance.post('/companies/auth', company)
+      let res = await axiosInstance.post('/sessions/company', company)
       return res
     } catch (erro) {
       return {error: erro};

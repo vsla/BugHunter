@@ -20,12 +20,11 @@ export default (state = initialState, action) => {
     case SIGN_IN_BUGHUNTER:
       return (
         {
-          type: 'user',
-          token: action.payload.access_token,
+          type: 'bughunter',
+          token: action.payload.authentication_token,
+          id: action.payload.id,
           email: action.payload.email,
           name: action.payload.username,
-          cpf: action.payload.cpf,
-          phone: action.payload.phone,
           logged: true,
         }
       );
@@ -37,8 +36,6 @@ export default (state = initialState, action) => {
           email: '',
           id: '',
           name: '',
-          cpf: '',
-          phone: '',
           logged: false,
         }
       );
@@ -46,11 +43,10 @@ export default (state = initialState, action) => {
       return (
         {
           type: 'admin',
-          token: action.payload.access_token,
+          id: action.payload.id,
+          token: action.payload.authentication_token,
           email: action.payload.email,
           name: action.payload.username,
-          cpf: action.payload.cpf,
-          phone: action.payload.phone,
           logged: true,
         }
       );
@@ -62,21 +58,17 @@ export default (state = initialState, action) => {
           email: '',
           id: '',
           name: '',
-          cpf: '',
-          phone: '',
           logged: false,
         }
       );
     case SIGN_IN_COMPANY:
       return (
         {
-          type: 'storekeeper',
-          token: action.payload.access_token,
+          type: 'company',
+          token: action.payload.authentication_token,
           id: action.payload.id,
           email: action.payload.email,
           name: '',
-          cpf: '',
-          phone: '',
           logged: true,
         }
       );
