@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 // Externals
-import PropTypes from "prop-types";
-import { Formik } from "formik";
-import * as yup from "yup";
+import PropTypes from 'prop-types';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 
 // Material helpers
 import {
@@ -19,20 +19,20 @@ import {
   Select,
   CircularProgress,
   MenuItem
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 // Shared layouts
-import MessageBar from "../../../../../../components/MessageBar";
-import ProjectService from "../../../../../../services/ProjectService";
+import MessageBar from '../../../../../../components/MessageBar';
+import ProjectService from '../../../../../../services/ProjectService';
 
 // Custom components
 
 const schema = yup.object().shape({
-  name: yup.string().required("Digite o nome do projeto"),
-  category: yup.string().required("Escolha uma categoria"),
-  linkToRepository: yup.string().required("Digite o link"),
-  longDescription: yup.string().required("Digite o passo a passo"),
-  tableAmount: yup.number().min(0, "Digite um valor acima de 0")
+  name: yup.string().required('Digite o nome do projeto'),
+  category: yup.string().required('Escolha uma categoria'),
+  linkToRepository: yup.string().required('Digite o link'),
+  longDescription: yup.string().required('Digite o passo a passo'),
+  tableAmount: yup.number().min(0, 'Digite um valor acima de 0')
   // .required("Digite o valor de pagamento")
 });
 class UserStorekeeperEdit extends Component {
@@ -44,14 +44,14 @@ class UserStorekeeperEdit extends Component {
       openSnackBar: false,
       params: this.props.params,
       data: {
-        name: "",
-        category: "",
-        shortDescription: "",
-        linkToRepository: "",
-        linkToLive: "",
-        longDescription: "",
-        tableAmount: "0",
-        status: "active"
+        name: '',
+        category: '',
+        shortDescription: '',
+        linkToRepository: '',
+        linkToLive: '',
+        longDescription: '',
+        tableAmount: '0',
+        status: 'active'
       }
     };
   }
@@ -63,13 +63,13 @@ class UserStorekeeperEdit extends Component {
       const { name, category, link1, link2, description } = response.data;
       const responseData = {
         name: name,
-        category: category ? category : "",
-        shortDescription: "",
-        linkToRepository: link1 ? link1 : "",
-        linkToLive: link2 ? link2 : "",
+        category: category ? category : '',
+        shortDescription: '',
+        linkToRepository: link1 ? link1 : '',
+        linkToLive: link2 ? link2 : '',
         longDescription: description,
-        tableAmount: "0",
-        status: "active"
+        tableAmount: '0',
+        status: 'active'
       };
       console.log(responseData);
       this.setState({ data: responseData, loading: false });
@@ -91,23 +91,26 @@ class UserStorekeeperEdit extends Component {
       link2: project.linkToLive,
       description: project.longDescription,
       status: project.status,
-      tableAmount: "0",
-      status: "active"
+      tableAmount: '0',
+      status: 'active'
     };
     if (edit === true) {
-      const response = await ProjectService.updateProject(params.id, newProject);
+      const response = await ProjectService.updateProject(
+        params.id,
+        newProject
+      );
       console.log(response);
       if (response.status === 200) {
-        this.setState({ openSnackBar: "Projeto editado com com sucesso!" });
+        this.setState({ openSnackBar: 'Projeto editado com com sucesso!' });
       } else {
-        this.setState({ openSnackBar: "Erro ao editar o projeto!" });
+        this.setState({ openSnackBar: 'Erro ao editar o projeto!' });
       }
     } else {
       const response = await ProjectService.newProject(newProject);
       if (response.status === 201) {
-        this.setState({ openSnackBar: "Projeto adicionado com com sucesso!" });
+        this.setState({ openSnackBar: 'Projeto adicionado com com sucesso!' });
       } else {
-        this.setState({ openSnackBar: "Erro ao criar o projeto!" });
+        this.setState({ openSnackBar: 'Erro ao criar o projeto!' });
       }
     }
   };
@@ -129,7 +132,7 @@ class UserStorekeeperEdit extends Component {
           <Formik
             initialValues={this.getInitalValues()}
             onSubmit={values => {
-              this.setState({ openSnackBar: "" });
+              this.setState({ openSnackBar: '' });
               console.log(values);
               this.sendform(values);
             }}
@@ -143,38 +146,38 @@ class UserStorekeeperEdit extends Component {
               handleBlur,
               handleSubmit
             }) => (
-              <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+              <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                 <Grid
                   container
                   direction="column"
                   spacing={2}
                   style={{ maxWidth: 750 }}
                 >
-                  <Grid item style={{ borderBottom: "1px solid black" }}>
+                  <Grid item style={{ borderBottom: '1px solid black' }}>
                     <Typography variant="h5">
-                      {!edit ? "Novo projeto" : "Editar projeto"}
+                      {!edit ? 'Novo projeto' : 'Editar projeto'}
                     </Typography>
                   </Grid>
                   <Grid
                     item
                     style={{
-                      paddingTop: "25px",
-                      paddingBottom: "25px",
-                      width: "100%"
+                      paddingTop: '25px',
+                      paddingBottom: '25px',
+                      width: '100%'
                     }}
                   >
                     <Grid container direction="column" spacing={2}>
                       {/* First line */}
-                      <Grid item style={{ width: "100%" }}>
+                      <Grid item style={{ width: '100%' }}>
                         <Grid container spacing={2}>
-                          <Grid item xs={12} sm={7} style={{ width: "100%" }}>
+                          <Grid item xs={12} sm={7} style={{ width: '100%' }}>
                             <TextField
                               fullWidth
                               error={
                                 !!(
                                   errors.name &&
                                   touched.name &&
-                                  errors.name !== ""
+                                  errors.name !== ''
                                 )
                               }
                               label="Nome do projeto"
@@ -188,7 +191,7 @@ class UserStorekeeperEdit extends Component {
                               {errors.name && touched.name && errors.name}
                             </Typography>
                           </Grid>
-                          <Grid item xs={12} sm={5} style={{ width: "100%" }}>
+                          <Grid item xs={12} sm={5} style={{ width: '100%' }}>
                             <Select
                               fullWidth
                               onBlur={handleBlur}
@@ -199,7 +202,7 @@ class UserStorekeeperEdit extends Component {
                                 !!(
                                   errors.category &&
                                   touched.category &&
-                                  errors.category !== ""
+                                  errors.category !== ''
                                 )
                               }
                               input={
@@ -211,14 +214,14 @@ class UserStorekeeperEdit extends Component {
                                 />
                               }
                             >
-                              <MenuItem value={"Android"}>Android</MenuItem>
-                              <MenuItem value={"Swift"}>Swift</MenuItem>
-                              <MenuItem value={"JsFramework"}>
+                              <MenuItem value={'Android'}>Android</MenuItem>
+                              <MenuItem value={'Swift'}>Swift</MenuItem>
+                              <MenuItem value={'JsFramework'}>
                                 JsFramework
                               </MenuItem>
-                              <MenuItem value={"Windows"}>Windows</MenuItem>
-                              <MenuItem value={"Linux"}>Linux</MenuItem>
-                              <MenuItem value={"Mac"}>Mac</MenuItem>
+                              <MenuItem value={'Windows'}>Windows</MenuItem>
+                              <MenuItem value={'Linux'}>Linux</MenuItem>
+                              <MenuItem value={'Mac'}>Mac</MenuItem>
                             </Select>
                             <Typography variant="subtitle2">
                               {errors.category &&
@@ -228,14 +231,14 @@ class UserStorekeeperEdit extends Component {
                           </Grid>
                         </Grid>
                       </Grid>
-                      <Grid item xs={12} sm={12} style={{ width: "100%" }}>
+                      <Grid item xs={12} sm={12} style={{ width: '100%' }}>
                         <TextField
                           fullWidth
                           error={
                             !!(
                               errors.shortDescription &&
                               touched.shortDescription &&
-                              errors.shortDescription !== ""
+                              errors.shortDescription !== ''
                             )
                           }
                           label="Pequena descrição do projeto"
@@ -251,14 +254,14 @@ class UserStorekeeperEdit extends Component {
                             errors.shortDescription}
                         </Typography>
                       </Grid>
-                      <Grid item xs={12} sm={12} style={{ width: "100%" }}>
+                      <Grid item xs={12} sm={12} style={{ width: '100%' }}>
                         <TextField
                           fullWidth
                           error={
                             !!(
                               errors.linkToRepository &&
                               touched.linkToRepository &&
-                              errors.linkToRepository !== ""
+                              errors.linkToRepository !== ''
                             )
                           }
                           label="Link para o respostório"
@@ -274,14 +277,14 @@ class UserStorekeeperEdit extends Component {
                             errors.linkToRepository}
                         </Typography>
                       </Grid>
-                      <Grid item xs={12} sm={12} style={{ width: "100%" }}>
+                      <Grid item xs={12} sm={12} style={{ width: '100%' }}>
                         <TextField
                           fullWidth
                           error={
                             !!(
                               errors.linkToLive &&
                               touched.linkToLive &&
-                              errors.linkToLive !== ""
+                              errors.linkToLive !== ''
                             )
                           }
                           label="Link Live app (opcional)"
@@ -297,7 +300,7 @@ class UserStorekeeperEdit extends Component {
                             errors.linkToLive}
                         </Typography>
                       </Grid>
-                      <Grid item xs={12} sm={12} style={{ width: "100%" }}>
+                      <Grid item xs={12} sm={12} style={{ width: '100%' }}>
                         <TextField
                           fullWidth
                           multiline
@@ -306,7 +309,7 @@ class UserStorekeeperEdit extends Component {
                             !!(
                               errors.longDescription &&
                               touched.longDescription &&
-                              errors.longDescription !== ""
+                              errors.longDescription !== ''
                             )
                           }
                           label="Passo a Passo"
@@ -322,16 +325,16 @@ class UserStorekeeperEdit extends Component {
                             errors.longDescription}
                         </Typography>
                       </Grid>
-                      <Grid item xs={12} sm={12} style={{ width: "100%" }}>
+                      <Grid item xs={12} sm={12} style={{ width: '100%' }}>
                         <TextField
                           fullWidth
                           type="number"
-                          inputProps={{ min: "0", max: "10" }}
+                          inputProps={{ min: '0', max: '10' }}
                           error={
                             !!(
                               errors.tableAmount &&
                               touched.tableAmount &&
-                              errors.tableAmount !== ""
+                              errors.tableAmount !== ''
                             )
                           }
                           label="Valor da tabela a ser pago"
@@ -351,7 +354,7 @@ class UserStorekeeperEdit extends Component {
                   </Grid>
                   <Grid
                     item
-                    style={{ borderTop: "1px solid black", width: "100%" }}
+                    style={{ borderTop: '1px solid black', width: '100%' }}
                   >
                     <Grid
                       container
@@ -389,7 +392,7 @@ class UserStorekeeperEdit extends Component {
                           type="submit"
                           size="medium"
                         >
-                          {!edit ? "Criar projeto" : "Editar projeto"}
+                          {'Criar projeto'}
                         </Button>
                       </Grid>
                     </Grid>

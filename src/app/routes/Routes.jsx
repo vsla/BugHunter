@@ -18,6 +18,7 @@ import Dashboard from 'app/pages/BugHunter/pages/MainPage';
 import SeeProject from 'app/pages/Company/pages/Projects/SeeProject';
 import DashboardDetails from 'app/pages/BugHunter/pages/ProjectDetails';
 import ListAdmin from 'app/pages/Admin/pages/AdminList/index';
+import FormAdmin from 'app/pages/Admin/pages/CreateOrUpdate/index';
 export default class Routes extends Component {
   constructor(props) {
     super(props);
@@ -62,6 +63,7 @@ export default class Routes extends Component {
         {/* Admin */}
 
         <Route component={ListAdmin} exact path="/admin/list" />
+        <Route component={FormAdmin} exact path="/admin/novo" />
 
         <Redirect to={defaultRoute} />
       </Switch>
