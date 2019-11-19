@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 // Material helpers
-import { withStyles } from '@material-ui/core';
+import { withStyles, Button } from '@material-ui/core';
 
 // Material components
 import {
@@ -22,11 +22,16 @@ import {
 import {
   Home as DashboardIcon,
   Person as PeopleIcon,
+  BugReport,
+  People,
   Assignment
 } from '@material-ui/icons';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+
+// Logo
+import logo from '../../../../assets/bughunter.png';
 
 // Component styles
 import styles from './styles';
@@ -40,7 +45,8 @@ class Sidebar extends Component {
   }
 
   handleClick = () => {
-    this.setState({ open: !this.state.open });
+    const { open } = this.state;
+    this.setState({ open: !open });
   };
 
   render() {
@@ -57,15 +63,15 @@ class Sidebar extends Component {
       <nav className={rootClassName}>
         <div className={classes.logoWrapper}>
           <Link className={classes.logoLink} to="/">
-            {/* <img
+            <img
+              alt="BugHunter logo"
               className={classes.logoImage}
-              src="/images/logos/logo.svg"
-            /> */}
+              src={logo}
+            />
           </Link>
         </div>
-        <Divider className={classes.logoDivider} />
 
-        <List component="div" disablePadding>
+        <List component="div" className={classes.list}>
           <ListItem
             activeClassName={classes.activeListItem}
             className={classes.listItem}
@@ -77,14 +83,15 @@ class Sidebar extends Component {
             </ListItemIcon>
             <ListItemText
               classes={{ primary: classes.listItemText }}
-              primary="Inicial"
+              primary="Home"
             />
           </ListItem>
+
           <ListItem
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
-            to="/perfil"
+            to="/empresa/home"
           >
             <ListItemIcon className={classes.listItemIcon}>
               <PeopleIcon />
@@ -94,66 +101,44 @@ class Sidebar extends Component {
               primary="Perfil"
             />
           </ListItem>
+
           <ListItem
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
-            to="/empresa/projetos"
+            to="/empresa/home"
           >
             <ListItemIcon className={classes.listItemIcon}>
-              <Assignment />
+              <People />
             </ListItemIcon>
             <ListItemText
               classes={{ primary: classes.listItemText }}
-              primary="Projetos"
+              primary="Admins"
             />
           </ListItem>
-          {/*
+
           <ListItem
-            onClick={this.handleClick}
             activeClassName={classes.activeListItem}
             className={classes.listItem}
+            component={CustomNavLink}
+            to="/empresa/home"
           >
             <ListItemIcon className={classes.listItemIcon}>
-              <PeopleIcon />
+              <BugReport />
             </ListItemIcon>
             <ListItemText
-              primary="Projetos"
               classes={{ primary: classes.listItemText }}
+              primary="Bugs"
             />
-            {this.state.open ? <ExpandLess className={classes.listItemIcon} /> : <ExpandMore className={classes.listItemIcon} />}
           </ListItem>
-          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem
-                className={classes.nested}
-                activeClassName={classes.activeListItem}
-                className={classes.nested}
-                component={CustomNavLink}
-                to="/admin-list">
-                <ListItemText className={classes.listItemText} primary="Administadores" />
-              </ListItem>
-              <ListItem
-                className={classes.nested}
-                activeClassName={classes.activeListItem}
-                className={classes.nested}
-                component={CustomNavLink}
-                to="/UserList"
-              >
-                <ListItemText className={classes.listItemText} primary="Consumidores" />
-              </ListItem>
-              <ListItem
-                className={classes.nested}
-                activeClassName={classes.activeListItem}
-                className={classes.nested}
-                component={CustomNavLink}
-                to="/lojistas"
-              >
-                <ListItemText className={classes.listItemText} primary="Lojistas" />
-              </ListItem>
-            </List>
-          </Collapse>
-         */}
+
+          <div className={classes.grow} />
+          <Divider className={classes.logoDivider} />
+          <div className={classes.button}>
+            <Button fullWidth variant="outlined" color="primary">
+              Sair
+            </Button>
+          </div>
         </List>
       </nav>
     );
@@ -161,7 +146,7 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired
 };
 

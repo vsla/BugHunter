@@ -10,7 +10,7 @@ import { withStyles, withWidth } from '@material-ui/core';
 // Material components
 import { Drawer } from '@material-ui/core';
 // Custom components
-import { Sidebar, Topbar, Footer } from './components/index.jsx';
+import { Sidebar, Topbar, Footer, SidebarAdmin } from './components/index.jsx';
 // Component styles
 import styles from './styles.jsx';
 
@@ -19,7 +19,7 @@ class Dashboard extends Component {
     super(props);
     const isMobile = ['xs', 'sm', 'md'].includes(props.width);
     this.state = {
-      isOpen: !isMobile,
+      isOpen: !isMobile
     };
   }
 
@@ -28,21 +28,21 @@ class Dashboard extends Component {
   };
 
   handleToggleOpen = () => {
-    this.setState((prevState) => ({
-      isOpen: !prevState.isOpen,
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen
     }));
   };
 
   renderSidebar = (profile, classes) => {
     if (profile === 'company') {
       return <Sidebar className={classes.sidebar} />;
+    } else {
+      return <SidebarAdmin className={classes.Sidebar} />;
     }
   };
 
   render() {
-    const {
-      classes, width, title, children, profile,
-    } = this.props;
+    const { classes, width, title, children, profile } = this.props;
     const { isOpen } = this.state;
     const isMobile = ['xs', 'sm', 'md'].includes(width);
     const shiftTopbar = isOpen && !isMobile;
@@ -51,7 +51,7 @@ class Dashboard extends Component {
       <>
         <Topbar
           className={classNames(classes.topbar, {
-            [classes.topbarShift]: shiftTopbar,
+            [classes.topbarShift]: shiftTopbar
           })}
           isSidebarOpen={isOpen}
           onToggleSidebar={this.handleToggleOpen}
@@ -64,11 +64,11 @@ class Dashboard extends Component {
           open={isOpen}
           variant={isMobile ? 'temporary' : 'persistent'}
         >
-          {this.renderSidebar('company', classes)}
+          {this.renderSidebar(profile, classes)}
         </Drawer>
         <main
           className={classNames(classes.content, {
-            [classes.contentShift]: shiftContent,
+            [classes.contentShift]: shiftContent
           })}
         >
           {children}
@@ -83,9 +83,6 @@ Dashboard.propTypes = {
   className: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired
 };
-export default compose(
-  withStyles(styles),
-  withWidth(),
-)(Dashboard);
+export default compose(withStyles(styles), withWidth())(Dashboard);

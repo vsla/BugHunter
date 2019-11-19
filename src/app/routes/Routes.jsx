@@ -17,7 +17,7 @@ import NotLoggedHome from 'app/pages/BugHunter/pages/NotLoggedHome';
 import Dashboard from 'app/pages/BugHunter/pages/MainPage';
 import SeeProject from 'app/pages/Company/pages/Projects/SeeProject';
 import DashboardDetails from 'app/pages/BugHunter/pages/ProjectDetails';
-import ListAdmin from 'app/pages/Admin/pages/AdminList';
+import ListAdmin from 'app/pages/Admin/pages/AdminList/index';
 export default class Routes extends Component {
   constructor(props) {
     super(props);

@@ -1,5 +1,19 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
-import { Grid, withStyles, Typography, Button, Paper } from '@material-ui/core';
+// Externals
+import PropTypes from 'prop-types';
+// Material helpers
+import { withStyles } from '@material-ui/core';
+// Material components
+import { Grid, Paper, Typography, Button } from '@material-ui/core';
+// Shared layouts
+import Dashboard from '../../../../layouts/Dashboard';
+// Custom components
+// Component styles
+//icon
+import BugReport from '@material-ui/icons/Edit';
+
+import palette from '../../../../theme/palette';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,15 +21,22 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-import palette from '../../../../theme/palette';
-
-import Header from '../../components/Header';
-import DefaultContainer from '../../components/DefaultContainer';
-
-//icon
-import BugReport from '@material-ui/icons/Edit';
-
 const styles = theme => ({
+  StorekeeperDashboard: {
+    padding: theme.spacing.unit * 4,
+    flexGrow: 1
+  },
+  Paperpendency: {
+    padding: '18px'
+  },
+  title: {
+    fontSize: '20px',
+    fontWeight: 'bold',
+    letterSpacing: '2px'
+  },
+  subTitle: {
+    fontSize: '12px'
+  },
   mainContainer: {
     height: '100%',
     paddingTop: 90
@@ -59,85 +80,68 @@ function createData(status, name) {
 }
 
 const rows = [
-  createData('Pendente', 'João Gabriel'),
-  createData('Resolvido', 'Adriana'),
-  createData('Resolvido', 'Gabriel Ramos')
+  createData('Ativo', 'João Gabriel'),
+  createData('Ativo', 'Adriana'),
+  createData('Inativo', 'Gabriel Ramos')
 ];
 
-class ListAdmin extends Component {
-  constructor(props) {
-    super(props);
+const ListAdmin = props => {
+  const { classes } = props;
 
-    this.state = {
-      logged: false,
-      value: 0
-    };
-  }
-
-  render() {
-    const { classes } = this.props;
-    const { value } = this.state;
-    return (
-      <Grid container style={{ height: '100%' }} direction="column">
-        <Header />
-        <DefaultContainer>
-          <Grid container justify="center" className={classes.mainContainer}>
-            <Grid item className={classes.centerContent}>
-              <div className={classes.StorekeeperDashboard}>
-                <Grid container direction="column">
-                  <Grid item className={classes.titleSection}>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="flex-end"
-                      className={classes.title}
-                    >
-                      <Grid item>
-                        <Button variant="outlined" className={classes.button}>
-                          Novo Administrador
-                        </Button>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item className={classes.content}>
-                    <Paper className={classes.root}>
-                      <Table
-                        className={classes.table}
-                        aria-label="simple table"
-                      >
-                        <TableHead>
-                          <TableRow>
-                            <TableCell align="center">Editar</TableCell>
-                            <TableCell align="center">Status</TableCell>
-                            <TableCell align="center">Nome</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {rows.map(row => (
-                            <TableRow key={row.status}>
-                              <TableCell align="center">
-                                <BugReport />
-                              </TableCell>
-                              <TableCell component="th" scope="row">
-                                <Typography className={classes.active}>
-                                  {row.status}
-                                </Typography>
-                              </TableCell>
-                              <TableCell align="center">{row.name}</TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </Paper>
-                  </Grid>
-                </Grid>
-              </div>
+  return (
+    <Dashboard title="Projetos" profile="Admin">
+      <div className={classes.StorekeeperDashboard}>
+        <Grid container direction="column">
+          <Grid item className={classes.titleSection}>
+            <Grid
+              container
+              direction="row"
+              justify="flex-end"
+              className={classes.title}
+            >
+              <Grid item>
+                <Button variant="outlined" className={classes.button}>
+                  Novo Administrador
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
-        </DefaultContainer>
-      </Grid>
-    );
-  }
-}
+          <Grid item className={classes.content}>
+            <Paper className={classes.root}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center">Editar</TableCell>
+                    <TableCell align="center">Status</TableCell>
+                    <TableCell align="center">Nome</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map(row => (
+                    <TableRow key={row.status}>
+                      <TableCell align="center">
+                        <BugReport />
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        <Typography className={classes.active}>
+                          {row.status}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">{row.name}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
+    </Dashboard>
+  );
+};
+
+ListAdmin.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(ListAdmin);
