@@ -7,7 +7,10 @@ import * as yup from "yup";
 
 // Shared layouts
 import MessageBar from "../../../../components/MessageBar";
-import ProjectService from "../../../../services/ProjectService";
+import BugRequestService from "app/services/BugRequestService";
+
+// Redux
+import { connect } from 'react-redux';
 
 // Material helpers
 import {
@@ -55,25 +58,19 @@ class BugRequestForm extends Component {
     status: "active"
   });
 
-  sendform = async project => {
+  sendform = async bugRequest => {
     // const { edit, data } = this.state;
-    const edit = false;
-    const id = 1;
-    // const { data } = this.state;
-    // if (edit === true) {
-    //   const response = await ProjectService.newProject(
-    //     id,
-    //     project,
-    //   );
-    //   return response;
-    // }
-    const newProject = {
-      name: project.name,
-      description: project.shortDescription,
-      company_id: id
-    };
-    console.log(newProject);
-    const response = await ProjectService.newProject(newProject);
+    let newBugRequest = {
+      title: bugRequest.name,
+      category:bugRequest.category,
+      repository_link: bugRequest.linkToRepository,
+      live_link: bugRequest.linkToLive,
+      status: 'Pending',
+      project_id: this.props.projectId,
+      hunter_id: this.props.authState.auth.id
+    }
+    console.log(newBugRequest)
+    const response = await BugRequestService.newBugRequest(newBugRequest)
     if (response.status === 201) {
       this.setState({ openSnackBar: "BugRequest adicionado com com sucesso!" });
     } else {
@@ -327,7 +324,13 @@ class BugRequestForm extends Component {
 }
 
 BugRequestForm.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  createNewBugRequest: PropTypes.node,
+  projectId: PropTypes.number.isRequired
 };
 
-export default BugRequestForm;
+const mapStateToProps = (state) => ({
+  authState: state,
+});
+
+export default connect(mapStateToProps)(BugRequestForm);

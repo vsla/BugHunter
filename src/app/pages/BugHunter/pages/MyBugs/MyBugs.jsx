@@ -9,7 +9,10 @@ import TableRow from '@material-ui/core/TableRow';
 
 import Header from '../../components/Header';
 import DefaultContainer from '../../components/DefaultContainer';
-import ProjectService from 'app/services/ProjectService';
+import BugRequestService from 'app/services/BugRequestService';
+
+// Redux
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   mainContainer: {
@@ -95,11 +98,11 @@ class MyBugs extends Component {
     this.getProjectInformation()
   }
 
-  getProjectInformation = async () => {
-    const { id, loading } = this.state;
-    const response = await ProjectService.getProject(id)
+  getAllBugRequests = async () => {
+    const {id} = this.props.authState.auth
+    const response = await BugRequestService.getAllBugRequestsBugHunter(id)
     if (!response.error) {
-      this.setState({ loading: false, project: response.data })
+      this.setState({ loading: false, bugRequests: response.data })
     }
   }
 
@@ -167,4 +170,8 @@ class MyBugs extends Component {
   }
 }
 
-export default withStyles(styles)(MyBugs);
+const mapStateToProps = (state) => ({
+  authState: state,
+});
+
+export default withStyles(styles)(connect(mapStateToProps)(MyBugs));

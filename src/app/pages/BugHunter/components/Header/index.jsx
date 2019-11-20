@@ -8,9 +8,12 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
+
+// Icons
 import BugReport from '@material-ui/icons/BugReport';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import {
