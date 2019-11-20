@@ -17,6 +17,7 @@ import NotLoggedHome from 'app/pages/BugHunter/pages/NotLoggedHome';
 import Dashboard from 'app/pages/BugHunter/pages/MainPage';
 import SeeProject from 'app/pages/Company/pages/Projects/SeeProject';
 import DashboardDetails from 'app/pages/BugHunter/pages/ProjectDetails';
+import MyBugrequests from 'app/pages/BugHunter/pages/MyBugrequests';
 export default class Routes extends Component {
   constructor(props) {
     super(props);
@@ -33,13 +34,17 @@ export default class Routes extends Component {
         <Route component={Profile} exact path="/empresa/perfil" />
         <Route component={Projects} exact path="/empresa/projetos" />
         <Route component={FormProject} exact path="/empresa/projetos/novo" />
-        <Route component={FormProject} exact path="/empresa/projetos/editar/:id" />
+        <Route
+          component={FormProject}
+          exact
+          path="/empresa/projetos/editar/:id"
+        />
         <Route component={SeeProject} exact path="/empresa/projetos/:id" />
 
         <Route component={SignUp} exact path="/cadastro/empresa" />
         <Route component={ChooseSignUp} exact path="/cadastro/escolher" />
         <Route component={AfterLogged} exact path="/cadastro/cadastrado" />
-        
+
         <Route component={SignIn} exact path="/empresa/login" />
 
         {/* BugHunter */}
@@ -53,6 +58,7 @@ export default class Routes extends Component {
           exact
           path="/bughunter/projetos/:id"
         />
+        <Route component={MyBugrequests} exact path="/mybugrequests" />
 
         <Redirect to={defaultRoute} />
       </Switch>

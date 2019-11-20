@@ -18,19 +18,18 @@ import DefaultContainer from '../DefaultContainer';
 
 import Logo from '../../../../assets/bughunter.png';
 
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+      display: 'block'
+    }
   },
   search: {
     position: 'relative',
@@ -38,15 +37,15 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(theme.palette.common.white, 0.25)
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
+      width: 'auto'
+    }
   },
   searchIcon: {
     width: theme.spacing(7),
@@ -55,36 +54,36 @@ const useStyles = makeStyles((theme) => ({
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   inputRoot: {
-    color: 'inherit',
+    color: 'inherit'
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: 200,
-    },
+      width: 200
+    }
   },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',
-    },
+      alignItems: 'center'
+    }
   },
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   loginButon: {
-    marginRight: 10,
-  },
+    marginRight: 10
+  }
 }));
 
 export default function PrimarySearchAppBar() {
@@ -93,12 +92,11 @@ export default function PrimarySearchAppBar() {
   const [logged, logg] = React.useState(true);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMobileMenuOpen = (event) => {
+  const handleMobileMenuOpen = event => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
@@ -109,40 +107,37 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {
-        !logged ? (
-          <>
-            <MenuItem>
-              <Link to="/login" style={{ width: '100%' }}>
-                <Button fullWidth variant="contained">Login</Button>
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/cadastro/escolher" style={{ width: '100%' }}>
-                <Button fullWidth color="default" variant="contained">Cadastre-se</Button>
-              </Link>
-            </MenuItem>
-          </>
-        )
-          : (
-            <List>
-              <ListItem>
-                <ListItemIcon
-                  color="inherit"
-                >
-                  <BugReport />
-                </ListItemIcon>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </ListItemIcon>
-              </ListItem>
-            </List>
-          )
-      }
+      {!logged ? (
+        <>
+          <MenuItem>
+            <Link to="/login" style={{ width: '100%' }}>
+              <Button fullWidth variant="contained">
+                Login
+              </Button>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/cadastro/escolher" style={{ width: '100%' }}>
+              <Button fullWidth color="default" variant="contained">
+                Cadastre-se
+              </Button>
+            </Link>
+          </MenuItem>
+        </>
+      ) : (
+        <List>
+          <ListItem>
+            <ListItemIcon color="inherit">
+              <BugReport />
+            </ListItemIcon>
+          </ListItem>
+          <ListItem>
+            <ListItemIcon color="inherit">
+              <AccountCircle />
+            </ListItemIcon>
+          </ListItem>
+        </List>
+      )}
     </SwipeableDrawer>
   );
 
@@ -161,57 +156,56 @@ export default function PrimarySearchAppBar() {
               />
             </Link>
 
-            {
-              logged ? (
-                <div className={classes.search}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon />
-                  </div>
-                  <InputBase
-                    placeholder="Projeto ou empresa..."
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                  />
+            {logged ? (
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
                 </div>
-              )
-                : (
-                  <div className={classes.grow} />
-                )
-            }
+                <InputBase
+                  placeholder="Projeto ou empresa..."
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </div>
+            ) : (
+              <div className={classes.grow} />
+            )}
             <div className={classes.sectionDesktop}>
-              {
-                !logged ? (
-                  <>
-                    <Link to="/login">
-                      <Button className={classes.loginButon} variant="contained" size="medium">Login</Button>
-                    </Link>
-                    <Link to="/cadastro/escolher">
-                      <Button color="default" variant="contained" size="medium">Cadastre-se</Button>
-                    </Link>
-                  </>
-                )
-                  : (
-                    <>
-                      <IconButton
-                        color="inherit"
-                      >
-                        <BugReport />
-                      </IconButton>
-                      <Link to="/dashboard">
-                        <IconButton
-                          style={{ color: 'white' }}
+              {!logged ? (
+                <>
+                  <Link to="/login">
+                    <Button
+                      className={classes.loginButon}
+                      variant="contained"
+                      size="medium"
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                  <Link to="/cadastro/escolher">
+                    <Button color="default" variant="contained" size="medium">
+                      Cadastre-se
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/mybugrequests">
+                    <IconButton style={{ color: 'white' }}>
+                      <BugReport />
+                    </IconButton>
+                  </Link>
 
-                        >
-                          <AccountCircle />
-                        </IconButton>
-                      </Link>
-
-                    </>
-                  )
-              }
+                  <Link to="/dashboard">
+                    <IconButton style={{ color: 'white' }}>
+                      <AccountCircle />
+                    </IconButton>
+                  </Link>
+                </>
+              )}
             </div>
             <div className={classes.sectionMobile}>
               <IconButton
@@ -224,7 +218,6 @@ export default function PrimarySearchAppBar() {
                 <MenuIcon />
               </IconButton>
             </div>
-
           </Toolbar>
         </DefaultContainer>
       </AppBar>
