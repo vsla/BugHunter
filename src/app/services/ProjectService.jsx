@@ -14,10 +14,12 @@ class ProjectService extends Component{
       return {error: erro};
     }
   }
-  
+ 
+
   static getProject = async (projectId) => {
     try {
       let res = await axiosInstance.get('/projects/' + projectId)
+      console.log(res)
       return res
     } catch (erro) {
       console.log(erro);

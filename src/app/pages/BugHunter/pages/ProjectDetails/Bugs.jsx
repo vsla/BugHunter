@@ -113,11 +113,15 @@ const styles = theme => ({
 class BugsList extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       loading: false,
-      newBug: true
+      newBug: false,
+      project: this.props.project
     };
+  }
+
+  createNewBugRequest = (value) => {
+    this.setState({ newBug: value })
   }
 
   render() {
@@ -128,15 +132,14 @@ class BugsList extends Component {
       <div className={classes.StorekeeperDashboard}>
         {!loading ? (
           <Grid container direction="column">
-            {!newBug ? <BugList /> : <BugRequestForm />}
+            {!newBug ? <BugList createNewBugRequest={this.createNewBugRequest} /> : <BugRequestForm createNewBugRequest={this.createNewBugRequest} />}
           </Grid>
         ) : (
-          <Grid container justify="center" align="center">
-            <CircularProgress />
-          </Grid>
-        )}
+            <Grid container justify="center" align="center">
+              <CircularProgress />
+            </Grid>
+          )}
       </div>
-      // </Dashboard>
     );
   }
 }

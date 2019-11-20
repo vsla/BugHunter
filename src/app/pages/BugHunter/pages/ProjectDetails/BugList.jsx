@@ -157,7 +157,7 @@ class BugList extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes,createNewBugRequest } = this.props;
     const { active } = this.state;
     return (
       <div className={classes.StorekeeperDashboard}>
@@ -170,7 +170,7 @@ class BugList extends Component {
               className={classes.title}
             >
               <Grid item>
-                <Button variant="outlined" className={classes.button}>
+                <Button variant="outlined" onClick={() => createNewBugRequest(true)} className={classes.button}>
                   NOVO
                   <BugReport />
                 </Button>
@@ -210,7 +210,6 @@ class BugList extends Component {
             </Paper>
           </Grid>
         </Grid>
-        )}
       </div>
       
     );

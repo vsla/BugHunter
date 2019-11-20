@@ -92,7 +92,7 @@ class BugRequestForm extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, createNewBugRequest } = this.props;
     return (
       <Grid container>
         {this.renderSnackBar()}
@@ -113,202 +113,213 @@ class BugRequestForm extends Component {
             handleBlur,
             handleSubmit
           }) => (
-            <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-              <Grid container direction="column" style={{ maxWidth: 750 }}>
-                <Grid
-                  item
-                  style={{
-                    paddingTop: "20px",
-                    paddingBottom: "20px",
-                    backgroundColor: "rgba(227, 227, 227, 0.32)"
-                  }}
-                >
+              <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+                <Grid container direction="column" style={{ maxWidth: 750 }}>
                   <Grid
-                    container
-                    direction="row"
-                    justify="space-between"
-                    className={{
-                      maxWidth: "900px"
+                    item
+                    style={{
+                      paddingTop: "20px",
+                      paddingBottom: "20px",
+                      backgroundColor: "rgba(227, 227, 227, 0.32)"
                     }}
                   >
-                    <Grid item>
-                      <Typography variant="h3" style={{ paddingLeft: 20 }}>
-                        Nome do Projeto
+                    <Grid
+                      container
+                      direction="row"
+                      justify="space-between"
+                      className={{
+                        maxWidth: "900px"
+                      }}
+                    >
+                      <Grid item>
+                        <Typography variant="h3" style={{ paddingLeft: 20 }}>
+                          Nome do Projeto
                       </Typography>
+                      </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
-                <Grid
-                  item
-                  style={{
-                    paddingTop: "25px",
-                    paddingBottom: "25px",
-                    width: "100%"
-                  }}
-                >
-                  <Grid container direction="column" spacing={2}>
-                    {/* First line */}
-                    <Grid item style={{ width: "100%" }}>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} style={{ width: "100%" }}>
-                          <TextField
-                            fullWidth
-                            error={
-                              !!(
-                                errors.name &&
-                                touched.name &&
-                                errors.name !== ""
-                              )
-                            }
-                            label="Título"
-                            name="name"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.name}
-                            variant="outlined"
-                          />
-                          <Typography variant="subtitle2">
-                            {errors.name && touched.name && errors.name}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={6} style={{ width: "100%" }}>
-                          <Select
-                            fullWidth
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.category}
-                            variant="outlined"
-                            error={
-                              !!(
-                                errors.category &&
-                                touched.category &&
-                                errors.category !== ""
-                              )
-                            }
-                            input={
-                              <TextField
-                                id="outlined-age-simple"
-                                name="category"
-                                label="Categoria"
-                                variant="outlined"
-                              />
-                            }
-                          >
-                            <MenuItem value={"Android"}>Android</MenuItem>
-                            <MenuItem value={"Swift"}>Swift</MenuItem>
-                            <MenuItem value={"JsFramework"}>
-                              JsFramework
+                  <Grid
+                    item
+                    style={{
+                      paddingTop: "25px",
+                      paddingBottom: "25px",
+                      width: "100%"
+                    }}
+                  >
+                    <Grid container direction="column" spacing={2}>
+                      {/* First line */}
+                      <Grid item style={{ width: "100%" }}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} sm={6} style={{ width: "100%" }}>
+                            <TextField
+                              fullWidth
+                              error={
+                                !!(
+                                  errors.name &&
+                                  touched.name &&
+                                  errors.name !== ""
+                                )
+                              }
+                              label="Título"
+                              name="name"
+                              onBlur={handleBlur}
+                              onChange={handleChange}
+                              value={values.name}
+                              variant="outlined"
+                            />
+                            <Typography variant="subtitle2">
+                              {errors.name && touched.name && errors.name}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={12} sm={6} style={{ width: "100%" }}>
+                            <Select
+                              fullWidth
+                              onBlur={handleBlur}
+                              onChange={handleChange}
+                              value={values.category}
+                              variant="outlined"
+                              error={
+                                !!(
+                                  errors.category &&
+                                  touched.category &&
+                                  errors.category !== ""
+                                )
+                              }
+                              input={
+                                <TextField
+                                  id="outlined-age-simple"
+                                  name="category"
+                                  label="Categoria"
+                                  variant="outlined"
+                                />
+                              }
+                            >
+                              <MenuItem value={"Android"}>Android</MenuItem>
+                              <MenuItem value={"Swift"}>Swift</MenuItem>
+                              <MenuItem value={"JsFramework"}>
+                                JsFramework
                             </MenuItem>
-                            <MenuItem value={"Windows"}>Windows</MenuItem>
-                            <MenuItem value={"Linux"}>Linux</MenuItem>
-                            <MenuItem value={"Mac"}>Mac</MenuItem>
-                          </Select>
-                          <Typography variant="subtitle2">
-                            {errors.category &&
-                              touched.category &&
-                              errors.category}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={6} style={{ width: "100%" }}>
-                          <TextField
-                            fullWidth
-                            error={
-                              !!(
-                                errors.linkToRepository &&
+                              <MenuItem value={"Windows"}>Windows</MenuItem>
+                              <MenuItem value={"Linux"}>Linux</MenuItem>
+                              <MenuItem value={"Mac"}>Mac</MenuItem>
+                            </Select>
+                            <Typography variant="subtitle2">
+                              {errors.category &&
+                                touched.category &&
+                                errors.category}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={12} sm={6} style={{ width: "100%" }}>
+                            <TextField
+                              fullWidth
+                              error={
+                                !!(
+                                  errors.linkToRepository &&
+                                  touched.linkToRepository &&
+                                  errors.linkToRepository !== ""
+                                )
+                              }
+                              label="Link Repositório demo do bug"
+                              name="linkToRepository"
+                              onBlur={handleBlur}
+                              onChange={handleChange}
+                              value={values.linkToRepository}
+                              variant="outlined"
+                            />
+                            <Typography variant="subtitle2">
+                              {errors.linkToRepository &&
                                 touched.linkToRepository &&
-                                errors.linkToRepository !== ""
-                              )
-                            }
-                            label="Link Repositório demo do bug"
-                            name="linkToRepository"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.linkToRepository}
-                            variant="outlined"
-                          />
-                          <Typography variant="subtitle2">
-                            {errors.linkToRepository &&
-                              touched.linkToRepository &&
-                              errors.linkToRepository}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={6} style={{ width: "100%" }}>
-                          <TextField
-                            fullWidth
-                            error={
-                              !!(
-                                errors.linkToLive &&
+                                errors.linkToRepository}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={12} sm={6} style={{ width: "100%" }}>
+                            <TextField
+                              fullWidth
+                              error={
+                                !!(
+                                  errors.linkToLive &&
+                                  touched.linkToLive &&
+                                  errors.linkToLive !== ""
+                                )
+                              }
+                              label="Link Live demo do bug (opcional)"
+                              name="linkToLive"
+                              onBlur={handleBlur}
+                              onChange={handleChange}
+                              value={values.linkToLive}
+                              variant="outlined"
+                            />
+                            <Typography variant="subtitle2">
+                              {errors.linkToLive &&
                                 touched.linkToLive &&
-                                errors.linkToLive !== ""
-                              )
-                            }
-                            label="Link Live demo do bug (opcional)"
-                            name="linkToLive"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.linkToLive}
-                            variant="outlined"
-                          />
-                          <Typography variant="subtitle2">
-                            {errors.linkToLive &&
-                              touched.linkToLive &&
-                              errors.linkToLive}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={12} style={{ width: "100%" }}>
-                          <TextField
-                            fullWidth
-                            multiline
-                            rows={6}
-                            error={
-                              !!(
-                                errors.stepsStoRproduce &&
+                                errors.linkToLive}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={12} sm={12} style={{ width: "100%" }}>
+                            <TextField
+                              fullWidth
+                              multiline
+                              rows={6}
+                              error={
+                                !!(
+                                  errors.stepsStoRproduce &&
+                                  touched.stepsStoRproduce &&
+                                  errors.stepsStoRproduce !== ""
+                                )
+                              }
+                              label="Descrição"
+                              name="stepsStoRproduce"
+                              onBlur={handleBlur}
+                              onChange={handleChange}
+                              value={values.stepsStoRproduce}
+                              variant="outlined"
+                            />
+                            <Typography variant="subtitle2">
+                              {errors.stepsStoRproduce &&
                                 touched.stepsStoRproduce &&
-                                errors.stepsStoRproduce !== ""
-                              )
-                            }
-                            label="Descrição"
-                            name="stepsStoRproduce"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.stepsStoRproduce}
-                            variant="outlined"
-                          />
-                          <Typography variant="subtitle2">
-                            {errors.stepsStoRproduce &&
-                              touched.stepsStoRproduce &&
-                              errors.stepsStoRproduce}
-                          </Typography>
+                                errors.stepsStoRproduce}
+                            </Typography>
+                          </Grid>
                         </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
-                <Grid
-                  item
-                  style={{ borderTop: "1px solid black", width: "100%" }}
-                >
                   <Grid
-                    container
-                    className="radio_container"
-                    justify="space-between"
-                    alignItems="center"
+                    item
+                    style={{ borderTop: "1px solid black", width: "100%", paddingTop: 20 }}
                   >
-                    <Grid item>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        type="submit"
-                        size="large"
-                      >
-                        {"ENVIAR"}
+                    <Grid
+                      container
+                      justify="flex-end"
+                      alignItems="center"
+                    >
+                      <Grid item style={{ paddingRight: 20 }}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          type="submit"
+                          size="large"
+                        >
+                          {"ENVIAR"}
+                        </Button>
+                      </Grid>
+                      <Grid item>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          size="large"
+                          onClick={() => { 
+                            createNewBugRequest(false) 
+                          }}
+                        >
+                          Voltar
                       </Button>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            </form>
-          )}
+              </form>
+            )}
         </Formik>
       </Grid>
     );
