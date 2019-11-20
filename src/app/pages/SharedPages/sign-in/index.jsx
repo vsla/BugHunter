@@ -68,7 +68,7 @@ class SignIn extends React.Component {
       console.log(response)
       if (!response.error) {
         this.props.SignInBugHunter(response.data.data)
-        this.setState({logged: true})
+        this.setState({ logged: true })
       } else {
         this.setState({ openSnackBar: 'Senha ou login incorreto' })
       }
@@ -76,11 +76,11 @@ class SignIn extends React.Component {
     else if (type === 'company') {
       console.log('oi3')
       const response = await CompanyService.authCompany(values)
-      
+
       if (!response.error) {
         console.log(response.data)
         this.props.SignInCompany(response.data.data)
-        this.setState({logged: true})
+        this.setState({ logged: true })
       } else {
         this.setState({ openSnackBar: 'Senha ou login incorreto' })
       }
@@ -102,7 +102,7 @@ class SignIn extends React.Component {
   };
   render() {
     const { classes } = this.props;
-    const {logged, type} = this.state;
+    const { logged, type } = this.state;
     if (!logged) {
       return (
         <Grid
@@ -121,7 +121,9 @@ class SignIn extends React.Component {
                   spacing={2}
                 >
                   <Grid item>
-                    <img src={logo} alt="logo bughunter" />
+                    <Link to="/">
+                      <img src={logo} alt="logo bughunter" />
+                    </Link>
                   </Grid>
                   <Grid item>
                     <Typography component="h1" variant="h5" color="primary">
@@ -135,7 +137,7 @@ class SignIn extends React.Component {
                 <Formik
                   initialValues={{ email: '', password: '' }}
                   onSubmit={values => {
-                    this.setState({openSnackBar: false})
+                    this.setState({ openSnackBar: false })
                     this.login(values)
                   }}
                   validationSchema={schema}
@@ -200,7 +202,7 @@ class SignIn extends React.Component {
                               variant="contained"
                               color="primary"
                               onClick={() => {
-                                this.setState({type: 'bughunter'})
+                                this.setState({ type: 'bughunter' })
                                 // setSubmitting(true)
                               }}
                               type='submit'
@@ -215,7 +217,7 @@ class SignIn extends React.Component {
                               variant="contained"
                               color="secondary"
                               onClick={() => {
-                                this.setState({type: 'company'})
+                                this.setState({ type: 'company' })
                                 // setSubmitting(true)
                               }}
                               type='submit'
@@ -246,22 +248,22 @@ class SignIn extends React.Component {
                   }
                 </Formik>
               </Grid>
-  
+
             </Grid>
           </Grid>
         </Grid>
       );
     } else if (type === 'bughunter') {
       return (
-        <Redirect to='/dashboard'/>
+        <Redirect to='/dashboard' />
       )
     }
     else if (type === 'company') {
       return (
-        <Redirect to='/empresa/home'/>
+        <Redirect to='/empresa/home' />
       )
     }
-    
+
   }
 }
 
@@ -269,4 +271,4 @@ const mapStateToProps = (state) => ({
   authState: state,
 });
 
-export default withStyles(useStyles)(connect(mapStateToProps, { SignInBugHunter, SignInCompany } )(SignIn));
+export default withStyles(useStyles)(connect(mapStateToProps, { SignInBugHunter, SignInCompany })(SignIn));

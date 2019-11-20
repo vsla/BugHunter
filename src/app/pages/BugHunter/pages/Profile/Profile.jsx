@@ -34,18 +34,20 @@ class Profile extends Component {
       <Grid container style={{ height: '100%' }} direction="column">
         <Header />
         <DefaultContainer>
-          <Grid container direction="column" className={classes.mainContainer}>
-
-            <Button
-              color="primary"
-              size="large"
-              onClick={() => {
-                this.props.SignOutBugHunter()
-              }}
-            >
-              Deslogar
-            </Button>
-
+          <Grid container justify="center" alignContent="center" className={classes.mainContainer}>
+            <Grid item>
+              <Button
+                color="primary"
+                size="large"
+                variant="contained"
+                style={{ maxWidth: 200 }}
+                onClick={() => {
+                  this.props.SignOutBugHunter()
+                }}
+              >
+                Deslogar
+              </Button>
+            </Grid>
           </Grid>
         </DefaultContainer>
       </Grid>

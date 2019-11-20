@@ -170,7 +170,7 @@ function PrimarySearchAppBar(props) {
       <AppBar position="fixed">
         <DefaultContainer>
           <Toolbar style={{ padding: 0 }}>
-            <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+            <Link to={!logged || type !== 'bughunter' ? '/' : '/dashboard'} style={{ display: 'flex', alignItems: 'center' }}>
               <img
                 src={Logo}
                 edge="start"
@@ -223,7 +223,7 @@ function PrimarySearchAppBar(props) {
                         </IconButton>
                       </Link>
 
-                      <Link to="/dashboard">
+                      <Link to="/perfil">
                         <IconButton
                           style={{ color: 'white' }}
 

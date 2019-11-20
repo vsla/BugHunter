@@ -32,20 +32,20 @@ class Routes extends Component {
     };
   }
 
-  redirectHunter = Component => {
+  redirectHunter = (Component, routeProps) => {
     const { type } = this.props.authState.auth;
     const { development } = this.state;
     if (type === 'bughunter' || development === true) {
-      return <Component />;
+      return <Component {...routeProps} />;
     } else {
       return <Redirect to='/login' />;
     }
   };
-  redirectCompany = Component => {
+  redirectCompany = (Component, routeProps) => {
     const { type } = this.props.authState.auth;
     const { development } = this.state;
     if (type === 'company' || development === true) {
-      return <Component />;
+      return <Component {...routeProps} />;
     } else {
       return <Redirect to='/login' />;
     }
@@ -55,12 +55,12 @@ class Routes extends Component {
     const { defaultRoute } = this.state;
     return (
       <Switch>
-        <Route render={() => this.redirectCompany(Home)} exact path="/empresa/home" />
-        <Route render={() => this.redirectCompany(Profile)} exact path="/empresa/perfil" />
-        <Route render={() => this.redirectCompany(Projects)} exact path="/empresa/projetos" />
-        <Route render={() => this.redirectCompany(FormProject)} exact path="/empresa/projetos/novo" />
-        <Route render={() => this.redirectCompany(FormProject)} exact path="/empresa/projetos/editar/:id" />
-        <Route render={() => this.redirectCompany(SeeProject)} exact path="/empresa/projetos/:id" />
+        <Route render={(routeProps) => this.redirectCompany(Home,routeProps)} exact path="/empresa/home" />
+        <Route render={(routeProps) => this.redirectCompany(Profile, routeProps)} exact path="/empresa/perfil" />
+        <Route render={(routeProps) => this.redirectCompany(Projects, routeProps)} exact path="/empresa/projetos" />
+        <Route render={(routeProps) => this.redirectCompany(FormProject, routeProps)} exact path="/empresa/projetos/novo" />
+        <Route render={(routeProps) => this.redirectCompany(FormProject, routeProps)} exact path="/empresa/projetos/editar/:id" />
+        <Route render={(routeProps) => this.redirectCompany(SeeProject, routeProps)} exact path="/empresa/projetos/:id" />
 
         <Route component={SignUp} exact path="/cadastro/empresa" />
         <Route component={ChooseSignUp} exact path="/cadastro/escolher" />
@@ -71,12 +71,12 @@ class Routes extends Component {
 
         <Route component={NotLoggedHome} exact path="/" />
         <Route component={BugHunterSignUp} exact path="/cadastro/bughunter" />
-        <Route render={() => this.redirectHunter(Dashboard)} exact path="/dashboard" />
-        <Route render={() => this.redirectHunter(ProfileBugHunter)} exact path="/perfil" />
-        <Route render={() => this.redirectHunter(MyBugs)} exact path="/bugs" />
+        <Route render={(routeProps) => this.redirectHunter(Dashboard, routeProps)} exact path="/dashboard" />
+        <Route render={(routeProps) => this.redirectHunter(ProfileBugHunter, routeProps)} exact path="/perfil" />
+        <Route render={(routeProps) => this.redirectHunter(MyBugs, routeProps)} exact path="/bugs" />
         <Route component={SignIn} exact path="/login" />
         <Route
-          render={() => this.redirectHunter(DashboardDetails)}
+          render={(routeProps) => this.redirectHunter(DashboardDetails,routeProps)}
           exact
           path="/bughunter/projetos/:id"
         />

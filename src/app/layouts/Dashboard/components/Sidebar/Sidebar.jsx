@@ -31,6 +31,10 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 // Logo
 import logo from '../../../../assets/bughunter.png'
 
+// Redux
+import { connect } from 'react-redux';
+import { SignOutCompany } from 'app/redux/authRedux/authActions';
+
 // Component styles
 import styles from './styles';
 
@@ -162,13 +166,10 @@ class Sidebar extends Component {
           <div className={classes.grow} />
           <Divider className={classes.logoDivider} />
           <div className={classes.button}>
-            <Button fullWidth variant='outlined' color='primary'>
+            <Button fullWidth variant='outlined' color='primary' onClick={() => this.props.SignOutCompany()} >
               Sair
             </Button>
           </div>
-
-
-
         </List>
       </nav>
     );
@@ -180,4 +181,8 @@ Sidebar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Sidebar);
+const mapStateToProps = (state) => ({
+  authState: state
+});
+
+export default withStyles(styles)(connect(mapStateToProps, { SignOutCompany })(Sidebar));
