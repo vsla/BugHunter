@@ -13,43 +13,70 @@ import ChooseSignUp from 'app/pages/SharedPages/ChooseSignUp';
 import AfterLogged from 'app/pages/Company/pages/CompanySignUp/AfterLogged';
 
 import BugHunterSignUp from 'app/pages/BugHunter/pages/BughunterSIgnUp';
+import MyBugs from 'app/pages/BugHunter/pages/MyBugs/MyBugs';
 import NotLoggedHome from 'app/pages/BugHunter/pages/NotLoggedHome';
 import Dashboard from 'app/pages/BugHunter/pages/MainPage';
+import ProfileBugHunter from 'app/pages/BugHunter/pages/Profile/Profile';
 import SeeProject from 'app/pages/Company/pages/Projects/SeeProject';
 import DashboardDetails from 'app/pages/BugHunter/pages/ProjectDetails';
-export default class Routes extends Component {
+
+//Redux
+import { connect } from 'react-redux';
+
+class Routes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultRoute: '/'
+      defaultRoute: '/',
+      development: false
     };
   }
+
+  redirectHunter = Component => {
+    const { type } = this.props.authState.auth;
+    const { development } = this.state;
+    if (type === 'bughunter' || development === true) {
+      return <Component />;
+    } else {
+      return <Redirect to='/login' />;
+    }
+  };
+  redirectCompany = Component => {
+    const { type } = this.props.authState.auth;
+    const { development } = this.state;
+    if (type === 'company' || development === true) {
+      return <Component />;
+    } else {
+      return <Redirect to='/login' />;
+    }
+  };
 
   render() {
     const { defaultRoute } = this.state;
     return (
       <Switch>
-        <Route component={Home} exact path="/empresa/home" />
-        <Route component={Profile} exact path="/empresa/perfil" />
-        <Route component={Projects} exact path="/empresa/projetos" />
-        <Route component={FormProject} exact path="/empresa/projetos/novo" />
-        <Route component={FormProject} exact path="/empresa/projetos/editar/:id" />
-        <Route component={SeeProject} exact path="/empresa/projetos/:id" />
+        <Route render={() => this.redirectCompany(Home)} exact path="/empresa/home" />
+        <Route render={() => this.redirectCompany(Profile)} exact path="/empresa/perfil" />
+        <Route render={() => this.redirectCompany(Projects)} exact path="/empresa/projetos" />
+        <Route render={() => this.redirectCompany(FormProject)} exact path="/empresa/projetos/novo" />
+        <Route render={() => this.redirectCompany(FormProject)} exact path="/empresa/projetos/editar/:id" />
+        <Route render={() => this.redirectCompany(SeeProject)} exact path="/empresa/projetos/:id" />
 
         <Route component={SignUp} exact path="/cadastro/empresa" />
         <Route component={ChooseSignUp} exact path="/cadastro/escolher" />
         <Route component={AfterLogged} exact path="/cadastro/cadastrado" />
-        
-        <Route component={SignIn} exact path="/empresa/login" />
+
 
         {/* BugHunter */}
 
         <Route component={NotLoggedHome} exact path="/" />
         <Route component={BugHunterSignUp} exact path="/cadastro/bughunter" />
-        <Route component={Dashboard} exact path="/dashboard" />
+        <Route render={() => this.redirectHunter(Dashboard)} exact path="/dashboard" />
+        <Route render={() => this.redirectHunter(ProfileBugHunter)} exact path="/perfil" />
+        <Route render={() => this.redirectHunter(MyBugs)} exact path="/bugs" />
         <Route component={SignIn} exact path="/login" />
         <Route
-          component={DashboardDetails}
+          render={() => this.redirectHunter(DashboardDetails)}
           exact
           path="/bughunter/projetos/:id"
         />
@@ -59,3 +86,9 @@ export default class Routes extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    authState: state
+  };
+};
+export default connect(mapStateToProps)(Routes);

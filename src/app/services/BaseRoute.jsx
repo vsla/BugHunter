@@ -15,4 +15,4 @@ const axiosDevelop = axios.create({
   }
 });
 
-export default axiosDevelop;
+export default axiosInstance;
