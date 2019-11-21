@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/BugHunter/static/js/main.095b0fc2.chunk.js",
-    "main.js.map": "/BugHunter/static/js/main.095b0fc2.chunk.js.map",
+    "main.js": "/BugHunter/static/js/main.c56da30c.chunk.js",
+    "main.js.map": "/BugHunter/static/js/main.c56da30c.chunk.js.map",
     "runtime-main.js": "/BugHunter/static/js/runtime-main.adb59787.js",
     "runtime-main.js.map": "/BugHunter/static/js/runtime-main.adb59787.js.map",
-    "static/js/2.adc77215.chunk.js": "/BugHunter/static/js/2.adc77215.chunk.js",
-    "static/js/2.adc77215.chunk.js.map": "/BugHunter/static/js/2.adc77215.chunk.js.map",
+    "static/js/2.3b78e891.chunk.js": "/BugHunter/static/js/2.3b78e891.chunk.js",
+    "static/js/2.3b78e891.chunk.js.map": "/BugHunter/static/js/2.3b78e891.chunk.js.map",
     "index.html": "/BugHunter/index.html",
-    "precache-manifest.875b7bd909fbe33e2e61d280b76ae6ad.js": "/BugHunter/precache-manifest.875b7bd909fbe33e2e61d280b76ae6ad.js",
+    "precache-manifest.a5966bc019abb7e206b3616f9cebb12a.js": "/BugHunter/precache-manifest.a5966bc019abb7e206b3616f9cebb12a.js",
     "service-worker.js": "/BugHunter/service-worker.js",
     "static/media/sadface.png": "/BugHunter/static/media/sadface.0570b2be.png"
   }
