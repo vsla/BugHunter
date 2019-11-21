@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Grid, withStyles, Select, TextField, Typography, CircularProgress } from '@material-ui/core';
+import {
+  Grid,
+  withStyles,
+  Select,
+  TextField,
+  Typography,
+  CircularProgress
+} from '@material-ui/core';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -53,9 +60,9 @@ class DashboardDetails extends Component {
     const { id, loading } = this.state;
     const response = await ProjectService.getProject(id)
     if (!response.error) {
-      this.setState({ loading: false, project: response.data })
+      this.setState({ loading: false, project: response.data });
     }
-  }
+  };
 
   getBugRequests = async () => {
     const { id, loading } = this.state;
@@ -74,31 +81,28 @@ class DashboardDetails extends Component {
         <Header />
         <DefaultContainer>
           <Grid container justify="center" className={classes.mainContainer}>
-
-            {
-              !loading ? (
-                <Grid item className={classes.centerContent}>
-                  <Grid container className={classes.tabs}>
-
-                    <Grid item xs={9}>
-                      <Tabs
-                        indicatorColor="primary"
-                        value={value}
-                        onChange={(e, newValue) => {
-                          this.setState({ value: newValue });
-                        }}
-                      >
-                        <Tab label="Descrição" />
-                        <Tab label="Bugs" />
-                      </Tabs>
-                    </Grid>
+            {!loading ? (
+              <Grid item className={classes.centerContent}>
+                <Grid container className={classes.tabs}>
+                  <Grid item xs={9}>
+                    <Tabs
+                      indicatorColor="primary"
+                      value={value}
+                      onChange={(e, newValue) => {
+                        this.setState({ value: newValue });
+                      }}
+                    >
+                      <Tab label="Descrição" />
+                      <Tab label="Bugs" />
+                    </Tabs>
                   </Grid>
 
                   {value === 0 ? <ProjectDetails project={project} /> : <BugsList bugs={bugs} project={project} />}
                 </Grid>
-              ) : (
-                  <CircularProgress />
-                )
+              </Grid>
+            ) : (
+                <CircularProgress />
+              )
             }
           </Grid>
         </DefaultContainer>

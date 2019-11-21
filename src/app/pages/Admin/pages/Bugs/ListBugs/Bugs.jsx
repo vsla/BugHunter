@@ -14,6 +14,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import EditIcon from '@material-ui/icons/Edit';
+import EditBugRequest from 'app/pages/Admin/pages/Bugs/SolveBugs/Edit';
 
 // Material components
 import {
@@ -26,7 +28,7 @@ import {
 } from '@material-ui/core';
 
 // Custom components
-import palette from '../../../../theme/palette';
+import palette from 'app/theme/palette';
 
 //icon
 import BugReport from '@material-ui/icons/BugReport';
@@ -118,35 +120,16 @@ function createData(status, bugs, category, author, value) {
 }
 
 const rows = [
-  createData(
-    'Pendente',
-    'Problemas na integração do serviço de entrega',
-    'Android',
-    'Hudson',
-    'R$ 400'
-  ),
-  createData(
-    'Resolvido',
-    'Problemas na integração do serviço de entrega',
-    'Integração',
-    'Hudson',
-    'R$ 400'
-  ),
-  createData(
-    'Resolvido',
-    'Problemas na integração do serviço de entrega',
-    'Integração',
-    'Hudson',
-    'R$ 400'
-  )
+  createData('Pendente', 'Android', 'Bughunter', 'Empresa', 'João Gabriel'),
+  createData('Resolvido', 'web', 'Bughunter', 'Empresa', 'Gabriel Ramos'),
+  createData('Resolvido', 'Swift', 'Bughunter', 'Empresa', 'Adriana Alves')
 ];
 class BugList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       active: false,
-      NewProjectBug: false,
-      bugs: this.props.bugs
+      NewProjectBug: false
     };
   }
   newProject = () => {
@@ -158,57 +141,44 @@ class BugList extends Component {
   };
 
   render() {
-    const { classes,createNewBugRequest } = this.props;
-    const { active, bugs } = this.state;
-    console.log(this.props.bugs)
+    const { classes } = this.props;
+    const { active } = this.state;
     return (
       <div className={classes.StorekeeperDashboard}>
         <Grid container direction="column">
-          <Grid item className={classes.titleSection}>
-            <Grid
-              container
-              direction="row"
-              justify="flex-end"
-              className={classes.title}
-            >
-              <Grid item>
-                <Button
-                  variant="outlined"
-                  onClick={() => createNewBugRequest(true)}
-                  className={classes.button}
-                >
-                  NOVO
-                  <BugReport />
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
           <Grid item className={classes.content}>
             <Paper className={classes.root}>
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Status</TableCell>
-                    <TableCell align="center">Bugs</TableCell>
+                    {this.props.type === 'notSOlved' ? (
+                      <TableCell align="center">Editar</TableCell>
+                    ) : (
+                      <div />
+                    )}
+
                     <TableCell align="center">Categoria</TableCell>
-                    <TableCell align="center">Autor</TableCell>
-                    <TableCell align="center">Valor</TableCell>
+                    <TableCell align="center">Projeto</TableCell>
+                    <TableCell align="center">Empresa</TableCell>
+                    <TableCell align="center">Bughunter</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {bugs.map(bug => (
-                    <TableRow key={bug.status}>
-                      <TableCell component="th" scope="row">
-                        <Typography
-                          className={active ? classes.active : classes.inactive}
-                        >
-                          {bug.status}
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="center">{bug.title}</TableCell>
-                      <TableCell align="center">{bug.category}</TableCell>
-                      <TableCell align="center">{bug.author}</TableCell>
-                      <TableCell align="center">{bug.value}</TableCell>
+                  {rows.map(row => (
+                    <TableRow key={row.status}>
+                      {this.props.type === 'notSOlved' ? (
+                        <TableCell align="center">
+                          <Link to={'bugs/edit'}>
+                            <EditIcon />
+                          </Link>
+                        </TableCell>
+                      ) : (
+                        <div />
+                      )}
+                      <TableCell align="center">{row.bugs}</TableCell>
+                      <TableCell align="center">{row.category}</TableCell>
+                      <TableCell align="center">{row.author}</TableCell>
+                      <TableCell align="center">{row.value}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
