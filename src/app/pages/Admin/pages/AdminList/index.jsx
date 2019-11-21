@@ -61,7 +61,8 @@ const styles = theme => ({
   },
   button: {
     backgroundColor: palette.secondary.dark,
-    color: '#fff'
+    color: '#fff',
+    marginBottom: '20px'
   },
   StorekeeperDashboard: {
     // padding: theme.spacing(4),
@@ -91,9 +92,13 @@ const ListAdmin = props => {
   const { classes } = props;
 
   return (
-    <Dashboard title="Projetos" profile="Admin">
+    <Dashboard title="Admin" profile="Admin">
       <div className={classes.StorekeeperDashboard}>
-        <Grid container direction="column">
+        <Grid
+          container
+          direction="column"
+          style={{ maxWidth: '800px', padding: 20 }}
+        >
           <Grid item className={classes.titleSection}>
             <Grid
               container
