@@ -38,10 +38,9 @@ class ProjectService extends Component{
 
   }
 
-  static authAdmin = async (company) => {
+  static authAdmin = async (admin) => {
     try {
-      console.log(company)
-      let res = await axiosInstance.post('/sessions/company', company)
+      let res = await axiosInstance.post('/sessions/admin', admin)
       return res
     } catch (erro) {
       return {error: erro};

@@ -116,7 +116,8 @@ class BugsList extends Component {
     this.state = {
       loading: false,
       newBug: false,
-      project: this.props.project
+      project: this.props.project,
+      bugs: this.props.bugs
     };
   }
 
@@ -126,7 +127,7 @@ class BugsList extends Component {
 
   render() {
     const { classes } = this.props;
-    const { loading, newBug, project } = this.state;
+    const { loading, newBug, project, bugs } = this.state;
     console.log(project)
     return (
       <div className={classes.StorekeeperDashboard}>
@@ -136,7 +137,7 @@ class BugsList extends Component {
               {
                 !newBug ?
                   <BugList
-                    createNewBugRequest={this.createNewBugRequest} />
+                    createNewBugRequest={this.createNewBugRequest} bugs={bugs}/>
                   :
                   <BugRequestForm
                     createNewBugRequest={this.createNewBugRequest}

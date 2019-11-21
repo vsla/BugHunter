@@ -17,8 +17,9 @@ import logo from '../../../assets/HunterLogo.png';
 // Services
 import BughunterService from 'app/services/BughunterService'
 import CompanyService from 'app/services/CompanyService'
+import AdminService from 'app/services/AdminService'
 
-import { SignInBugHunter, SignInCompany } from 'app/redux/authRedux/authActions';
+import { SignInBugHunter, SignInCompany, SignInAdmin } from 'app/redux/authRedux/authActions';
 
 import PropTypes from "prop-types";
 
@@ -63,7 +64,6 @@ class SignIn extends React.Component {
     const { type } = this.state
     console.log(type)
     if (type === 'bughunter') {
-      console.log('oi2')
       const response = await BughunterService.authBughunter(values)
       console.log(response)
       if (!response.error) {
@@ -74,12 +74,21 @@ class SignIn extends React.Component {
       }
     }
     else if (type === 'company') {
-      console.log('oi3')
       const response = await CompanyService.authCompany(values)
 
       if (!response.error) {
         console.log(response.data)
         this.props.SignInCompany(response.data.data)
+        this.setState({ logged: true })
+      } else {
+        this.setState({ openSnackBar: 'Senha ou login incorreto' })
+      }
+    } else {
+      const response = await AdminService.authAdmin(values)
+
+      if (!response.error) {
+        console.log(response.data)
+        this.props.SignInAdmin(response.data.data)
         this.setState({ logged: true })
       } else {
         this.setState({ openSnackBar: 'Senha ou login incorreto' })
@@ -227,6 +236,21 @@ class SignIn extends React.Component {
                             </Button>
                           </Grid>
                           <Grid item style={{ width: '100%' }}>
+                            <Button
+                              fullWidth
+                              variant="contained"
+                              color="primary"
+                              onClick={() => {
+                                this.setState({ type: 'admin' })
+                                // setSubmitting(true)
+                              }}
+                              type='submit'
+                              className={classes.submit}
+                            >
+                              Entrar como Admin
+                            </Button>
+                          </Grid>
+                          <Grid item style={{ width: '100%' }}>
                             <Grid container>
                               <Grid item xs>
                                 <Link href="/" variant="body2" >
@@ -271,4 +295,4 @@ const mapStateToProps = (state) => ({
   authState: state,
 });
 
-export default withStyles(useStyles)(connect(mapStateToProps, { SignInBugHunter, SignInCompany })(SignIn));
+export default withStyles(useStyles)(connect(mapStateToProps, { SignInBugHunter, SignInCompany,SignInAdmin })(SignIn));

@@ -145,7 +145,8 @@ class BugList extends Component {
     super(props);
     this.state = {
       active: false,
-      NewProjectBug: false
+      NewProjectBug: false,
+      bugs: this.props.bugs
     };
   }
   newProject = () => {
@@ -158,7 +159,8 @@ class BugList extends Component {
 
   render() {
     const { classes,createNewBugRequest } = this.props;
-    const { active } = this.state;
+    const { active, bugs } = this.state;
+    console.log(this.props.bugs)
     return (
       <div className={classes.StorekeeperDashboard}>
         <Grid container direction="column">
@@ -190,19 +192,19 @@ class BugList extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map(row => (
-                    <TableRow key={row.status}>
+                  {bugs.map(bug => (
+                    <TableRow key={bug.status}>
                       <TableCell component="th" scope="row">
                         <Typography
                           className={active ? classes.active : classes.inactive}
                         >
-                          {row.status}
+                          {bug.status}
                         </Typography>
                       </TableCell>
-                      <TableCell align="center">{row.bugs}</TableCell>
-                      <TableCell align="center">{row.category}</TableCell>
-                      <TableCell align="center">{row.author}</TableCell>
-                      <TableCell align="center">{row.value}</TableCell>
+                      <TableCell align="center">{bug.title}</TableCell>
+                      <TableCell align="center">{bug.category}</TableCell>
+                      <TableCell align="center">{bug.author}</TableCell>
+                      <TableCell align="center">{bug.value}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

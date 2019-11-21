@@ -130,7 +130,7 @@ class BugRequestForm extends Component {
                     >
                       <Grid item>
                         <Typography variant="h3" style={{ paddingLeft: 20 }}>
-                          Nome do Projeto
+                          Novo BugRequest
                       </Typography>
                       </Grid>
                     </Grid>

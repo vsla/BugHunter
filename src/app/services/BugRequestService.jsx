@@ -17,7 +17,18 @@ class ProjectService extends Component{
   
   static async getAllBugRequestsBugHunter(bugHunterId){
     try {
-      let res = await axiosInstance.get('/projects/' )
+      let res = await axiosInstance.get('/hunters/' + bugHunterId + '/bug_requests' )
+      console.log(res);
+      return res
+    } catch (erro) {
+      console.log({error: erro});
+      return {error: erro};
+    }
+  }
+
+  static async getAllBugRequestsCompany(projectId){
+    try {
+      let res = await axiosInstance.get('/projects/' + projectId + '/bug_requests' )
       console.log(res);
       return res
     } catch (erro) {

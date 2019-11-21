@@ -65,37 +65,14 @@ class MyBugs extends Component {
     this.state = {
       loading: true,
       bugRequests: [
-        {
-          status: 'pending', 
-          name: 'Problemas na integração do serviço de entrega', 
-          category: 'Android', 
-          company: 'Microsoft', 
-          project: 'BugHunter',
-          value: '400,0'
-        },
-        {
-          status: 'solved', 
-          name: 'Problemas na integração do serviço de entrega', 
-          category: 'Android', 
-          company: 'Microsoft', 
-          project: 'BugHunter',
-          value: '400,0'
-        },
-        {
-          status: 'solved', 
-          name: 'Problemas na integração do serviço de entrega', 
-          category: 'Android', 
-          company: 'Microsoft', 
-          project: 'BugHunter',
-          value: '400,0'
-        },
+        
       ]
     };
   }
 
 
   componentDidMount() {
-    this.getProjectInformation()
+    this.getAllBugRequests()
   }
 
   getAllBugRequests = async () => {
@@ -141,7 +118,7 @@ class MyBugs extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {bugRequests.map(bugRequest => (
+                    {bugRequests && bugRequests.map(bugRequest => (
                       <TableRow key={bugRequest.status}>
                         <TableCell component="th" scope="row">
                           <Typography
@@ -150,7 +127,7 @@ class MyBugs extends Component {
                             {bugRequest.status==='solved' ? 'Resolvido' : 'Pendente'}
                           </Typography>
                         </TableCell>
-                        <TableCell align="center">{bugRequest.name}</TableCell>
+                        <TableCell align="center">{bugRequest.title}</TableCell>
                         <TableCell align="center">{bugRequest.category}</TableCell>
                         <TableCell align="center">{bugRequest.company}</TableCell>
                         <TableCell align="center">{bugRequest.project}</TableCell>
