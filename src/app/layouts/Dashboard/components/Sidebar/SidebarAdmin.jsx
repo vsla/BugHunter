@@ -76,37 +76,7 @@ class Sidebar extends Component {
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
-            to="/empresa/home"
-          >
-            <ListItemIcon className={classes.listItemIcon}>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText
-              classes={{ primary: classes.listItemText }}
-              primary="Home"
-            />
-          </ListItem>
-
-          <ListItem
-            activeClassName={classes.activeListItem}
-            className={classes.listItem}
-            component={CustomNavLink}
-            to="/empresa/home"
-          >
-            <ListItemIcon className={classes.listItemIcon}>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText
-              classes={{ primary: classes.listItemText }}
-              primary="Perfil"
-            />
-          </ListItem>
-
-          <ListItem
-            activeClassName={classes.activeListItem}
-            className={classes.listItem}
-            component={CustomNavLink}
-            to="/empresa/home"
+            to="/admin/list"
           >
             <ListItemIcon className={classes.listItemIcon}>
               <People />
@@ -121,7 +91,7 @@ class Sidebar extends Component {
             activeClassName={classes.activeListItem}
             className={classes.listItem}
             component={CustomNavLink}
-            to="/empresa/home"
+            to="/admin/bugs"
           >
             <ListItemIcon className={classes.listItemIcon}>
               <BugReport />
