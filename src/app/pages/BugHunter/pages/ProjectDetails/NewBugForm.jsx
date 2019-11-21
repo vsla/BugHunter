@@ -1,13 +1,14 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 // Externals
-import PropTypes from "prop-types";
-import { Formik } from "formik";
-import * as yup from "yup";
+import PropTypes from 'prop-types';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 
 // Shared layouts
-import MessageBar from "../../../../components/MessageBar";
-import BugRequestService from "app/services/BugRequestService";
+import MessageBar from '../../../../components/MessageBar';
+import ProjectService from '../../../../services/ProjectService';
+import BugRequestService from 'app/services/BugRequestService';
 
 // Redux
 import { connect } from 'react-redux';
@@ -27,15 +28,15 @@ import {
   Select,
   InputLabel,
   MenuItem
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 // Custom components
 
 const schema = yup.object().shape({
-  name: yup.string().required("Digite o título do bug request"),
-  category: yup.string().required("Escolha uma categoria"),
-  linkToRepository: yup.string().required("Digite o link"),
-  stepsStoRproduce: yup.string().required("Digite a descrição")
+  name: yup.string().required('Digite o título do bug request'),
+  category: yup.string().required('Escolha uma categoria'),
+  linkToRepository: yup.string().required('Digite o link'),
+  stepsStoRproduce: yup.string().required('Digite a descrição')
 });
 class BugRequestForm extends Component {
   constructor(props) {
@@ -48,33 +49,33 @@ class BugRequestForm extends Component {
   }
 
   getInitalValues = () => ({
-    name: "",
-    category: "",
-    shortDescription: "",
-    linkToRepository: "",
-    linkToLive: "",
-    stepsStoReproduce: "",
-    tableAmount: "1",
-    status: "active"
+    name: '',
+    category: '',
+    shortDescription: '',
+    linkToRepository: '',
+    linkToLive: '',
+    stepsStoReproduce: '',
+    tableAmount: '1',
+    status: 'active'
   });
 
   sendform = async bugRequest => {
     // const { edit, data } = this.state;
     let newBugRequest = {
       title: bugRequest.name,
-      category:bugRequest.category,
+      category: bugRequest.category,
       repository_link: bugRequest.linkToRepository,
       live_link: bugRequest.linkToLive,
       status: 'Pending',
       project_id: this.props.projectId,
       hunter_id: this.props.authState.auth.id
-    }
-    console.log(newBugRequest)
-    const response = await BugRequestService.newBugRequest(newBugRequest)
+    };
+    console.log(newBugRequest);
+    const response = await BugRequestService.newBugRequest(newBugRequest);
     if (response.status === 201) {
-      this.setState({ openSnackBar: "BugRequest adicionado com com sucesso!" });
+      this.setState({ openSnackBar: 'BugRequest adicionado com com sucesso!' });
     } else {
-      this.setState({ openSnackBar: "Erro ao criar o BugRequest!" });
+      this.setState({ openSnackBar: 'Erro ao criar o BugRequest!' });
     }
     console.log(response);
     return response;
@@ -96,7 +97,7 @@ class BugRequestForm extends Component {
         <Formik
           initialValues={this.getInitalValues()}
           onSubmit={values => {
-            this.setState({ openSnackBar: "" });
+            this.setState({ openSnackBar: '' });
             console.log(values);
             this.sendform(values);
           }}
@@ -110,213 +111,216 @@ class BugRequestForm extends Component {
             handleBlur,
             handleSubmit
           }) => (
-              <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-                <Grid container direction="column" style={{ maxWidth: 750 }}>
+            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+              <Grid container direction="column" style={{ maxWidth: 750 }}>
+                <Grid
+                  item
+                  style={{
+                    paddingTop: '20px',
+                    paddingBottom: '20px',
+                    backgroundColor: 'rgba(227, 227, 227, 0.32)'
+                  }}
+                >
                   <Grid
-                    item
-                    style={{
-                      paddingTop: "20px",
-                      paddingBottom: "20px",
-                      backgroundColor: "rgba(227, 227, 227, 0.32)"
+                    container
+                    direction="row"
+                    justify="space-between"
+                    className={{
+                      maxWidth: '900px'
                     }}
                   >
-                    <Grid
-                      container
-                      direction="row"
-                      justify="space-between"
-                      className={{
-                        maxWidth: "900px"
-                      }}
-                    >
-                      <Grid item>
-                        <Typography variant="h3" style={{ paddingLeft: 20 }}>
-                          Nome do Projeto
+                    <Grid item>
+                      <Typography variant="h3" style={{ paddingLeft: 20 }}>
+                        Nome do Projeto
                       </Typography>
-                      </Grid>
                     </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    style={{
-                      paddingTop: "25px",
-                      paddingBottom: "25px",
-                      width: "100%"
-                    }}
-                  >
-                    <Grid container direction="column" spacing={2}>
-                      {/* First line */}
-                      <Grid item style={{ width: "100%" }}>
-                        <Grid container spacing={2}>
-                          <Grid item xs={12} sm={6} style={{ width: "100%" }}>
-                            <TextField
-                              fullWidth
-                              error={
-                                !!(
-                                  errors.name &&
-                                  touched.name &&
-                                  errors.name !== ""
-                                )
-                              }
-                              label="Título"
-                              name="name"
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.name}
-                              variant="outlined"
-                            />
-                            <Typography variant="subtitle2">
-                              {errors.name && touched.name && errors.name}
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={12} sm={6} style={{ width: "100%" }}>
-                            <Select
-                              fullWidth
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.category}
-                              variant="outlined"
-                              error={
-                                !!(
-                                  errors.category &&
-                                  touched.category &&
-                                  errors.category !== ""
-                                )
-                              }
-                              input={
-                                <TextField
-                                  id="outlined-age-simple"
-                                  name="category"
-                                  label="Categoria"
-                                  variant="outlined"
-                                />
-                              }
-                            >
-                              <MenuItem value={"Android"}>Android</MenuItem>
-                              <MenuItem value={"Swift"}>Swift</MenuItem>
-                              <MenuItem value={"JsFramework"}>
-                                JsFramework
-                            </MenuItem>
-                              <MenuItem value={"Windows"}>Windows</MenuItem>
-                              <MenuItem value={"Linux"}>Linux</MenuItem>
-                              <MenuItem value={"Mac"}>Mac</MenuItem>
-                            </Select>
-                            <Typography variant="subtitle2">
-                              {errors.category &&
-                                touched.category &&
-                                errors.category}
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={12} sm={6} style={{ width: "100%" }}>
-                            <TextField
-                              fullWidth
-                              error={
-                                !!(
-                                  errors.linkToRepository &&
-                                  touched.linkToRepository &&
-                                  errors.linkToRepository !== ""
-                                )
-                              }
-                              label="Link Repositório demo do bug"
-                              name="linkToRepository"
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.linkToRepository}
-                              variant="outlined"
-                            />
-                            <Typography variant="subtitle2">
-                              {errors.linkToRepository &&
-                                touched.linkToRepository &&
-                                errors.linkToRepository}
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={12} sm={6} style={{ width: "100%" }}>
-                            <TextField
-                              fullWidth
-                              error={
-                                !!(
-                                  errors.linkToLive &&
-                                  touched.linkToLive &&
-                                  errors.linkToLive !== ""
-                                )
-                              }
-                              label="Link Live demo do bug (opcional)"
-                              name="linkToLive"
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.linkToLive}
-                              variant="outlined"
-                            />
-                            <Typography variant="subtitle2">
-                              {errors.linkToLive &&
-                                touched.linkToLive &&
-                                errors.linkToLive}
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={12} sm={12} style={{ width: "100%" }}>
-                            <TextField
-                              fullWidth
-                              multiline
-                              rows={6}
-                              error={
-                                !!(
-                                  errors.stepsStoRproduce &&
-                                  touched.stepsStoRproduce &&
-                                  errors.stepsStoRproduce !== ""
-                                )
-                              }
-                              label="Descrição"
-                              name="stepsStoRproduce"
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.stepsStoRproduce}
-                              variant="outlined"
-                            />
-                            <Typography variant="subtitle2">
-                              {errors.stepsStoRproduce &&
-                                touched.stepsStoRproduce &&
-                                errors.stepsStoRproduce}
-                            </Typography>
-                          </Grid>
-                        </Grid>
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                style={{
+                  paddingTop: '25px',
+                  paddingBottom: '25px',
+                  width: '100%'
+                }}
+              >
+                <Grid container direction="column" spacing={2}>
+                  {/* First line */}
+                  <Grid item style={{ width: '100%' }}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={6} style={{ width: '100%' }}>
+                        <TextField
+                          fullWidth
+                          error={
+                            !!(
+                              errors.name &&
+                              touched.name &&
+                              errors.name !== ''
+                            )
+                          }
+                          label="Título"
+                          name="name"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.name}
+                          variant="outlined"
+                        />
+                        <Typography variant="subtitle2">
+                          {errors.name && touched.name && errors.name}
+                        </Typography>
                       </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid
-                    item
-                    style={{ borderTop: "1px solid black", width: "100%", paddingTop: 20 }}
-                  >
-                    <Grid
-                      container
-                      justify="flex-end"
-                      alignItems="center"
-                    >
-                      <Grid item style={{ paddingRight: 20 }}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          type="submit"
-                          size="large"
+                      <Grid item xs={12} sm={6} style={{ width: '100%' }}>
+                        <Select
+                          fullWidth
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.category}
+                          variant="outlined"
+                          error={
+                            !!(
+                              errors.category &&
+                              touched.category &&
+                              errors.category !== ''
+                            )
+                          }
+                          input={
+                            <TextField
+                              id="outlined-age-simple"
+                              name="category"
+                              label="Categoria"
+                              variant="outlined"
+                            />
+                          }
                         >
-                          {"ENVIAR"}
-                        </Button>
+                          <MenuItem value={'Impeditiva'}>Impeditiva</MenuItem>
+                          <MenuItem value={'Funcional'}>Funcional</MenuItem>
+                          <MenuItem value={'Interface'}>Interface</MenuItem>
+                          <MenuItem value={'Texto'}>Texto</MenuItem>
+                          <MenuItem value={'Melhoria'}>Melhoria</MenuItem>
+                          <MenuItem value={'Segurança'}>Segurança</MenuItem>
+                        </Select>
+                        <Typography variant="subtitle2">
+                          {errors.category &&
+                            touched.category &&
+                            errors.category}
+                        </Typography>
                       </Grid>
-                      <Grid item>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          size="large"
-                          onClick={() => { 
-                            createNewBugRequest(false) 
-                          }}
-                        >
-                          Voltar
-                      </Button>
+                      <Grid item xs={12} sm={6} style={{ width: '100%' }}>
+                        <TextField
+                          fullWidth
+                          error={
+                            !!(
+                              errors.linkToRepository &&
+                              touched.linkToRepository &&
+                              errors.linkToRepository !== ''
+                            )
+                          }
+                          label="Link Repositório demo do bug"
+                          name="linkToRepository"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.linkToRepository}
+                          variant="outlined"
+                        />
+                        <Typography variant="subtitle2">
+                          {errors.linkToRepository &&
+                            touched.linkToRepository &&
+                            errors.linkToRepository}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} sm={6} style={{ width: '100%' }}>
+                        <TextField
+                          fullWidth
+                          error={
+                            !!(
+                              errors.linkToLive &&
+                              touched.linkToLive &&
+                              errors.linkToLive !== ''
+                            )
+                          }
+                          label="Link Live demo do bug (opcional)"
+                          name="linkToLive"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.linkToLive}
+                          variant="outlined"
+                        />
+                        <Typography variant="subtitle2">
+                          {errors.linkToLive &&
+                            touched.linkToLive &&
+                            errors.linkToLive}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} sm={12} style={{ width: '100%' }}>
+                        <TextField
+                          fullWidth
+                          multiline
+                          rows={6}
+                          error={
+                            !!(
+                              errors.stepsStoRproduce &&
+                              touched.stepsStoRproduce &&
+                              errors.stepsStoRproduce !== ''
+                            )
+                          }
+                          label="Descrição"
+                          name="stepsStoRproduce"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.stepsStoRproduce}
+                          variant="outlined"
+                        />
+                        <Typography variant="subtitle2">
+                          {errors.stepsStoRproduce &&
+                            touched.stepsStoRproduce &&
+                            errors.stepsStoRproduce}
+                        </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-              </form>
-            )}
+              </Grid>
+              <Grid
+                item
+                style={{ borderTop: '1px solid black', width: '100%' }}
+              >
+                <Grid
+                  item
+                  style={{
+                    borderTop: '1px solid black',
+                    width: '100%',
+                    paddingTop: 20
+                  }}
+                >
+                  <Grid container justify="flex-end" alignItems="center">
+                    <Grid item style={{ paddingRight: 20 }}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        size="large"
+                      >
+                        {'ENVIAR'}
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        size="large"
+                        onClick={() => {
+                          createNewBugRequest(false);
+                        }}
+                      >
+                        Voltar
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </form>
+          )}
         </Formik>
       </Grid>
     );
@@ -329,8 +333,8 @@ BugRequestForm.propTypes = {
   projectId: PropTypes.number.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  authState: state,
+const mapStateToProps = state => ({
+  authState: state
 });
 
 export default connect(mapStateToProps)(BugRequestForm);

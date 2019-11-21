@@ -15,19 +15,18 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Collapse,
+  Collapse
 } from '@material-ui/core';
 
 // Material icons
 import {
   Home as DashboardIcon,
   Person as PeopleIcon,
-  Assignment,
+  Assignment
 } from '@material-ui/icons';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-
 
 // Component styles
 import styles from './styles';
@@ -36,13 +35,13 @@ class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      open: false
     };
   }
 
   handleClick = () => {
     this.setState({ open: !this.state.open });
-  }
+  };
 
   render() {
     const { classes, className } = this.props;
@@ -163,7 +162,7 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
   className: PropTypes.string,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Sidebar);

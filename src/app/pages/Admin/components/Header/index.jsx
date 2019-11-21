@@ -8,24 +8,12 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
-
-// Icons
 import BugReport from '@material-ui/icons/BugReport';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import {
-  SwipeableDrawer,
-  List,
-  ListItemIcon,
-  ListItemText,
-} from '@material-ui/core';
-
-// Redux
-import { connect } from 'react-redux';
-
+import { SwipeableDrawer, List, ListItemIcon } from '@material-ui/core';
 import DefaultContainer from '../DefaultContainer';
 
 import Logo from '../../../../assets/bughunter.png';
@@ -99,11 +87,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PrimarySearchAppBar(props) {
+export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [logged, logg] = React.useState(true);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const {logged, type} = props.authState.auth
+
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -119,10 +108,9 @@ function PrimarySearchAppBar(props) {
       anchor="right"
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
-      style={{ minWidth: '200px' }}
     >
       {
-        !logged || type === 'bughunter' ? (
+        !logged ? (
           <>
             <MenuItem>
               <Link to="/login" style={{ width: '100%' }}>
@@ -138,30 +126,20 @@ function PrimarySearchAppBar(props) {
         )
           : (
             <List>
-              <Link to="/bugs">
-                <ListItem>
-
-                  <ListItemIcon
-                    color="inherit"
-                  >
-                    <BugReport />
-                  </ListItemIcon>
-                  <ListItemText primary="Meus Bugs" />
-
-
-                </ListItem>
-              </Link>
-              <Link to="/">
-                <ListItem>
-                  <ListItemIcon
-                    color="inherit"
-                  >
-                    <AccountCircle />
-                  </ListItemIcon>
-                  <ListItemText primary="Meu Perfil" />
-                </ListItem>
-              </Link>
-
+              <ListItem>
+                <ListItemIcon
+                  color="inherit"
+                >
+                  <BugReport />
+                </ListItemIcon>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </ListItemIcon>
+              </ListItem>
             </List>
           )
       }
@@ -173,7 +151,7 @@ function PrimarySearchAppBar(props) {
       <AppBar position="fixed">
         <DefaultContainer>
           <Toolbar style={{ padding: 0 }}>
-            <Link to={!logged || type !== 'bughunter' ? '/' : '/dashboard'} style={{ display: 'flex', alignItems: 'center' }}>
+            <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
               <img
                 src={Logo}
                 edge="start"
@@ -184,7 +162,7 @@ function PrimarySearchAppBar(props) {
             </Link>
 
             {
-              logged && type === 'bughunter' ? (
+              logged ? (
                 <div className={classes.search}>
                   <div className={classes.searchIcon}>
                     <SearchIcon />
@@ -205,7 +183,7 @@ function PrimarySearchAppBar(props) {
             }
             <div className={classes.sectionDesktop}>
               {
-                !logged || type !== 'bughunter' ? (
+                !logged ? (
                   <>
                     <Link to="/login">
                       <Button className={classes.loginButon} variant="contained" size="medium">Login</Button>
@@ -217,16 +195,12 @@ function PrimarySearchAppBar(props) {
                 )
                   : (
                     <>
-                      <Link to="/bugs">
-                        <IconButton
-                          color="inherit"
-                          style={{ color: 'white' }}
-                        >
-                          <BugReport />
-                        </IconButton>
-                      </Link>
-
-                      <Link to="/perfil">
+                      <IconButton
+                        color="inherit"
+                      >
+                        <BugReport />
+                      </IconButton>
+                      <Link to="/dashboard">
                         <IconButton
                           style={{ color: 'white' }}
 
@@ -259,9 +233,3 @@ function PrimarySearchAppBar(props) {
     </div>
   );
 }
-
-const mapStateToProps = (state) => ({
-  authState: state
-});
-
-export default connect(mapStateToProps)(PrimarySearchAppBar);
