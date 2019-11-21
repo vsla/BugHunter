@@ -198,14 +198,12 @@ class BugRequestForm extends Component {
                               />
                             }
                           >
-                            <MenuItem value={'Android'}>Android</MenuItem>
-                            <MenuItem value={'Swift'}>Swift</MenuItem>
-                            <MenuItem value={'JsFramework'}>
-                              JsFramework
-                            </MenuItem>
-                            <MenuItem value={'Windows'}>Windows</MenuItem>
-                            <MenuItem value={'Linux'}>Linux</MenuItem>
-                            <MenuItem value={'Mac'}>Mac</MenuItem>
+                            <MenuItem value={'Impeditiva'}>Impeditiva</MenuItem>
+                            <MenuItem value={'Funcional'}>Funcional</MenuItem>
+                            <MenuItem value={'Interface'}>Interface</MenuItem>
+                            <MenuItem value={'Texto'}>Texto</MenuItem>
+                            <MenuItem value={'Melhoria'}>Melhoria</MenuItem>
+                            <MenuItem value={'Segurança'}>Segurança</MenuItem>
                           </Select>
                           <Typography variant="subtitle2">
                             {errors.category &&

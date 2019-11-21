@@ -15,8 +15,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import EditIcon from '@material-ui/icons/Edit';
-import EditBugRequest from 'app/pages/Admin/pages/Bugs/SolveBugs/Edit'
-
+import EditBugRequest from 'app/pages/Admin/pages/Bugs/SolveBugs/Edit';
 
 // Material components
 import {
@@ -121,27 +120,9 @@ function createData(status, bugs, category, author, value) {
 }
 
 const rows = [
-  createData(
-    'Pendente',
-    'Android',
-    'Bughunter',
-    'Empresa',
-    'João Gabriel'
-  ),
-  createData(
-    'Resolvido',
-    'web',
-    'Bughunter',
-    'Empresa',
-    'Gabriel Ramos'
-  ),
-  createData(
-    'Resolvido',
-    'Swift',
-    'Bughunter',
-    'Empresa',
-    'Adriana Alves'
-  )
+  createData('Pendente', 'Android', 'Bughunter', 'Empresa', 'João Gabriel'),
+  createData('Resolvido', 'web', 'Bughunter', 'Empresa', 'Gabriel Ramos'),
+  createData('Resolvido', 'Swift', 'Bughunter', 'Empresa', 'Adriana Alves')
 ];
 class BugList extends Component {
   constructor(props) {
@@ -153,11 +134,11 @@ class BugList extends Component {
   }
   newProject = () => {
     if (this.state.newProjectBug === true) {
-      this.setState({ NewProjectBug: false })
+      this.setState({ NewProjectBug: false });
     } else {
-      this.setState({ NewProjectBug: true })
+      this.setState({ NewProjectBug: true });
     }
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -170,7 +151,12 @@ class BugList extends Component {
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Resolver</TableCell>
+                    {this.props.type === 'notSOlved' ? (
+                      <TableCell align="center">Editar</TableCell>
+                    ) : (
+                      <div />
+                    )}
+
                     <TableCell align="center">Categoria</TableCell>
                     <TableCell align="center">Projeto</TableCell>
                     <TableCell align="center">Empresa</TableCell>
@@ -180,17 +166,19 @@ class BugList extends Component {
                 <TableBody>
                   {rows.map(row => (
                     <TableRow key={row.status}>
-                      <TableCell align="center">
-                        <Link to={'bugs/edit'}>
-                          <EditIcon />
-                        </Link>
-                        
-                      </TableCell>
+                      {this.props.type === 'notSOlved' ? (
+                        <TableCell align="center">
+                          <Link to={'bugs/edit'}>
+                            <EditIcon />
+                          </Link>
+                        </TableCell>
+                      ) : (
+                        <div />
+                      )}
                       <TableCell align="center">{row.bugs}</TableCell>
                       <TableCell align="center">{row.category}</TableCell>
                       <TableCell align="center">{row.author}</TableCell>
                       <TableCell align="center">{row.value}</TableCell>
-
                     </TableRow>
                   ))}
                 </TableBody>
@@ -198,9 +186,7 @@ class BugList extends Component {
             </Paper>
           </Grid>
         </Grid>
-
       </div>
-
     );
   }
 }
