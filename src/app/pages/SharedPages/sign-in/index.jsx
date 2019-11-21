@@ -287,6 +287,11 @@ class SignIn extends React.Component {
         <Redirect to='/empresa/home' />
       )
     }
+    else if (type === 'admin') {
+      return (
+        <Redirect to='/admin/list' />
+      )
+    }
 
   }
 }

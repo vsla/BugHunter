@@ -6,7 +6,7 @@ import axios from 'axios'
 class ProjectService extends Component{
   static async getAllBugRequests(){
     try {
-      let res = await axiosInstance.get('/projects/' )
+      let res = await axiosInstance.get('/bug_requests/' )
       console.log(res);
       return res
     } catch (erro) {

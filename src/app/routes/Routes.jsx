@@ -129,7 +129,7 @@ class Routes extends Component {
         {/* Admin */}
 
         <Route component={SeeListBugs} exact path="/admin/bugs" />
-        <Route component={EditBugs} exact path="/admin/bugs/edit" />
+        <Route component={EditBugs} exact path="/admin/bugs/edit/:id" />
 
         {/* Admin */}
 

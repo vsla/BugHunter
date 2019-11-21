@@ -58,14 +58,13 @@ class Projects extends Component {
                   this.setState({ value: newValue });
                 }}
               >
-                <Tab label="Resolver" />
-                <Tab label="Resolvidos" />
+                <Tab label="Resolver/REsolvidos" />
               </Tabs>
               {this.state.value === 0 ? (
-                <Bugs type="notSOlved" />
+                <Bugs type="notSolved" />
               ) : (
-                <Bugs type="SOlved" />
-              )}
+                  <Bugs type="Solved" />
+                )}
             </Grid>
           </Grid>
         </div>

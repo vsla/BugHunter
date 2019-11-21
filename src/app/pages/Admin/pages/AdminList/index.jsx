@@ -23,6 +23,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+import AdminService from 'app/services/AdminService'
+
 const styles = theme => ({
   StorekeeperDashboard: {
     padding: theme.spacing.unit * 4,
@@ -78,77 +80,102 @@ const styles = theme => ({
   }
 });
 
-function createData(status, name) {
-  return { status, name };
-}
 
-const rows = [
-  createData('Ativo', 'João Gabriel'),
-  createData('Ativo', 'Adriana'),
-  createData('Inativo', 'Gabriel Ramos')
-];
 
-const ListAdmin = props => {
-  const { classes } = props;
+class ListAdmin extends Component {
+  constructor(props) {
+    super(props)
 
-  return (
-    <Dashboard title="Admin" profile="Admin">
-      <div className={classes.StorekeeperDashboard}>
-        <Grid
-          container
-          direction="column"
-          style={{ maxWidth: '800px', padding: 20 }}
-        >
-          <Grid item className={classes.titleSection}>
-            <Grid
-              container
-              direction="row"
-              justify="flex-end"
-              className={classes.title}
-            >
-              <Grid item>
-                <Link to="/admin/novo">
-                  <Button variant="outlined" className={classes.button}>
-                    Novo Administrador
-                  </Button>
-                </Link>
+    this.state = {
+      loading: true,
+      data: null
+    }
+  }
+
+  componentDidMount() {
+    this.getProjectInformation()
+  }
+
+  getProjectInformation = async () => {
+    const response = await AdminService.getAllAdmins()
+    if (!response.error) {
+      this.setState({ loading: false, data: response.data });
+    }
+  };
+
+  render() {
+    const { classes } = this.props;
+    const { data } = this.state
+
+    return (
+      <Dashboard title="Admin" profile="Admin">
+        <div className={classes.StorekeeperDashboard}>
+          <Grid
+            container
+            direction="column"
+            style={{ maxWidth: '800px', padding: 20 }}
+          >
+            <Grid item className={classes.titleSection}>
+              <Grid
+                container
+                direction="row"
+                justify="flex-end"
+                className={classes.title}
+              >
+                <Grid item>
+                  <Link to="/admin/novo">
+                    <Button variant="outlined" className={classes.button}>
+                      Novo Administrador
+                    </Button>
+                  </Link>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item className={classes.content}>
-            <Paper className={classes.root}>
-              <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="center">Editar</TableCell>
-                    <TableCell align="center">Status</TableCell>
-                    <TableCell align="center">Nome</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map(row => (
-                    <TableRow key={row.status}>
-                      <TableCell align="center">
-                        <Link to="/admin/novo">
-                          <EditIcon />
-                        </Link>
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        <Typography className={classes.active}>
-                          {row.status}
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="center">{row.name}</TableCell>
+            <Grid item className={classes.content}>
+              <Paper className={classes.root}>
+                <Table className={classes.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">Editar</TableCell>
+                      <TableCell align="center">Status</TableCell>
+                      <TableCell align="center">Nome</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Paper>
+                  </TableHead>
+                  <TableBody>
+                    {data && data.map(admin => (
+                      <TableRow key={admin.status}>
+                        <TableCell align="center">
+                          <Link to="/admin/novo">
+                            <EditIcon />
+                          </Link>
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {
+                            admin.status ? (
+                              <Typography className={classes.active}>
+                                ativo
+                          </Typography>
+                            ) : (
+                                <Typography className={classes.inactive}>
+                                  ativo
+                          </Typography>
+                              )
+                          }
+
+                        </TableCell>
+                        <TableCell align="center">{admin.name}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
-    </Dashboard>
-  );
+        </div>
+      </Dashboard>
+    );
+  }
+
 };
 
 ListAdmin.propTypes = {

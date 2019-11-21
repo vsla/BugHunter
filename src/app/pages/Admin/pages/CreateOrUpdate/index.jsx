@@ -14,10 +14,11 @@ import {
   RadioGroup,
   Radio,
   FormControl,
-  Select,
-  InputLabel,
-  MenuItem
 } from '@material-ui/core';
+
+
+import AdminService from 'app/services/AdminService'
+
 // Material components
 import { Grid, Paper, Typography } from '@material-ui/core';
 // Shared layouts
@@ -44,10 +45,9 @@ const styles = theme => ({
 });
 
 const schema = yup.object().shape({
-  name: yup.string().required('Digite o título do bug request'),
-  category: yup.string().required('Escolha uma categoria'),
-  linkToRepository: yup.string().required('Digite o link'),
-  stepsStoRproduce: yup.string().required('Digite a descrição')
+  name: yup.string().required('DIgite um nome'),
+  email: yup.string().email().required('email requirido'),
+  password: yup.string().required('Digite a senha'),
 });
 
 const getInitalValues = () => ({
@@ -59,25 +59,27 @@ const getInitalValues = () => ({
   confirmPassword: ''
 });
 
-const FormAdmin = props => {
-  const { classes } = props;
+const sendform = async (admin) => {
+  const response = await AdminService.newAdmin(admin);
+}
 
+const FormAdmin = (props) => {
+  const { classes } = props;
+  
   return (
     <Dashboard title="Admins" profile="Admin">
       <div className={classes.StorekeeperDashboard}>
         <Grid container>
           <Formik
             initialValues={getInitalValues()}
-            onSubmit={values => {
-              const bughunter = {
+            onSubmit={(values) => {
+              const admin = {
                 name: values.name,
-                cnpj: values.id,
+                email: values.email,
                 password: values.password,
-                email: values.email
+                status: values.status,
               };
-              this.setState({ openSnackBar: '' });
-              console.log(values, bughunter);
-              this.sendform(bughunter);
+              sendform(admin);
             }}
             validationSchema={schema}
           >
@@ -87,182 +89,182 @@ const FormAdmin = props => {
               touched,
               handleChange,
               handleBlur,
-              handleSubmit
+              handleSubmit,
             }) => (
-              <form
-                onSubmit={handleSubmit}
-                style={{ width: '100%', maxWidth: '550px' }}
-              >
-                <Grid
-                  container
-                  direction="column"
-                  spacing={1}
-                  style={{ maxWidth: 750 }}
+                <form
+                  onSubmit={handleSubmit}
+                  style={{ width: '100%', maxWidth: '550px' }}
                 >
-                  <Grid item>
+                  <Grid
+                    container
+                    direction="column"
+                    spacing={1}
+                    style={{ maxWidth: 750 }}
+                  >
+                    <Grid item>
+                      <Grid
+                        container
+                        direction="column"
+                        justify="space-around"
+                        alignItems="center"
+                        spacing={2}
+                      >
+                        <Grid item>
+                          <Typography variant="h2" color="primary">
+                            Novo Administrador
+                        </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
                     <Grid
-                      container
-                      direction="column"
-                      justify="space-around"
-                      alignItems="center"
-                      spacing={2}
+                      item
+                      style={{
+                        paddingTop: '25px',
+                        paddingBottom: '25px',
+                        width: '100%'
+                      }}
                     >
-                      <Grid item>
-                        <Typography variant="h2" color="primary">
-                          Novo Administrador
+                      <Grid container direction="column" spacing={1}>
+                        {/* First line */}
+                        <Grid item xs={12} style={{ width: '100%' }}>
+                          <TextField
+                            fullWidth
+                            error={
+                              !!(
+                                errors.name &&
+                                touched.name &&
+                                errors.name !== ''
+                              )
+                            }
+                            label="Nome"
+                            Inpu
+                            name="name"
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            value={values.name}
+                            variant="outlined"
+                          />
+                          <Typography variant="subtitle2">
+                            {errors.name && touched.name && errors.name}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} style={{ width: '100%' }}>
+                          <TextField
+                            fullWidth
+                            error={
+                              !!(
+                                errors.email &&
+                                touched.email &&
+                                errors.email !== ''
+                              )
+                            }
+                            label="E-mail"
+                            name="email"
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            value={values.email}
+                            variant="outlined"
+                          />
+                          <Typography variant="subtitle2">
+                            {errors.email && touched.email && errors.email}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={12} style={{ width: '100%' }}>
+                        <TextField
+                          fullWidth
+                          error={
+                            !!(
+                              errors.password &&
+                              touched.password &&
+                              errors.password !== ''
+                            )
+                          }
+                          label="Senha"
+                          name="password"
+                          type="password"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.password}
+                          variant="outlined"
+                        />
+                        <Typography variant="subtitle2">
+                          {errors.password && touched.password && errors.password}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} style={{ width: '100%' }}>
+                        <TextField
+                          fullWidth
+                          error={
+                            !!(
+                              errors.confirmPassword &&
+                              touched.confirmPassword &&
+                              errors.confirmPassword !== ''
+                            )
+                          }
+                          label="Confirme a senha"
+                          name="confirmPassword"
+                          type="password"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.confirmPassword}
+                          variant="outlined"
+                        />
+                        <Typography variant="subtitle2">
+                          {errors.confirmPassword &&
+                            touched.confirmPassword &&
+                            errors.confirmPassword}
                         </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
                   <Grid
                     item
-                    style={{
-                      paddingTop: '25px',
-                      paddingBottom: '25px',
-                      width: '100%'
-                    }}
+                    style={{ borderTop: '1px solid black', width: '100%' }}
                   >
-                    <Grid container direction="column" spacing={1}>
-                      {/* First line */}
-                      <Grid item xs={12} style={{ width: '100%' }}>
-                        <TextField
-                          fullWidth
-                          error={
-                            !!(
-                              errors.name &&
-                              touched.name &&
-                              errors.name !== ''
-                            )
-                          }
-                          label="Nome"
-                          Inpu
-                          name="name"
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          value={values.name}
-                          variant="outlined"
-                        />
-                        <Typography variant="subtitle2">
-                          {errors.name && touched.name && errors.name}
-                        </Typography>
+                    <Grid
+                      container
+                      className="radio_container"
+                      justify="space-between"
+                      alignItems="center"
+                    >
+                      <Grid item>
+                        <FormControl component="fieldset">
+                          <FormLabel component="legend">Situação</FormLabel>
+                          <RadioGroup
+                            row={!(window.innerWidth < 375)}
+                            aria-label="Situação"
+                            name="status"
+                            value={values.status}
+                            onChange={handleChange}
+                          >
+                            <FormControlLabel
+                              value="active"
+                              control={<Radio />}
+                              label="Ativo"
+                            />
+                            <FormControlLabel
+                              value="inactive"
+                              control={<Radio />}
+                              label="Inativo"
+                            />
+                          </RadioGroup>
+                        </FormControl>
                       </Grid>
-                      <Grid item xs={12} style={{ width: '100%' }}>
-                        <TextField
-                          fullWidth
-                          error={
-                            !!(
-                              errors.email &&
-                              touched.email &&
-                              errors.email !== ''
-                            )
-                          }
-                          label="E-mail"
-                          name="email"
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          value={values.email}
-                          variant="outlined"
-                        />
-                        <Typography variant="subtitle2">
-                          {errors.email && touched.email && errors.email}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={12} style={{ width: '100%' }}>
-                      <TextField
-                        fullWidth
-                        error={
-                          !!(
-                            errors.password &&
-                            touched.password &&
-                            errors.password !== ''
-                          )
-                        }
-                        label="Senha"
-                        name="password"
-                        type="password"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.password}
-                        variant="outlined"
-                      />
-                      <Typography variant="subtitle2">
-                        {errors.password && touched.password && errors.password}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} style={{ width: '100%' }}>
-                      <TextField
-                        fullWidth
-                        error={
-                          !!(
-                            errors.confirmPassword &&
-                            touched.confirmPassword &&
-                            errors.confirmPassword !== ''
-                          )
-                        }
-                        label="Confirme a senha"
-                        name="confirmPassword"
-                        type="password"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.confirmPassword}
-                        variant="outlined"
-                      />
-                      <Typography variant="subtitle2">
-                        {errors.confirmPassword &&
-                          touched.confirmPassword &&
-                          errors.confirmPassword}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid
-                  item
-                  style={{ borderTop: '1px solid black', width: '100%' }}
-                >
-                  <Grid
-                    container
-                    className="radio_container"
-                    justify="space-between"
-                    alignItems="center"
-                  >
-                    <Grid item>
-                      <FormControl component="fieldset">
-                        <FormLabel component="legend">Situação</FormLabel>
-                        <RadioGroup
-                          row={!(window.innerWidth < 375)}
-                          aria-label="Situação"
-                          name="status"
-                          value={values.status}
-                          onChange={handleChange}
+                      <Grid item>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          type="submit"
+                          size="medium"
                         >
-                          <FormControlLabel
-                            value="active"
-                            control={<Radio />}
-                            label="Ativo"
-                          />
-                          <FormControlLabel
-                            value="inactive"
-                            control={<Radio />}
-                            label="Inativo"
-                          />
-                        </RadioGroup>
-                      </FormControl>
-                    </Grid>
-                    <Grid item>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        type="submit"
-                        size="medium"
-                      >
-                        {'Cadastrar'}
-                      </Button>
+                          {'Cadastrar'}
+                        </Button>
+                      </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
-              </form>
-            )}
+                </form>
+              )}
           </Formik>
         </Grid>
       </div>

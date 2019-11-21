@@ -33,6 +33,8 @@ import palette from 'app/theme/palette';
 //icon
 import BugReport from '@material-ui/icons/BugReport';
 
+import BugRequestService from 'app/services/BugRequestService';
+
 // Component styles
 const styles = theme => ({
   StorekeeperDashboard: {
@@ -129,7 +131,8 @@ class BugList extends Component {
     super(props);
     this.state = {
       active: false,
-      NewProjectBug: false
+      NewProjectBug: false,
+      bugs: []
     };
   }
   newProject = () => {
@@ -140,9 +143,20 @@ class BugList extends Component {
     }
   };
 
+  componentDidMount() {
+    this.getBugRequests()
+  }
+
+  getBugRequests = async () => {
+    const response = await BugRequestService.getAllBugRequests()
+    if (!response.error) {
+      this.setState({ bugs: response.data })
+    }
+  }
+
   render() {
-    const { classes } = this.props;
-    const { active } = this.state;
+    const { classes, type } = this.props;
+    const { active, bugs } = this.state;
     return (
       <div className={classes.StorekeeperDashboard}>
         <Grid container direction="column">
@@ -151,34 +165,34 @@ class BugList extends Component {
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    {this.props.type === 'notSOlved' ? (
+                    {this.props.type === 'notSolved' ? (
                       <TableCell align="center">Editar</TableCell>
                     ) : (
-                      <div />
-                    )}
+                        <div />
+                      )}
 
                     <TableCell align="center">Categoria</TableCell>
                     <TableCell align="center">Projeto</TableCell>
-                    <TableCell align="center">Empresa</TableCell>
+                    <TableCell align="center">Nome BugRequest</TableCell>
                     <TableCell align="center">Bughunter</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map(row => (
-                    <TableRow key={row.status}>
-                      {this.props.type === 'notSOlved' ? (
+                  {bugs && bugs.map(bug => (
+                    <TableRow key={bug.status}>
+                      {this.props.type === 'notSolved' ? (
                         <TableCell align="center">
-                          <Link to={'bugs/edit'}>
+                          <Link to={'bugs/edit/' + bug.id}>
                             <EditIcon />
                           </Link>
                         </TableCell>
                       ) : (
-                        <div />
-                      )}
-                      <TableCell align="center">{row.bugs}</TableCell>
-                      <TableCell align="center">{row.category}</TableCell>
-                      <TableCell align="center">{row.author}</TableCell>
-                      <TableCell align="center">{row.value}</TableCell>
+                          <div />
+                        )}
+                      <TableCell align="center">{bug.category}</TableCell>
+                      <TableCell align="center">{}</TableCell>
+                      <TableCell align="center">{bug.name}</TableCell>
+                      <TableCell align="center">{}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

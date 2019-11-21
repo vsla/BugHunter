@@ -6,7 +6,7 @@ import axios from 'axios'
 class ProjectService extends Component{
   static async getAllAdmins(){
     try {
-      let res = await axiosInstance.get('/projects/' )
+      let res = await axiosInstance.get('/admins/' )
       console.log(res);
       return res
     } catch (erro) {
@@ -29,7 +29,7 @@ class ProjectService extends Component{
 
   static newAdmin = async (Project) => {
     try {
-      let res = await axiosInstance.post('/projects', Project)
+      let res = await axiosInstance.post('/admins', Project)
       console.log(res)
       return res
     } catch (erro) {

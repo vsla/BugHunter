@@ -34,7 +34,7 @@ const styles = (theme) => ({
 
 const Projects = (props) => {
   const { classes } = props;
-
+  console.log(props)
   return (
     <Dashboard title="Bugs" profile="Admin">
       <div
@@ -43,7 +43,7 @@ const Projects = (props) => {
         <Grid
           container
         >
-          <Form/>
+          <Form id={props.match.params.id} />
         </Grid>
       </div>
     </Dashboard>
