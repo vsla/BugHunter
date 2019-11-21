@@ -11,9 +11,11 @@ import Dashboard from '../../../../layouts/Dashboard';
 // Custom components
 // Component styles
 //icon
-import BugReport from '@material-ui/icons/Edit';
+import EditIcon from '@material-ui/icons/Edit';
 
 import palette from '../../../../theme/palette';
+
+import { Link } from 'react-router-dom';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -100,9 +102,11 @@ const ListAdmin = props => {
               className={classes.title}
             >
               <Grid item>
-                <Button variant="outlined" className={classes.button}>
-                  Novo Administrador
-                </Button>
+                <Link to="/admin/novo">
+                  <Button variant="outlined" className={classes.button}>
+                    Novo Administrador
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </Grid>
@@ -120,7 +124,9 @@ const ListAdmin = props => {
                   {rows.map(row => (
                     <TableRow key={row.status}>
                       <TableCell align="center">
-                        <BugReport />
+                        <Link to="/admin/novo">
+                          <EditIcon />
+                        </Link>
                       </TableCell>
                       <TableCell component="th" scope="row">
                         <Typography className={classes.active}>
