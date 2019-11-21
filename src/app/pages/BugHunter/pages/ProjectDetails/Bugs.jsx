@@ -113,30 +113,44 @@ const styles = theme => ({
 class BugsList extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       loading: false,
-      newBug: true
+      newBug: false,
+      project: this.props.project
     };
+  }
+
+  createNewBugRequest = (value) => {
+    this.setState({ newBug: value })
   }
 
   render() {
     const { classes } = this.props;
-    const { loading, newBug } = this.state;
-
+    const { loading, newBug, project } = this.state;
+    console.log(project)
     return (
       <div className={classes.StorekeeperDashboard}>
-        {!loading ? (
-          <Grid container direction="column">
-            {!newBug ? <BugList /> : <BugRequestForm />}
-          </Grid>
-        ) : (
-          <Grid container justify="center" align="center">
-            <CircularProgress />
-          </Grid>
-        )}
+        {
+          !loading ? (
+            <Grid container direction="column">
+              {
+                !newBug ?
+                  <BugList
+                    createNewBugRequest={this.createNewBugRequest} />
+                  :
+                  <BugRequestForm
+                    createNewBugRequest={this.createNewBugRequest}
+                    projectId={project.id} />
+              }
+            </Grid>
+          )
+            : (
+              <Grid container justify="center" align="center">
+                <CircularProgress />
+              </Grid>
+            )
+        }
       </div>
-      // </Dashboard>
     );
   }
 }

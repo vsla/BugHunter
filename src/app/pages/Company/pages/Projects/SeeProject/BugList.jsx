@@ -26,7 +26,7 @@ import {
 } from '@material-ui/core';
 
 // Custom components
-import palette from '../../../../theme/palette';
+import palette from 'app/theme/palette';
 
 //icon
 import BugReport from '@material-ui/icons/BugReport';
@@ -47,7 +47,7 @@ const styles = theme => ({
   },
   content: {
     paddingTop: 26,
-    padding: theme.spacing(4),
+    // padding: theme.spacing(4),
     maxWidth: '965px'
   },
   title: {
@@ -148,39 +148,21 @@ class BugList extends Component {
       NewProjectBug: false
     };
   }
+
   newProject = () => {
-    if (this.state.newProjectBug === true) {
-      this.setState({ NewProjectBug: false });
+    if (this.state.newProjectBug === true){
+      this.setState({NewProjectBug: false})
     } else {
-      this.setState({ NewProjectBug: true });
+      this.setState({NewProjectBug: true})
     }
-  };
+  }
 
   render() {
-    const { classes, createNewBugRequest } = this.props;
+    const { classes,createNewBugRequest } = this.props;
     const { active } = this.state;
     return (
       <div className={classes.StorekeeperDashboard}>
         <Grid container direction="column">
-          <Grid item className={classes.titleSection}>
-            <Grid
-              container
-              direction="row"
-              justify="flex-end"
-              className={classes.title}
-            >
-              <Grid item>
-                <Button
-                  variant="outlined"
-                  onClick={() => createNewBugRequest(true)}
-                  className={classes.button}
-                >
-                  NOVO
-                  <BugReport />
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
           <Grid item className={classes.content}>
             <Paper className={classes.root}>
               <Table className={classes.table} aria-label="simple table">
@@ -215,6 +197,7 @@ class BugList extends Component {
           </Grid>
         </Grid>
       </div>
+      
     );
   }
 }

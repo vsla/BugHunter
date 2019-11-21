@@ -27,6 +27,8 @@ import palette from '../../../../../theme/palette';
 
 import ProjectService from '../../../../../services/ProjectService';
 
+import BugList from './BugList'
+
 // Component styles
 const styles = theme => ({
   StorekeeperDashboard: {
@@ -45,6 +47,10 @@ const styles = theme => ({
     paddingTop: 26,
     padding: theme.spacing(4),
     maxWidth: '900px',
+  },
+  bugRequests:{
+    paddingTop: 26,
+    padding: theme.spacing(4),
   },
   title: {
     maxWidth: '900px',
@@ -132,129 +138,144 @@ class SeeProject extends Component {
     return (
       <Dashboard title="Ver Projeto" profile="company">
         <div className={classes.StorekeeperDashboard}>
-          {!loading ? (
-            <Grid container direction="column">
-              <Grid item className={classes.titleSection}>
-                <Grid
-                  container
-                  direction="row"
-                  justify="space-between"
-                  className={classes.title}
-                >
-                  <Grid item>
-                    <Typography variant="h3">{data.name}</Typography>
+          {
+            !loading ? (
+              <Grid container direction="column">
+                <Grid item className={classes.titleSection}>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    className={classes.title}
+                  >
+                    <Grid item>
+                      <Typography variant="h3">{data.name}</Typography>
+                    </Grid>
+                    <Grid item>
+                      <Link
+                        to={{
+                          pathname: `/empresa/projetos/editar/${data.id}`,
+                        }}
+                      >
+                        <Button variant="outlined">Editar</Button>
+                      </Link>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Link
-                      to={{
-                        pathname: `/empresa/projetos/editar/${data.id}`,
+                </Grid>
+                <Grid item className={classes.content}>
+                  <Grid container direction="row" alignItems="center" spacing={2}>
+                    <Grid
+                      item
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
                       }}
                     >
-                      <Button variant="outlined">Editar</Button>
-                    </Link>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item className={classes.content}>
-                <Grid container direction="row" alignItems="center" spacing={2}>
-                  <Grid
-                    item
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography variant="h5">Status</Typography>
-                    <Typography
-                      className={data.status ? classes.active : classes.inactive}
+                      <Typography variant="h5">Status</Typography>
+                      <Typography
+                        className={data.status ? classes.active : classes.inactive}
+                      >
+                        {data.status === 'active' ? 'Ativo' : 'Inativo'}
+                      </Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
                     >
-                      {data.status === 'active' ? 'Ativo' : 'Inativo'}
-                    </Typography>
+                      <Typography variant="h5">Valor</Typography>
+                      <Typography className={classes.money}>R$ 2.0X</Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Typography variant="h5">Categoria</Typography>
+                      <Typography className={classes.category}>
+                        {data.category}
+                      </Typography>
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography variant="h5">Valor</Typography>
-                    <Typography className={classes.money}>R$ 2.0X</Typography>
-                  </Grid>
-                  <Grid
-                    item
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography variant="h5">Categoria</Typography>
-                    <Typography className={classes.category}>
-                      {data.category}
-                    </Typography>
+                  <Grid container direction="column" spacing={2}>
+                    <Grid item>
+                      <Typography variant="body1" className={classes.divider}>
+                        {data.shortDescription}
+                      </Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Typography variant="h5">Link para o git: </Typography>
+                      <a href={data.linkToRepository}>
+                        <Typography
+                          color="secondary"
+                          className={classes.growContent}
+                        >
+                          {data.linkToRepository}
+                        </Typography>
+                      </a>
+                    </Grid>
+                    <Grid
+                      item
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Typography variant="h5">Live App: </Typography>
+                      <a href={data.linkToLive}>
+                        <Typography
+                          color="secondary"
+                          className={classes.growContent}
+                        >
+                          {data.linkToLive}
+                        </Typography>
+                      </a>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="h5">Descrição: </Typography>
+                      <Paper elevation={2} style={{ padding: 15, marginTop: 8 }}>
+                        <Typography>
+                          {data.longDescription}
+                        </Typography>
+                      </Paper>
+                    </Grid>
                   </Grid>
                 </Grid>
-                <Grid container direction="column" spacing={2}>
-                  <Grid item>
-                    <Typography variant="body1" className={classes.divider}>
-                      {data.shortDescription}
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    item
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography variant="h5">Link para o git: </Typography>
-                    <a href={data.linkToRepository}>
-                      <Typography
-                        color="secondary"
-                        className={classes.growContent}
-                      >
-                        {data.linkToRepository}
-                      </Typography>
-                    </a>
-                  </Grid>
-                  <Grid
-                    item
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography variant="h5">Live App: </Typography>
-                    <a href={data.linkToLive}>
-                      <Typography
-                        color="secondary"
-                        className={classes.growContent}
-                      >
-                        {data.linkToLive}
-                      </Typography>
-                    </a>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="h5">Descrição: </Typography>
-                    <Paper elevation={2} style={{ padding: 15, marginTop: 8 }}>
-                      <Typography>
-                        {data.longDescription}
-                      </Typography>
-                    </Paper>
+                <Grid item className={classes.bugRequests}>
+                  <Grid container direction='column' >
+                    <Grid item style={{ borderBottom: '1px solid gray' }}>
+                      <Typography color="primary" variant="h2">Bugs</Typography>
+                    </Grid>
+                    <Grid item>
+                      <BugList />
+                    </Grid>
                   </Grid>
                 </Grid>
+
+
               </Grid>
-            </Grid>
-          ) : (
-            <Grid container justify="center" align="center">
-              <CircularProgress />
-            </Grid>
-          )}
+            )
+              : (
+                <Grid container justify="center" align="center">
+                  <CircularProgress />
+                </Grid>
+              )
+          }
         </div>
       </Dashboard>
     );

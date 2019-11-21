@@ -37,6 +37,7 @@ const styles = (theme) => ({
 class Projects extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props)
     const { params } = this.props.match;
     this.state = {
       loading: false,
@@ -50,7 +51,7 @@ class Projects extends Component {
     const { loading, params, edit } = this.state;
 
     return (
-      <Dashboard title="Projetos" profile="Admin">
+      <Dashboard title="Projetos" profile="company">
         <div
           className={classes.StorekeeperDashboard}
         >
