@@ -61,7 +61,7 @@ class Dashboard extends Component {
                     onChange={(e, newValue) => { this.setState({ value: newValue }); }}
                   >
                     <Tab label="Projetos" />
-                    <Tab label="Empresas" />
+                    {/* <Tab label="Empresas" /> */}
                   </Tabs>
                 </Grid>
                 <Grid item xs={3}>

@@ -14,6 +14,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import EditIcon from '@material-ui/icons/Edit';
+import EditBugRequest from 'app/pages/Admin/pages/Bugs/SolveBugs/Edit';
 
 // Material components
 import {
@@ -26,10 +28,12 @@ import {
 } from '@material-ui/core';
 
 // Custom components
-import palette from '../../../../theme/palette';
+import palette from 'app/theme/palette';
 
 //icon
 import BugReport from '@material-ui/icons/BugReport';
+
+import BugRequestService from 'app/services/BugRequestService';
 
 // Component styles
 const styles = theme => ({
@@ -118,27 +122,9 @@ function createData(status, bugs, category, author, value) {
 }
 
 const rows = [
-  createData(
-    'Pendente',
-    'Problemas na integração do serviço de entrega',
-    'Android',
-    'Hudson',
-    'R$ 400'
-  ),
-  createData(
-    'Resolvido',
-    'Problemas na integração do serviço de entrega',
-    'Integração',
-    'Hudson',
-    'R$ 400'
-  ),
-  createData(
-    'Resolvido',
-    'Problemas na integração do serviço de entrega',
-    'Integração',
-    'Hudson',
-    'R$ 400'
-  )
+  createData('Pendente', 'Android', 'Bughunter', 'Empresa', 'João Gabriel'),
+  createData('Resolvido', 'web', 'Bughunter', 'Empresa', 'Gabriel Ramos'),
+  createData('Resolvido', 'Swift', 'Bughunter', 'Empresa', 'Adriana Alves')
 ];
 class BugList extends Component {
   constructor(props) {
@@ -146,7 +132,7 @@ class BugList extends Component {
     this.state = {
       active: false,
       NewProjectBug: false,
-      bugs: this.props.bugs
+      bugs: []
     };
   }
   newProject = () => {
@@ -157,58 +143,56 @@ class BugList extends Component {
     }
   };
 
+  componentDidMount() {
+    this.getBugRequests()
+  }
+
+  getBugRequests = async () => {
+    const response = await BugRequestService.getAllBugRequests()
+    if (!response.error) {
+      this.setState({ bugs: response.data })
+    }
+  }
+
   render() {
-    const { classes,createNewBugRequest } = this.props;
+    const { classes, type } = this.props;
     const { active, bugs } = this.state;
-    console.log(this.props.bugs)
     return (
       <div className={classes.StorekeeperDashboard}>
         <Grid container direction="column">
-          <Grid item className={classes.titleSection}>
-            <Grid
-              container
-              direction="row"
-              justify="flex-end"
-              className={classes.title}
-            >
-              <Grid item>
-                <Button
-                  variant="outlined"
-                  onClick={() => createNewBugRequest(true)}
-                  className={classes.button}
-                >
-                  NOVO
-                  <BugReport />
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
           <Grid item className={classes.content}>
             <Paper className={classes.root}>
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Status</TableCell>
-                    <TableCell align="center">Bugs</TableCell>
+                    {this.props.type === 'notSolved' ? (
+                      <TableCell align="center">Editar</TableCell>
+                    ) : (
+                        <div />
+                      )}
+
                     <TableCell align="center">Categoria</TableCell>
-                    <TableCell align="center">Autor</TableCell>
-                    <TableCell align="center">Valor</TableCell>
+                    <TableCell align="center">Projeto</TableCell>
+                    <TableCell align="center">Nome BugRequest</TableCell>
+                    <TableCell align="center">Bughunter</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {bugs.map(bug => (
+                  {bugs && bugs.map(bug => (
                     <TableRow key={bug.status}>
-                      <TableCell component="th" scope="row">
-                        <Typography
-                          className={active ? classes.active : classes.inactive}
-                        >
-                          {bug.status}
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="center">{bug.title}</TableCell>
+                      {this.props.type === 'notSolved' ? (
+                        <TableCell align="center">
+                          <Link to={'bugs/edit/' + bug.id}>
+                            <EditIcon />
+                          </Link>
+                        </TableCell>
+                      ) : (
+                          <div />
+                        )}
                       <TableCell align="center">{bug.category}</TableCell>
-                      <TableCell align="center">{bug.author}</TableCell>
-                      <TableCell align="center">{bug.value}</TableCell>
+                      <TableCell align="center">{}</TableCell>
+                      <TableCell align="center">{bug.name}</TableCell>
+                      <TableCell align="center">{}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

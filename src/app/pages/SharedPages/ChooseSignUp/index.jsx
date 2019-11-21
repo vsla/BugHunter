@@ -75,7 +75,7 @@ class SignUp extends Component {
                   <img alt="logo" src={HunterImage} height={80} />
                 </Grid>
                 <Grid item>
-                  <Typography variant="h2" color="primary">Olá empresa, Faça seu cadastro</Typography>
+                  <Typography variant="h2" color="primary">Olá, Faça seu cadastro</Typography>
                 </Grid>
               </Grid>
             </Grid>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axiosInstance from './BaseRoute'
 
 class BugHunterService extends Component{
-  
+    
   static getAllBughunter = async () => {
     try {
       let res = await axiosInstance.get('/hunters')
@@ -28,12 +28,12 @@ class BugHunterService extends Component{
 
   static authBughunter = async (Bughunter) => {
     try {
-      console.log(Bughunter)
-      let res = await axiosInstance.post('/hunters/auth', Bughunter)
+      let res = await axiosInstance.post('/sessions/bughunter', Bughunter)
+      console.log(res);
       return res
     } catch (erro) {
+      console.log(erro);
       return {error: erro};
-
     }
 
   }

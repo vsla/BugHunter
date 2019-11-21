@@ -18,7 +18,9 @@ import theme from './theme/theme.jsx';
 import Routes from './routes/Routes';
 
 // Browser history
-const browserHistory = createBrowserHistory();
+const browserHistory = createBrowserHistory({
+  basename: process.env.PUBLIC_URL,
+});
 
 const App = () => (
   <ThemeProvider theme={theme}>

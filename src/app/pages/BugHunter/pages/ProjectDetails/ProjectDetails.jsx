@@ -16,7 +16,7 @@ import {
   Grid,
   Typography,
   Button,
-  Paper
+  Paper,
 } from '@material-ui/core';
 
 // Shared layouts
@@ -26,55 +26,55 @@ import Dashboard from '../../../../layouts/Dashboard';
 import palette from '../../../../theme/palette';
 
 // Component styles
-const styles = theme => ({
+const styles = (theme) => ({
   StorekeeperDashboard: {
     // padding: theme.spacing(4),
-    flexGrow: 1
+    flexGrow: 1,
   },
   titleSection: {
     paddingTop: '20px',
     paddingBottom: '20px',
     padding: theme.spacing(4),
-    backgroundColor: 'rgba(227, 227, 227, 0.32)'
+    backgroundColor: 'rgba(227, 227, 227, 0.32)',
     // width: '1168px',
     // height: '120px',
   },
   content: {
     paddingTop: 26,
     padding: theme.spacing(4),
-    maxWidth: '900px'
+    maxWidth: '900px',
   },
   title: {
-    maxWidth: '900px'
+    maxWidth: '900px',
   },
   subTitle: {
-    fontSize: '12px'
+    fontSize: '12px',
   },
   active: {
     border: `1px solid ${palette.primary.light}`,
     padding: 5,
     borderRadius: 5,
     marginLeft: 10,
-    color: palette.primary.light
+    color: palette.primary.light,
   },
   inactive: {
     border: `1px solid ${palette.secondary.dark}`,
     padding: 5,
     borderRadius: 5,
     marginLeft: 10,
-    color: palette.secondary.dark
+    color: palette.secondary.dark,
   },
   money: {
     border: '1px solid gray',
     padding: 5,
     borderRadius: 5,
-    marginLeft: 10
+    marginLeft: 10,
   },
   category: {
     border: '1px solid gray',
     padding: 5,
     borderRadius: 5,
-    marginLeft: 10
+    marginLeft: 10,
   },
   growContent: {
     // border: '1px solid gray',
@@ -84,13 +84,13 @@ const styles = theme => ({
     // display: 'flex',
     marginLeft: 10,
     '&:hover': {
-      textDecoration: 'underline'
-    }
+      textDecoration: 'underline',
+    },
   },
   divider: {
     borderBottom: '1px solid gray',
-    paddingBottom: 10
-  }
+    paddingBottom: 10,
+  },
 });
 
 class ProjectDetails extends Component {
@@ -99,16 +99,16 @@ class ProjectDetails extends Component {
 
     this.state = {
       loading: false,
-      active: true
+      active: true,
     };
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, project } = this.props;
     const { loading, active } = this.state;
-
+    console.log(project);
     return (
-      //<Dashboard title="Detalhes do projeto" profile="bughunter">
+      // <Dashboard title="Detalhes do projeto" profile="bughunter">
       <div className={classes.StorekeeperDashboard}>
         {!loading ? (
           <Grid container direction="column">
@@ -120,7 +120,7 @@ class ProjectDetails extends Component {
                 className={classes.title}
               >
                 <Grid item>
-                  <Typography variant="h3">Nome do Projeto</Typography>
+                  <Typography variant="h3">{project.name}</Typography>
                 </Grid>
               </Grid>
             </Grid>
@@ -131,14 +131,14 @@ class ProjectDetails extends Component {
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    alignItems: 'center'
+                    alignItems: 'center',
                   }}
                 >
                   <Typography variant="h5">Status</Typography>
                   <Typography
                     className={active ? classes.active : classes.inactive}
                   >
-                    Inativo
+                    Ativo
                   </Typography>
                 </Grid>
                 <Grid
@@ -146,7 +146,7 @@ class ProjectDetails extends Component {
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    alignItems: 'center'
+                    alignItems: 'center',
                   }}
                 >
                   <Typography variant="h5">Valor</Typography>
@@ -157,19 +157,19 @@ class ProjectDetails extends Component {
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    alignItems: 'center'
+                    alignItems: 'center',
                   }}
                 >
                   <Typography variant="h5">Categoria</Typography>
-                  <Typography className={classes.category}>Desktop</Typography>
+                  <Typography className={classes.category}>
+                    {project.category}
+                  </Typography>
                 </Grid>
               </Grid>
               <Grid container direction="column" spacing={2}>
                 <Grid item>
                   <Typography variant="body1" className={classes.divider}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry
-                    standard dummy text ever since the 1500s,
+                    {project.description}
                   </Typography>
                 </Grid>
                 <Grid
@@ -177,7 +177,7 @@ class ProjectDetails extends Component {
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    alignItems: 'center'
+                    alignItems: 'center',
                   }}
                 >
                   <Typography variant="h5">Link para o git: </Typography>
@@ -186,60 +186,61 @@ class ProjectDetails extends Component {
                       color="secondary"
                       className={classes.growContent}
                     >
-                      www.github.com/vsla/bughunter
+                      {project.link1}
                     </Typography>
                   </a>
                 </Grid>
-                <Grid
-                  item
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Typography variant="h5">Live App: </Typography>
-                  <a href="https://bughunter-front.herokuapp.com">
-                    <Typography
-                      color="secondary"
-                      className={classes.growContent}
+                {
+                  project.link1 ? (
+                    <Grid
+                      item
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
                     >
-                      https://bughunter-front.herokuapp.com
-                    </Typography>
-                  </a>
-                </Grid>
+                      <Typography variant="h5">Live App: </Typography>
+                      <a href="https://bughunter-front.herokuapp.com">
+                        <Typography
+                          color="secondary"
+                          className={classes.growContent}
+                        >
+                          {project.link1}
+                        </Typography>
+                      </a>
+                    </Grid>
+                  )
+                    : (
+                      <div />
+                    )
+                }
+
                 <Grid item>
                   <Typography variant="h5">Descrição: </Typography>
                   <Paper elevation={2} style={{ padding: 15, marginTop: 8 }}>
                     <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry
-                      standard dummy text ever since the 1500s, Lorem Ipsum is
-                      simply dummy text of the printing and typesetting
-                      industry. Lorem Ipsum has been the industry standard dummy
-                      text ever since the 1500s, Lorem Ipsum is simply dummy
-                      text of the printing and typesetting industry. Lorem Ipsum
-                      has been the industry standard dummy text ever since the
-                      1500s,
+                      {project.description}
                     </Typography>
                   </Paper>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-        ) : (
-          <Grid container justify="center" align="center">
-            <CircularProgress />
-          </Grid>
-        )}
+        )
+          : (
+            <Grid container justify="center" align="center">
+              <CircularProgress />
+            </Grid>
+          )}
       </div>
-      // </Dashboard>
     );
   }
 }
 
 ProjectDetails.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(ProjectDetails);

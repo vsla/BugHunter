@@ -4,9 +4,9 @@ import axiosInstance from './BaseRoute'
 import axios from 'axios'
 
 class ProjectService extends Component{
-  static async getAllProjects(){
+  static async getAllAdmins(){
     try {
-      let res = await axiosInstance.get('/projects/' )
+      let res = await axiosInstance.get('/admins/' )
       console.log(res);
       return res
     } catch (erro) {
@@ -16,7 +16,7 @@ class ProjectService extends Component{
   }
  
 
-  static getProject = async (projectId) => {
+  static getAdmin = async (projectId) => {
     try {
       let res = await axiosInstance.get('/projects/' + projectId)
       console.log(res)
@@ -24,25 +24,12 @@ class ProjectService extends Component{
     } catch (erro) {
       console.log(erro);
       return {error: erro};
-
     }
   }
 
-  static authProject = async (Project) => {
+  static newAdmin = async (Project) => {
     try {
-      console.log(Project)
-      let res = await axiosInstance.post('/projects/auth', Project)
-      return res
-    } catch (erro) {
-      return {error: erro};
-
-    }
-
-  }
-
-  static newProject = async (Project) => {
-    try {
-      let res = await axiosInstance.post('/projects', Project)
+      let res = await axiosInstance.post('/admins', Project)
       console.log(res)
       return res
     } catch (erro) {
@@ -51,8 +38,18 @@ class ProjectService extends Component{
 
   }
 
+  static authAdmin = async (admin) => {
+    try {
+      let res = await axiosInstance.post('/sessions/admin', admin)
+      return res
+    } catch (erro) {
+      return {error: erro};
 
-  static updateProject =  async (id,Project) =>  {
+    }
+
+  }
+
+  static updateAdmin =  async (id,Project) =>  {
     console.log(Project)
     try {
       let res = await axiosInstance.put(`/projects/${id}`, Project)     

@@ -26,7 +26,7 @@ import {
 } from '@material-ui/core';
 
 // Custom components
-import palette from '../../../../theme/palette';
+import palette from 'app/theme/palette';
 
 //icon
 import BugReport from '@material-ui/icons/BugReport';
@@ -47,7 +47,7 @@ const styles = theme => ({
   },
   content: {
     paddingTop: 26,
-    padding: theme.spacing(4),
+    // padding: theme.spacing(4),
     maxWidth: '965px'
   },
   title: {
@@ -145,44 +145,24 @@ class BugList extends Component {
     super(props);
     this.state = {
       active: false,
-      NewProjectBug: false,
-      bugs: this.props.bugs
+      NewProjectBug: false
     };
   }
+
   newProject = () => {
-    if (this.state.newProjectBug === true) {
-      this.setState({ NewProjectBug: false });
+    if (this.state.newProjectBug === true){
+      this.setState({NewProjectBug: false})
     } else {
-      this.setState({ NewProjectBug: true });
+      this.setState({NewProjectBug: true})
     }
-  };
+  }
 
   render() {
     const { classes,createNewBugRequest } = this.props;
-    const { active, bugs } = this.state;
-    console.log(this.props.bugs)
+    const { active } = this.state;
     return (
       <div className={classes.StorekeeperDashboard}>
         <Grid container direction="column">
-          <Grid item className={classes.titleSection}>
-            <Grid
-              container
-              direction="row"
-              justify="flex-end"
-              className={classes.title}
-            >
-              <Grid item>
-                <Button
-                  variant="outlined"
-                  onClick={() => createNewBugRequest(true)}
-                  className={classes.button}
-                >
-                  NOVO
-                  <BugReport />
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
           <Grid item className={classes.content}>
             <Paper className={classes.root}>
               <Table className={classes.table} aria-label="simple table">
@@ -196,19 +176,19 @@ class BugList extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {bugs.map(bug => (
-                    <TableRow key={bug.status}>
+                  {rows.map(row => (
+                    <TableRow key={row.status}>
                       <TableCell component="th" scope="row">
                         <Typography
                           className={active ? classes.active : classes.inactive}
                         >
-                          {bug.status}
+                          {row.status}
                         </Typography>
                       </TableCell>
-                      <TableCell align="center">{bug.title}</TableCell>
-                      <TableCell align="center">{bug.category}</TableCell>
-                      <TableCell align="center">{bug.author}</TableCell>
-                      <TableCell align="center">{bug.value}</TableCell>
+                      <TableCell align="center">{row.bugs}</TableCell>
+                      <TableCell align="center">{row.category}</TableCell>
+                      <TableCell align="center">{row.author}</TableCell>
+                      <TableCell align="center">{row.value}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -217,6 +197,7 @@ class BugList extends Component {
           </Grid>
         </Grid>
       </div>
+      
     );
   }
 }

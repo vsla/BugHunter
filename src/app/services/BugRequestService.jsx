@@ -4,9 +4,31 @@ import axiosInstance from './BaseRoute'
 import axios from 'axios'
 
 class ProjectService extends Component{
-  static async getAllProjects(){
+  static async getAllBugRequests(){
     try {
-      let res = await axiosInstance.get('/projects/' )
+      let res = await axiosInstance.get('/bug_requests/' )
+      console.log(res);
+      return res
+    } catch (erro) {
+      console.log({error: erro});
+      return {error: erro};
+    }
+  }
+  
+  static async getAllBugRequestsBugHunter(bugHunterId){
+    try {
+      let res = await axiosInstance.get('/hunters/' + bugHunterId + '/bug_requests' )
+      console.log(res);
+      return res
+    } catch (erro) {
+      console.log({error: erro});
+      return {error: erro};
+    }
+  }
+
+  static async getAllBugRequestsCompany(projectId){
+    try {
+      let res = await axiosInstance.get('/projects/' + projectId + '/bug_requests' )
       console.log(res);
       return res
     } catch (erro) {
@@ -16,7 +38,7 @@ class ProjectService extends Component{
   }
  
 
-  static getProject = async (projectId) => {
+  static getBugRequest = async (projectId) => {
     try {
       let res = await axiosInstance.get('/projects/' + projectId)
       console.log(res)
@@ -24,25 +46,12 @@ class ProjectService extends Component{
     } catch (erro) {
       console.log(erro);
       return {error: erro};
-
     }
   }
 
-  static authProject = async (Project) => {
+  static newBugRequest = async (bugRequest) => {
     try {
-      console.log(Project)
-      let res = await axiosInstance.post('/projects/auth', Project)
-      return res
-    } catch (erro) {
-      return {error: erro};
-
-    }
-
-  }
-
-  static newProject = async (Project) => {
-    try {
-      let res = await axiosInstance.post('/projects', Project)
+      let res = await axiosInstance.post('/bug_requests', bugRequest)
       console.log(res)
       return res
     } catch (erro) {
@@ -51,8 +60,7 @@ class ProjectService extends Component{
 
   }
 
-
-  static updateProject =  async (id,Project) =>  {
+  static updateBugRequest =  async (id,Project) =>  {
     console.log(Project)
     try {
       let res = await axiosInstance.put(`/projects/${id}`, Project)     
