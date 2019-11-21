@@ -38,9 +38,9 @@ class DashboardDetails extends Component {
     };
   }
 
-  render() {
-    const { classes } = this.props;
-    const { value } = this.state;
+render() {
+  const { classes } = this.props;
+  const { value } = this.state;
     return (
       <Grid container style={{ height: '100%' }} direction="column">
         <Header />

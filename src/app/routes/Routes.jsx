@@ -19,6 +19,8 @@ import SeeProject from 'app/pages/Company/pages/Projects/SeeProject';
 import DashboardDetails from 'app/pages/BugHunter/pages/ProjectDetails';
 import ListAdmin from 'app/pages/Admin/pages/AdminList/index';
 import FormAdmin from 'app/pages/Admin/pages/CreateOrUpdate/index';
+import SeeListBugs from '../pages/Admin/pages/Bugs/ListBugs/ListBugs';
+import EditBugs from 'app/pages/Admin/pages/Bugs/SolveBugs/Edit';
 export default class Routes extends Component {
   constructor(props) {
     super(props);
@@ -59,6 +61,11 @@ export default class Routes extends Component {
           exact
           path="/bughunter/projetos/:id"
         />
+
+        {/* Admin */}
+
+        <Route component={SeeListBugs} exact path="/admin/bugs" />
+        <Route component={EditBugs} exact path="/admin/bugs/edit" />
 
         {/* Admin */}
 

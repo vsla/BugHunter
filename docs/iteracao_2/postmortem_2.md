@@ -28,11 +28,9 @@
 | Definir autenticação do sistema (empresa/admin/usuario) | Adriana e Gabriel |    não    |
 |             Backend autenticação do sistema             | Adriana e Gabriel |    não    |
 |              Tela de cadastro do bughunter              |   João Gabriel    |    não    |
-|                Tela de logout da empresa                |      Victor       |    não    |
-|           Mockup da tela de logout da empresa           |      Thiago       |    não    |
-|                Tela de logout da empresa                |      Victor       |    não    |
 |           Integração autenticação do sistema            |      Victor       |    não    |
 |               Tela ver projeto da empresa               |      Victor       |    sim    |
+|      mockup da tela de ver projeto pelo bughunter       |      Victor       |    sim    |
 |            Mockup telas de cadastro empresa             |      Victor       |    sim    |
 |           Mockup telas de cadastro bughunter            |      Victor       |    sim    |
 |            FRONT - telas de cadastro empresa            |      Victor       |    sim    |

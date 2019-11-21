@@ -6,8 +6,8 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 // Shared layouts
-import MessageBar from '../../../../components/MessageBar';
-import ProjectService from '../../../../services/ProjectService';
+import MessageBar from 'app/components/MessageBar';
+import ProjectService from 'app/services/ProjectService';
 
 // Material helpers
 import {
@@ -114,7 +114,12 @@ class BugRequestForm extends Component {
             handleSubmit
           }) => (
             <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-              <Grid container direction="column" style={{ maxWidth: 750 }}>
+              <Grid
+                container
+                direction="column"
+                spacing={2}
+                style={{ maxWidth: 750 }}
+              >
                 <Grid
                   item
                   style={{
@@ -132,12 +137,11 @@ class BugRequestForm extends Component {
                     }}
                   >
                     <Grid item>
-                      <Typography variant="h3" style={{ paddingLeft: 20 }}>
-                        Nome do Projeto
-                      </Typography>
+                      <Typography variant="h3">Resolver BugRequest</Typography>
                     </Grid>
                   </Grid>
                 </Grid>
+                <div>Autor: </div>
                 <Grid
                   item
                   style={{
@@ -207,78 +211,78 @@ class BugRequestForm extends Component {
                               errors.category}
                           </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} style={{ width: '100%' }}>
-                          <TextField
-                            fullWidth
-                            error={
-                              !!(
-                                errors.linkToRepository &&
-                                touched.linkToRepository &&
-                                errors.linkToRepository !== ''
-                              )
-                            }
-                            label="Link Repositório demo do bug"
-                            name="linkToRepository"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.linkToRepository}
-                            variant="outlined"
-                          />
-                          <Typography variant="subtitle2">
-                            {errors.linkToRepository &&
-                              touched.linkToRepository &&
-                              errors.linkToRepository}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={6} style={{ width: '100%' }}>
-                          <TextField
-                            fullWidth
-                            error={
-                              !!(
-                                errors.linkToLive &&
-                                touched.linkToLive &&
-                                errors.linkToLive !== ''
-                              )
-                            }
-                            label="Link Live demo do bug (opcional)"
-                            name="linkToLive"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.linkToLive}
-                            variant="outlined"
-                          />
-                          <Typography variant="subtitle2">
-                            {errors.linkToLive &&
-                              touched.linkToLive &&
-                              errors.linkToLive}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={12} style={{ width: '100%' }}>
-                          <TextField
-                            fullWidth
-                            multiline
-                            rows={6}
-                            error={
-                              !!(
-                                errors.stepsStoRproduce &&
-                                touched.stepsStoRproduce &&
-                                errors.stepsStoRproduce !== ''
-                              )
-                            }
-                            label="Descrição"
-                            name="stepsStoRproduce"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.stepsStoRproduce}
-                            variant="outlined"
-                          />
-                          <Typography variant="subtitle2">
-                            {errors.stepsStoRproduce &&
-                              touched.stepsStoRproduce &&
-                              errors.stepsStoRproduce}
-                          </Typography>
-                        </Grid>
                       </Grid>
+                    </Grid>
+                    <Grid item xs={12} sm={6} style={{ width: '100%' }}>
+                      <TextField
+                        fullWidth
+                        error={
+                          !!(
+                            errors.linkToRepository &&
+                            touched.linkToRepository &&
+                            errors.linkToRepository !== ''
+                          )
+                        }
+                        label="Link Repositório demo do bug"
+                        name="linkToRepository"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.linkToRepository}
+                        variant="outlined"
+                      />
+                      <Typography variant="subtitle2">
+                        {errors.linkToRepository &&
+                          touched.linkToRepository &&
+                          errors.linkToRepository}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6} style={{ width: '100%' }}>
+                      <TextField
+                        fullWidth
+                        error={
+                          !!(
+                            errors.linkToLive &&
+                            touched.linkToLive &&
+                            errors.linkToLive !== ''
+                          )
+                        }
+                        label="Link Live demo do bug (opcional)"
+                        name="linkToLive"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.linkToLive}
+                        variant="outlined"
+                      />
+                      <Typography variant="subtitle2">
+                        {errors.linkToLive &&
+                          touched.linkToLive &&
+                          errors.linkToLive}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} style={{ width: '100%' }}>
+                      <TextField
+                        fullWidth
+                        multiline
+                        rows={6}
+                        error={
+                          !!(
+                            errors.stepsStoRproduce &&
+                            touched.stepsStoRproduce &&
+                            errors.stepsStoRproduce !== ''
+                          )
+                        }
+                        label="Descrição"
+                        name="stepsStoRproduce"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.stepsStoRproduce}
+                        variant="outlined"
+                      />
+                      <Typography variant="subtitle2">
+                        {errors.stepsStoRproduce &&
+                          touched.stepsStoRproduce &&
+                          errors.stepsStoRproduce}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
