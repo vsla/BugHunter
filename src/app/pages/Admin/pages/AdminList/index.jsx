@@ -136,7 +136,7 @@ class ListAdmin extends Component {
                 <Table className={classes.table} aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="center">Editar</TableCell>
+                      {/* <TableCell align="center">Editar</TableCell> */}
                       <TableCell align="center">Status</TableCell>
                       <TableCell align="center">Nome</TableCell>
                     </TableRow>
@@ -144,11 +144,11 @@ class ListAdmin extends Component {
                   <TableBody>
                     {data && data.map(admin => (
                       <TableRow key={admin.status}>
-                        <TableCell align="center">
+                        {/* <TableCell align="center">
                           <Link to="/admin/novo">
                             <EditIcon />
                           </Link>
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell component="th" scope="row">
                           {
                             admin.status ? (

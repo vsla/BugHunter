@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 
 
-import AdminService from 'app/services/AdminService'
+import AdminService from 'app/services/AdminService';
 
 // Material components
 import { Grid, Paper, Typography } from '@material-ui/core';
@@ -25,23 +25,23 @@ import { Grid, Paper, Typography } from '@material-ui/core';
 import Dashboard from '../../../../layouts/Dashboard';
 // Custom components
 // Component styles
-const styles = theme => ({
+const styles = (theme) => ({
   StorekeeperDashboard: {
     padding: theme.spacing.unit * 4,
-    flexGrow: 1
+    flexGrow: 1,
   },
   Paperpendency: {
-    padding: '18px'
+    padding: '18px',
   },
   title: {
     fontSize: '20px',
     fontWeight: 'bold',
-    letterSpacing: '2px'
+    letterSpacing: '2px',
   },
   subTitle: {
-    fontSize: '12px'
+    fontSize: '12px',
   },
-  item: {}
+  item: {},
 });
 
 const schema = yup.object().shape({
@@ -53,19 +53,18 @@ const schema = yup.object().shape({
 const getInitalValues = () => ({
   name: '',
   email: '',
-  cnpj_cpf: 'cpf',
-  id: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
 });
 
 const sendform = async (admin) => {
   const response = await AdminService.newAdmin(admin);
-}
+};
+
 
 const FormAdmin = (props) => {
   const { classes } = props;
-  
+
   return (
     <Dashboard title="Admins" profile="Admin">
       <div className={classes.StorekeeperDashboard}>
@@ -121,7 +120,7 @@ const FormAdmin = (props) => {
                       style={{
                         paddingTop: '25px',
                         paddingBottom: '25px',
-                        width: '100%'
+                        width: '100%',
                       }}
                     >
                       <Grid container direction="column" spacing={1}>
@@ -131,9 +130,9 @@ const FormAdmin = (props) => {
                             fullWidth
                             error={
                               !!(
-                                errors.name &&
-                                touched.name &&
-                                errors.name !== ''
+                                errors.name
+                                && touched.name
+                                && errors.name !== ''
                               )
                             }
                             label="Nome"
@@ -153,9 +152,9 @@ const FormAdmin = (props) => {
                             fullWidth
                             error={
                               !!(
-                                errors.email &&
-                                touched.email &&
-                                errors.email !== ''
+                                errors.email
+                                && touched.email
+                                && errors.email !== ''
                               )
                             }
                             label="E-mail"
@@ -175,9 +174,9 @@ const FormAdmin = (props) => {
                           fullWidth
                           error={
                             !!(
-                              errors.password &&
-                              touched.password &&
-                              errors.password !== ''
+                              errors.password
+                              && touched.password
+                              && errors.password !== ''
                             )
                           }
                           label="Senha"
@@ -197,9 +196,9 @@ const FormAdmin = (props) => {
                           fullWidth
                           error={
                             !!(
-                              errors.confirmPassword &&
-                              touched.confirmPassword &&
-                              errors.confirmPassword !== ''
+                              errors.confirmPassword
+                              && touched.confirmPassword
+                              && errors.confirmPassword !== ''
                             )
                           }
                           label="Confirme a senha"
@@ -211,9 +210,9 @@ const FormAdmin = (props) => {
                           variant="outlined"
                         />
                         <Typography variant="subtitle2">
-                          {errors.confirmPassword &&
-                            touched.confirmPassword &&
-                            errors.confirmPassword}
+                          {errors.confirmPassword
+                            && touched.confirmPassword
+                            && errors.confirmPassword}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -258,8 +257,8 @@ const FormAdmin = (props) => {
                           type="submit"
                           size="medium"
                         >
-                          {'Cadastrar'}
-                        </Button>
+                          Cadastrar
+                      </Button>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -273,7 +272,7 @@ const FormAdmin = (props) => {
 };
 
 FormAdmin.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(FormAdmin);

@@ -7,7 +7,16 @@ class ProjectService extends Component{
   static async getAllBugRequests(){
     try {
       let res = await axiosInstance.get('/bug_requests/' )
-      console.log(res);
+      console.log(res)
+      // const response = []
+      // res.data.map(bugRequest => {
+      //   if(bugRequest.status === 'Pending') {
+      //     response.unshift(bugRequest)
+      //   } else {
+      //     response.pop(bugRequest)
+      //   }
+      // })
+      // console.log(res,response);
       return res
     } catch (erro) {
       console.log({error: erro});
@@ -40,7 +49,7 @@ class ProjectService extends Component{
 
   static getBugRequest = async (projectId) => {
     try {
-      let res = await axiosInstance.get('/projects/' + projectId)
+      let res = await axiosInstance.get('/bug_requests/' + projectId)
       console.log(res)
       return res
     } catch (erro) {

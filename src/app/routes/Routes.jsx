@@ -55,6 +55,16 @@ class Routes extends Component {
     }
   };
 
+  redirectAdmin = (Component, routeProps) => {
+    const { type } = this.props.authState.auth;
+    const { development } = this.state;
+    if (type === 'admin' || development === true) {
+      return <Component {...routeProps} />;
+    } else {
+      return <Redirect to="/login" />;
+    }
+  };
+
   render() {
     const { defaultRoute } = this.state;
     return (
@@ -131,10 +141,10 @@ class Routes extends Component {
         <Route component={SeeListBugs} exact path="/admin/bugs" />
         <Route component={EditBugs} exact path="/admin/bugs/edit/:id" />
 
-        {/* Admin */}
-
         <Route component={ListAdmin} exact path="/admin/list" />
         <Route component={FormAdmin} exact path="/admin/novo" />
+
+        <Route component={FormAdmin} exact path="/admin/editar/:id" />
 
         <Redirect to={defaultRoute} />
       </Switch>
